@@ -1,0 +1,8 @@
+make a db called: school.
+
+login for the admin panel:
+username = uneedit
+password = root
+
+
+
