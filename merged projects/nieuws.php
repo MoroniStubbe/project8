@@ -11,7 +11,7 @@
         <header>
             <div class="container">
                 <div class="logo">
-                    <img src="img/logo.png" alt="UNEED-IT Logo">
+                <a href="index.html"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
                 </div>
                 <nav class="nav">
                     <ul>
