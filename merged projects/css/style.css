@@ -54,13 +54,6 @@ header {
     background-color: #2c3e50; 
 }
 
-main {
-    padding: 20px 0; 
-}
-
-
-
-
 .hero {
     background-image: url('../img/back.jpg');
     background-size: cover;
@@ -164,4 +157,35 @@ footer {
 
 footer p {
     margin-bottom: 0;
+}
+
+#footer {
+    background-color: #e6e6e6;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    z-index: 999;
+}
+
+#telefoonnnumer {
+    flex-grow: 1;
+    text-align: center;
+}
+#adress{
+    flex-grow: 1;
+    text-align: center;
+}
+#tijd{
+    flex-grow: 1;
+    text-align: center;
+}
+#footer div img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
 }
