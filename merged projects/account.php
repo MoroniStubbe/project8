@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>My Account</title>
-    <link rel="stylesheet" href="accountstyle.css">
+    <link rel="stylesheet" href="css/accountstyle.css">
 </head>
 <body>
 <nav id="navbar">
