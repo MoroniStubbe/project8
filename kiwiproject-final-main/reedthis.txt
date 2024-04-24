@@ -1,0 +1,13 @@
+!!!!!!!!!// please put the credentials in a env file befor use//!!!!!!!!!
+when importing the db:
+1. make a db called: school.
+2. import with the standard options.
+
+
+
+login for the admin panel:
+username = uneedit
+password = root
+
+
+
