@@ -7,4 +7,3 @@ session_destroy();
 
 header("Location: login_or_signup.html");
 exit();
-?>
