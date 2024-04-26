@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bezorgdiensten</title>
+  <link rel="stylesheet" href="css/bezorg.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <a href="index.html"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="nieuws.php">Nieuws</a></li>
+        <li><a href="service.html">Service </a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="aanvraag.php">Aanvraag</a></li>
+        <li><a href="faq.php">FAQ</a></li>
+        <li><a href="Bezorgdiensten.html">Bezorgdiensten</a></li>
+        <li><a href="account.php">Account</a>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<div class="bezorgbox">
+  <h1 class="textbezorg">Bezorgdiensten</h1>
+  <p class="textbezorg"> Als gebruiker wil ik informatie zien over bezorgdiensten zoals UPS, DHL, Homerr, zodat ik kan kiezen voor ophalen en verzenden.</p>
+  <p class="textbezorg">Kies een bezorgdienst:</p>
+  <ul>
+    <li><button class="bezorgdiensten" onclick="selectBezorgdienst('UPS')">UPS</button></li>
+    <li><button class="bezorgdiensten" onclick="selectBezorgdienst('DHL')">DHL</button></li>
+    <li><button class="bezorgdiensten" onclick="selectBezorgdienst('Homerr')">Homerr</button></li>
+    <!-- Voeg hier andere bezorgdiensten toe -->
+  </ul>
+  <div id="result"></div>
+</div>
+<script>
+  function selectBezorgdienst(bezorgdienst) {
+    document.getElementById('result').innerText = `Je hebt ${bezorgdienst} gekozen.`;
+    // Hier kun je verdere acties toevoegen afhankelijk van de geselecteerde bezorgdienst
+  }
+</script>
+</body>
+</html>
