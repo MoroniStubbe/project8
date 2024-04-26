@@ -6,7 +6,7 @@ if (empty($_POST['naam']) || empty($_POST['telefoonnummer']) || empty($_POST['em
     exit();
 }
 
-$mysql = new PDO('mysql:host=localhost;dbname=uneedit', 'root', 'root');
+$mysql = new PDO('mysql:host=localhost;dbname=school', 'root', 'root');
 
 $naam = filter_var(trim($_POST['naam']), FILTER_SANITIZE_STRING);
 $telefoonnummer = filter_var(trim($_POST['telefoonnummer']), FILTER_SANITIZE_STRING);
