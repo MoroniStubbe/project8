@@ -1,4 +1,5 @@
 <?php
+include_once("database.php");
 session_start();
 
 if (!isset($_POST['Naam']) || !isset($_POST['password']) || !isset($_POST['email'])) {
@@ -6,13 +7,11 @@ if (!isset($_POST['Naam']) || !isset($_POST['password']) || !isset($_POST['email
     exit();
 }
 
-$mysql = new PDO('mysql:host=localhost;dbname=school', 'root', '');
-
 $naam = filter_var(trim($_POST['Naam']), FILTER_SANITIZE_STRING);
 $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
 $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
 
-$stmt = $mysql->prepare("SELECT * FROM `users` WHERE `naam` = :naam AND `email` = :email AND `password` = :password");
+$stmt = $PDO->prepare("SELECT * FROM `users` WHERE `naam` = :naam AND `email` = :email AND `password` = :password");
 $stmt->bindParam(':naam', $naam);
 $stmt->bindParam(':email', $email);
 $stmt->bindParam(':password', $password);
@@ -38,5 +37,5 @@ if ($user['role'] === 'admin') {
 setcookie('user', session_id(), time() + (86400 * 30 * 5), "/"); // 86400 sec - 1 dag
 
 
-header("Location: home.html");
+header("Location: index.html");
 exit();
