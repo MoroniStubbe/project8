@@ -19,8 +19,8 @@
   </header>
   <main>
     <?php
-    $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-    $join = $db->prepare("SELECT reparatie_aanvraag.*, contact_info.* FROM reparatie_aanvraag INNER JOIN contact_info ON reparatie_aanvraag.contact_ID = contact_info.ID;");
+    include_once("../database.php");
+    $join = $PDO->prepare("SELECT reparatie_aanvraag.*, contact_info.* FROM reparatie_aanvraag INNER JOIN contact_info ON reparatie_aanvraag.contact_ID = contact_info.ID;");
     $join->execute();
     $result1 = $join->fetchAll();
 

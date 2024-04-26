@@ -1,4 +1,5 @@
 <?php
+include_once("database.php");
 session_start();
 
 if (!isset($_POST['Naam']) || !isset($_POST['password']) || !isset($_POST['email'])) {
@@ -6,13 +7,11 @@ if (!isset($_POST['Naam']) || !isset($_POST['password']) || !isset($_POST['email
     exit();
 }
 
-$mysql = new PDO('mysql:host=localhost;dbname=school', 'root', 'root');
-
 $naam = filter_var(trim($_POST['Naam']), FILTER_SANITIZE_STRING);
 $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
 $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
 
-$stmt = $mysql->prepare("SELECT * FROM `users` WHERE `naam` = :naam AND `email` = :email AND `password` = :password");
+$stmt = $PDO->prepare("SELECT * FROM `users` WHERE `naam` = :naam AND `email` = :email AND `password` = :password");
 $stmt->bindParam(':naam', $naam);
 $stmt->bindParam(':email', $email);
 $stmt->bindParam(':password', $password);

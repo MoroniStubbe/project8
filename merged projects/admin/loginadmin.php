@@ -21,13 +21,13 @@
 </html>
 
 <?php
+include_once("../database.php");
 $password = $_POST["password"];
 $username = $_POST["username"];
 
 
 try {
-    $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-    $passworddb = $db->prepare("SELECT * FROM adminpanel");
+    $passworddb = $PDO->prepare("SELECT * FROM adminpanel");
     $passworddb->execute();
 
     $result = $passworddb->fetchAll();

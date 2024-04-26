@@ -1,4 +1,5 @@
 <?php
+include_once("database.php");
 session_start();
 if (isset($_SESSION['user']) && isset($_POST['newName']) && isset($_POST['newPhoneNumber']) && isset($_POST['newAddress']) && isset($_POST['newEmail'])) {
 
@@ -26,12 +27,10 @@ if (isset($_SESSION['user']) && isset($_POST['newName']) && isset($_POST['newPho
     }
 
     try {
-
-        $pdo = new PDO('mysql:host=localhost;dbname=school', 'root', 'root');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-        $stmt = $pdo->prepare("UPDATE users SET naam=?, telefoonnummer=?, address=?, email=? WHERE id=?");
+        $stmt = $PDO->prepare("UPDATE users SET naam=?, telefoonnummer=?, address=?, email=? WHERE id=?");
         $stmt->execute([$newName, $newPhoneNumber, $newAddress, $newEmail, $user['id']]);
 
 
@@ -44,5 +43,3 @@ if (isset($_SESSION['user']) && isset($_POST['newName']) && isset($_POST['newPho
     header("Location: login_or_signup.html");
     exit();
 }
-?>
-

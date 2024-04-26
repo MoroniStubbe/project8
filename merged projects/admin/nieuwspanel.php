@@ -19,11 +19,10 @@
   </header>
   <main>
     <?php
+    include_once("../database.php");
 
     try {
-      $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-
-      $query = $db->prepare("SELECT * FROM nieuws");
+      $query = $PDO->prepare("SELECT * FROM nieuws");
       $query->execute();
       $result = $query->fetchAll();
       echo "<table class='table1'>";
@@ -58,16 +57,13 @@
 
 </html>
 <?php
-$db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $newrm = (int) $_POST["rmnew"]; // Cast to integer for safety (optional)
 
   try {
     // Check if the submitted value is not empty
     if (!empty($newrm)) {
-      $rm = $db->prepare("DELETE FROM `nieuws` WHERE `nieuws`.`ID` = :rmnew");
+      $rm = $PDO->prepare("DELETE FROM `nieuws` WHERE `nieuws`.`ID` = :rmnew");
       $rm->bindParam(':rmnew', $newrm, PDO::PARAM_INT);
       $rm->execute();
     }
@@ -86,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if the submitted value is not empty
     if (!empty($addnew)) {
 
-      $send = $db->prepare("INSERT INTO `nieuws` (`nieuwsbericht`) VALUES (:addnieuws);");
+      $send = $PDO->prepare("INSERT INTO `nieuws` (`nieuwsbericht`) VALUES (:addnieuws);");
 
       $send->bindParam(':addnieuws', $addnew);
       $send->execute();

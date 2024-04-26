@@ -65,6 +65,7 @@
 
 </html>
 <?php
+include_once("database.php");
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $probleem = $_POST["probleem"];
     $telefoon_nummer = $_POST["telefoon_nummer"];
@@ -73,9 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $device_type = $_POST["device_type"];
     try {
         if (!empty($device_type) && !empty($computernaam) && !empty($email) && !empty($telefoon_nummer) && !empty($probleem)) {
-            $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-            $send = $db->prepare("INSERT INTO reparatie_aanvraag (device_type, ID, computer_naam, probleem, contact_ID) VALUES (:device_type, NULL, :computernaam, :probleem, (SELECT MAX(ID) FROM contact_info));");
-            $send2 = $db->prepare("INSERT INTO contact_info (telefoon_nummer, ID, email) values (:telefoon_nummer, NULL, :email)");
+            $send = $PDO->prepare("INSERT INTO reparatie_aanvraag (device_type, ID, computer_naam, probleem, contact_ID) VALUES (:device_type, NULL, :computernaam, :probleem, (SELECT MAX(ID) FROM contact_info));");
+            $send2 = $PDO->prepare("INSERT INTO contact_info (telefoon_nummer, ID, email) values (:telefoon_nummer, NULL, :email)");
             $send2->bindParam(':email', $email);
             $send2->bindParam(':telefoon_nummer', $telefoon_nummer);
             $send2->execute();

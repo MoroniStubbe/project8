@@ -25,9 +25,8 @@
     </form>
     <main>
         <?php
-        $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-
-        $query = $db->prepare("SELECT * FROM adminpanel");
+        include_once("../database.php");
+        $query = $PDO->prepare("SELECT * FROM adminpanel");
         $query->execute();
         $result = $query->fetchAll();
         echo "<table class='table1'>";
@@ -60,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
         if (!empty($useradd) && !empty($passwordadd)) {
-            $send = $db->prepare("INSERT INTO `adminpanel` (`User_name`, `Password`, `ID`) VALUES (:useradd, :passwordadd, NULL);");
+            $send = $PDO->prepare("INSERT INTO `adminpanel` (`User_name`, `Password`, `ID`) VALUES (:useradd, :passwordadd, NULL);");
             $send->bindParam(':useradd', $useradd);
             $send->bindParam(':passwordadd', $passwordadd);
             $send->execute();

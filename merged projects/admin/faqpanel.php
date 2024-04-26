@@ -20,9 +20,8 @@
   </header>
   <main>
     <?php
-    $db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-
-    $query = $db->prepare("SELECT * FROM faq");
+    include_once("../database.php");
+    $query = $PDO->prepare("SELECT * FROM faq");
     $query->execute();
     $result = $query->fetchAll();
     echo "<table class='table1'>";
@@ -55,16 +54,13 @@
 
 </html>
 <?php
-$db  = new PDO("mysql:host=localhost;dbname=school", "root", "");
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $faqrm = (int) $_POST["faqrm"];
 
   try {
 
     if (!empty($faqrm)) {
-      $rm = $db->prepare("DELETE FROM `faq` WHERE `faq`.`ID` = :faqrm");
+      $rm = $PDO->prepare("DELETE FROM `faq` WHERE `faq`.`ID` = :faqrm");
       $rm->bindParam(':faqrm', $faqrm, PDO::PARAM_INT);
       $rm->execute();
     }
@@ -83,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($faqadd)) {
 
-      $send = $db->prepare("INSERT INTO `faq` (`post`) VALUES (:faqadd);");
+      $send = $PDO->prepare("INSERT INTO `faq` (`post`) VALUES (:faqadd);");
 
       $send->bindParam(':faqadd', $faqadd);
       $send->execute();

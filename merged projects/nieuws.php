@@ -36,9 +36,9 @@
             <section class="news">
                 <div class="containerr">
                     <?php
+                    include_once("database.php");
                     try {
-                        $db = new PDO("mysql:host=localhost;dbname=school", "root", "");
-                        $nieuwsbericht = $db->prepare("SELECT * FROM nieuws");
+                        $nieuwsbericht = $PDO->prepare("SELECT * FROM nieuws");
                         $nieuwsbericht->execute();
 
                         echo '<ul>';
