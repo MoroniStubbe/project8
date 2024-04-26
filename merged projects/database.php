@@ -1,2 +1,2 @@
 <?php
-$PDO = new PDO("mysql:host=localhost;dbname=school", "root", "");
+$PDO = new PDO("mysql:host=localhost;dbname=uneedit", "root", "");
