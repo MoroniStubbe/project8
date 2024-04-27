@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About UNEED-IT</title>
         <link rel="stylesheet" href="css/nieuws.css">
-        <link rel="stylesheet" href="css/custom.css">
         <link rel="stylesheet" href="css/nav.css">
     </head>
 
