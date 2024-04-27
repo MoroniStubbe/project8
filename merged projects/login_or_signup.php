@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login or Sign Up</title>
-    <link rel="stylesheet" href="css/registration.css">
+    <link rel="stylesheet" href="css/login_or_signup.css">
 </head>
 
 <body>
