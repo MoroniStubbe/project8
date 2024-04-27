@@ -7,6 +7,7 @@
         <title>About UNEED-IT</title>
         <link rel="stylesheet" href="css/nieuws.css">
         <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="css/nav.css">
     </head>
 
     <body>
