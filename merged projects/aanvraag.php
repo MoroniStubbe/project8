@@ -7,6 +7,7 @@
     <title>UNEED-IT - Contact</title>
     <link rel="stylesheet" href="css/aanvraag.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
     <meta name="description" content="Your one-stop solution for all your IT needs.">
     <meta name="keywords" content="IT, repair, services, phones, laptops, PCs">
 </head>
