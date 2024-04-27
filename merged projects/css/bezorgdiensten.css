@@ -2,27 +2,16 @@ body,
 h1,
 h2,
 h3,
-p,
-ul,
 li,
-a {
+p,
+ul {
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
-
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: #000
 }
 
 .bezorgbox {
@@ -32,7 +21,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 500px;
-    background-color: gray;
+    background-color: gray
 }
 
 .textbezorg {
@@ -41,11 +30,11 @@ body {
     margin-left: 50px;
     width: 400px;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 .bezorgdiensten {
     display: flex;
     justify-content: center;
-    width: 430px;
+    width: 430px
 }
