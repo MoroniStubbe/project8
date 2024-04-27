@@ -7,17 +7,10 @@ body {
 .container1 {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px; 
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
-    align-items: center; 
-}
-
-header {
-    background-color: #2c3e50; 
-    color: #fff;
-    padding: 20px 0;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 .logo img {
@@ -28,11 +21,11 @@ header {
 
 .nav ul {
     list-style: none;
-    display: flex; 
+    display: flex;
 }
 
 .nav li {
-    margin-left: 20px; 
+    margin-left: 20px;
 }
 
 .nav a {
@@ -45,7 +38,7 @@ header {
 }
 
 .nav a:hover {
-    background-color: #2c3e50; 
+    background-color: #2c3e50;
 }
 
 .login-signup {
@@ -71,6 +64,7 @@ header {
     justify-content: center;
     align-items: center;
 }
+
 .form-container {
     width: 300px;
     margin: auto;

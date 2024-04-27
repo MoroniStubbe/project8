@@ -12,26 +12,7 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <div>
-                <a href="index.html"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="nieuws.php">Nieuws</a></li>
-                    <li><a href="service.html">Service </a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="aanvraag.php">Aanvraag</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="Bezorgdiensten.html">Bezorgdiensten</a></li>
-                    <li><a href="account.php">Account</a>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <?php readfile("header.html") ?>
     <section class="hero">
         <div class="container">
             <h1>Contact opnemen met UNEED-IT?</h1>
@@ -58,8 +39,7 @@
     </section>
 
     <div class="container">
-        <p>Contact us at: <a href="tel:+31685858588">+31 6 8585 8588</a> or email: <a
-                href="mailto:2829389@student.zadkine.nl">2829389@student.zadkine.nl</a></p>
+        <p>Contact us at: <a href="tel:+31685858588">+31 6 8585 8588</a> or email: <a href="mailto:2829389@student.zadkine.nl">2829389@student.zadkine.nl</a></p>
     </div>
 
     <footer>

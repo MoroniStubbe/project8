@@ -10,25 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <div>
-                <a href="index.html"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="nieuws.php">Nieuws</a></li>
-                    <li><a href="service.html">Service </a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="aanvraag.php">Aanvraag</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="Bezorgdiensten.html">Bezorgdiensten</a></li>
-                    <li><a href="account.php">Account</a>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php readfile("header.html") ?>
     <main>
         <div class="Onze-Service">
             <h1 class="cred">ONZE <span class="Service-Color">SERVICE</span></h1>

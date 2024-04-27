@@ -12,25 +12,7 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <div>
-                <a href="index.html"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="nieuws.php">Nieuws</a></li>
-                    <li><a href="service.html">Service </a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="aanvraag.php">Aanvraag</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="Bezorgdiensten.html">Bezorgdiensten</a></li>
-                    <li><a href="account.php">Account</a>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php readfile("header.html") ?>
     <main>
         <section class="hero">
             <div class="container">
@@ -59,9 +41,7 @@
         <section class="iframe">
             <div class="container">
                 <div class="location">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2455.469405079923!2d4.6556065!3d52.0165458!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5d125952a58cd%3A0x93f677d7fe6faaae!2sUneed-IT!5e0!3m2!1sen!2snl!4v1712919752830!5m2!1sen!2snl"
-                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2455.469405079923!2d4.6556065!3d52.0165458!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5d125952a58cd%3A0x93f677d7fe6faaae!2sUneed-IT!5e0!3m2!1sen!2snl!4v1712919752830!5m2!1sen!2snl" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
