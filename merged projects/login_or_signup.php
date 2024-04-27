@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Login or Sign Up</title>
     <link rel="stylesheet" href="css/registration.css">
-    <link rel="stylesheet" href="css/nav.css">
 </head>
 
 <body>
