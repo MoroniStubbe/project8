@@ -20,6 +20,7 @@
             </form>
         </div>
     </main>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

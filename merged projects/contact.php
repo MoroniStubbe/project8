@@ -40,13 +40,7 @@
     <div class="container">
         <p>Contact us at: <a href="tel:+31685858588">+31 6 8585 8588</a> or email: <a href="mailto:2829389@student.zadkine.nl">2829389@student.zadkine.nl</a></p>
     </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 UNEED-IT. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

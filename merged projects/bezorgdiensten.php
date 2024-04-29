@@ -30,6 +30,7 @@
       // Hier kun je verdere acties toevoegen afhankelijk van de geselecteerde bezorgdienst
     }
   </script>
+  <?php readfile("footer.html") ?>
 </body>
 
 </html>

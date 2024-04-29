@@ -49,6 +49,7 @@
       answer.classList.toggle('show');
     }
   </script>
+  <?php readfile("footer.html") ?>
 </body>
 
 </html>

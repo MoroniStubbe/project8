@@ -37,11 +37,7 @@
             </form>
         </div>
     </section>
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 UNEED-IT. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

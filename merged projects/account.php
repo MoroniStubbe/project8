@@ -56,6 +56,7 @@
             </form>
         </div>
     </main>
+    <?php readfile("footer.html") ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             function toggleEdit() {

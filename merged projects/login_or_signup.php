@@ -16,6 +16,7 @@
             <button onclick="window.location.href='registration.php'">Sign Up</button>
         </div>
     </div>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>
