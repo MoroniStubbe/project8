@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNEED-IT</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
     <meta name="description" content="Your one-stop solution for all your IT needs.">
     <meta name="keywords" content="IT, repair, services, phones, laptops, PCs">
