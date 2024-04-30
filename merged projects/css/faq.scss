@@ -3,13 +3,11 @@ $font-family_1: Arial, sans-serif;
 
 a {
     margin: 0;
-    padding: 0;
 }
 
 .faq-container {
     max-width: 800px;
     margin: 120px auto 50px;
-    padding: 20px;
     background-color: #5d5c5c;
     border: solid 3px;
     border-color: #48d1cc;
@@ -24,7 +22,6 @@ a {
 
 .answer {
     display: none;
-    padding-left: 20px;
 }
 
 .answer.show {

@@ -4,7 +4,6 @@ $font-family_1: Arial, sans-serif;
 .container1 {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +14,6 @@ $font-family_1: Arial, sans-serif;
     margin-top: 100px;
 
     button {
-        padding: 10px 20px;
         margin: 10px;
         font-size: 16px;
         border-radius: 5px;

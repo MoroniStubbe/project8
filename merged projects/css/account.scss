@@ -10,7 +10,6 @@ $font-family_1: Arial, sans-serif;
 .info-block {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     margin-bottom: 20px;
@@ -29,7 +28,6 @@ $font-family_1: Arial, sans-serif;
     justify-content: center;
 
     button {
-        padding: 10px 20px;
         margin: 0 10px;
         background-color: #4caf50;
         color: $color_1;
@@ -58,7 +56,6 @@ $font-family_1: Arial, sans-serif;
     margin-right: auto;
 
     button {
-        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -77,6 +74,5 @@ $font-family_1: Arial, sans-serif;
     display: none;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 20px;
     max-width: 600px;
 }

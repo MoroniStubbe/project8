@@ -4,7 +4,6 @@ $font-family_1: Arial, sans-serif;
 .container1 {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +14,6 @@ $font-family_1: Arial, sans-serif;
     margin: auto;
     margin-top: 10vh;
     background-color: #f2f2f2;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
 
@@ -26,7 +24,6 @@ $font-family_1: Arial, sans-serif;
 
     button[type=submit] {
         width: 100%;
-        padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -43,7 +40,6 @@ $font-family_1: Arial, sans-serif;
 
     input[type=email] {
         width: 100%;
-        padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -52,7 +48,6 @@ $font-family_1: Arial, sans-serif;
 
     input[type=password] {
         width: 100%;
-        padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -61,7 +56,6 @@ $font-family_1: Arial, sans-serif;
 
     input[type=text] {
         width: 100%;
-        padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
         border-radius: 5px;

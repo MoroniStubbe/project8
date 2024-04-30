@@ -1,36 +1,29 @@
 h1 {
   margin: 0;
-  padding: 0;
 }
 
 h2 {
   margin: 0;
-  padding: 0;
 }
 
 h3 {
   margin: 0;
-  padding: 0;
 }
 
 p {
   margin: 0;
-  padding: 0;
 }
 
 ul {
   margin: 0;
-  padding: 0;
 }
 
 li {
   margin: 0;
-  padding: 0;
 }
 
 a {
   margin: 0;
-  padding: 0;
 }
 
 .Graphic-Design {
@@ -52,7 +45,6 @@ a {
   border: solid 2px;
   border-radius: 7px;
   border-color: mediumturquoise;
-  padding: 5px;
   width: 300px;
   height: 170px;
 }
@@ -76,7 +68,6 @@ a {
   border: solid 2px;
   border-radius: 7px;
   border-color: rgb(220, 21, 21);
-  padding: 5px;
   width: 300px;
   height: 170px;
 }
@@ -150,7 +141,6 @@ a {
 .faq-container {
   max-width: 800px;
   margin: 120px auto 50px;
-  padding: 20px;
   background-color: #5d5c5c;
   border: solid 3px;
   border-color: mediumturquoise;
@@ -165,7 +155,6 @@ a {
 
 .answer {
   display: none;
-  padding-left: 20px;
 }
 
 .answer.show {

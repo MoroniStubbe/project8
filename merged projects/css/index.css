@@ -3,7 +3,6 @@ body main #hero {
   background-size: cover;
   background-position: center;
   color: #fff;
-  padding: 100px 0;
   text-align: center;
 }
 body main #hero h1 {
@@ -12,7 +11,6 @@ body main #hero h1 {
 }
 body main #services {
   background-color: #f9f9f9;
-  padding: 50px 20px;
 }
 body main #services h2 {
   text-align: center;
@@ -23,19 +21,16 @@ body main #services .service {
 }
 body main #services .service h3 {
   margin: 0;
-  padding: 0;
   font-size: 24px;
   margin-bottom: 10px;
 }
 body main #services .service p {
   margin: 0;
-  padding: 0;
   font-size: 16px;
   color: #333;
 }
 body main .iframe {
   background-color: #fff;
-  padding: 50px 20px;
   text-align: center;
 }
 body main .iframe .location {
