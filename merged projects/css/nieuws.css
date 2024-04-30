@@ -5,74 +5,27 @@ body {
   background-color: #f8f8f8;
   color: #333;
 }
-
-h1 {
-  margin: 0;
-  padding: 0;
+body main {
+  min-height: 80vh;
+  box-sizing: border-box;
+  padding: 3vh 0;
 }
-
-h2 {
-  margin: 0;
-  padding: 0;
-}
-
-h3 {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-main {
-  padding: 20px 0;
-}
-
-.h2text {
+body main h2 {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 2vh;
 }
-
-.news {
-  max-width: 800px;
+body main #news {
+  max-width: 40vw;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1vh 1vw;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
-.news h2 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.news ul {
+body main #news ul li {
+  margin: 0;
   padding: 0;
-}
-.news li {
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  color: #333;
   word-wrap: break-word;
 }/*# sourceMappingURL=nieuws.css.map */

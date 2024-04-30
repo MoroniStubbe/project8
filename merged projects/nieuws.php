@@ -11,32 +11,28 @@
 
     <body>
         <?php readfile("header.html") ?>
-        <div class="h2text">
+        <main>
             <h2>Recent News</h2>
-        </div>
-        <div class="main-content">
-            <section class="news">
-                <div class="containerr">
-                    <?php
-                    include_once("database.php");
-                    try {
-                        $nieuwsbericht = $PDO->prepare("SELECT * FROM nieuws");
-                        $nieuwsbericht->execute();
+            <section id="news">
+                <?php
+                include_once("database.php");
+                try {
+                    $nieuwsbericht = $PDO->prepare("SELECT * FROM nieuws");
+                    $nieuwsbericht->execute();
 
-                        echo '<ul>';
+                    echo '<ul>';
 
-                        foreach ($nieuwsbericht->fetchAll() as $data) {
-                            echo "<li>" . $data["nieuwsbericht"] . "</li>";
-                        }
-
-                        echo '</ul>';
-                    } catch (PDOException $e) {
-                        echo "connection failed" . $e->getMessage();
+                    foreach ($nieuwsbericht->fetchAll() as $data) {
+                        echo "<li>" . $data["nieuwsbericht"] . "</li>";
                     }
-                    ?>
-                </div>
+
+                    echo '</ul>';
+                } catch (PDOException $e) {
+                    echo "connection failed" . $e->getMessage();
+                }
+                ?>
             </section>
-        </div>
+        </main>
         <?php readfile("footer.html") ?>
     </body>
 
