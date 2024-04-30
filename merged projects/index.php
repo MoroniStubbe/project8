@@ -14,18 +14,16 @@
 <body>
     <?php readfile("header.html") ?>
     <main>
-        <section class="hero">
+        <section id="hero">
             <div class="container">
                 <h1>Welcome to UNEED-IT</h1>
             </div>
         </section>
-        <section class="services">
+        <section id="services">
             <div class="container">
                 <div class="service">
                     <h3>Phone Repair</h3>
                     <p>We specialize in repairing all types of phones, including iPhones, Android devices, and more.</p>
-                </div>
-                <div class="picture">
                 </div>
                 <div class="service">
                     <h3>Laptop Repair</h3>
