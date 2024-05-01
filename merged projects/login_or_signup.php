@@ -10,13 +10,17 @@
 
 <body>
     <?php readfile("header.html") ?>
-    <div class="container">
-        <div class="login-signup">
-            <h1>Het lijkt erop dat jij niet ingelogd is</h1>
-            <button onclick="window.location.href='login.php'">Log In</button>
-            <button onclick="window.location.href='registration.php'">Sign Up</button>
+    <main>
+        <div class="container">
+            <div class="login-signup">
+                <h1>Het lijkt erop dat jij niet ingelogd is</h1>
+                <div>
+                    <button onclick="window.location.href='login.php'">Log In</button>
+                    <button onclick="window.location.href='registration.php'">Sign Up</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
     <?php readfile("footer.html") ?>
 </body>
 

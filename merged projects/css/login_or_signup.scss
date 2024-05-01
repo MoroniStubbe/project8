@@ -1,32 +1,31 @@
 $color_1: #fff;
 $font-family_1: Arial, sans-serif;
 
-.container1 {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+body {
+    main {
+        .container {
+            .login-signup {
+                width: 80vw;
+                height: 80vh;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
 
-.login-signup {
-    text-align: center;
-    margin-top: 100px;
+                button {
+                    margin: 10px;
+                    padding: 2vh 2vw;
+                    font-size: 16px;
+                    border-radius: 5px;
+                    cursor: pointer;
 
-    button {
-        margin: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #45a049;
-            color: $color_1;
+                    &:hover {
+                        background-color: #45a049;
+                        color: $color_1;
+                    }
+                }
+            }
         }
     }
-}
-
-.login-header {
-    text-align: center;
-    margin-bottom: 20px;
 }
