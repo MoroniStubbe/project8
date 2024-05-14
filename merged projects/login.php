@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 
 <body>
@@ -20,6 +21,7 @@
             </form>
         </div>
     </main>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

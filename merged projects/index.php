@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNEED-IT</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
     <meta name="description" content="Your one-stop solution for all your IT needs.">
     <meta name="keywords" content="IT, repair, services, phones, laptops, PCs">
@@ -13,18 +14,14 @@
 <body>
     <?php readfile("header.html") ?>
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Welcome to UNEED-IT</h1>
-            </div>
+        <section id="hero">
+            <h1>Welcome to UNEED-IT</h1>
         </section>
-        <section class="services">
+        <section id="services">
             <div class="container">
                 <div class="service">
                     <h3>Phone Repair</h3>
                     <p>We specialize in repairing all types of phones, including iPhones, Android devices, and more.</p>
-                </div>
-                <div class="picture">
                 </div>
                 <div class="service">
                     <h3>Laptop Repair</h3>
@@ -37,19 +34,15 @@
                 </div>
             </div>
         </section>
-        <section class="iframe">
+        <section id="iframe">
             <div class="container">
-                <div class="location">
+                <div id="location">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2455.469405079923!2d4.6556065!3d52.0165458!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5d125952a58cd%3A0x93f677d7fe6faaae!2sUneed-IT!5e0!3m2!1sen!2snl!4v1712919752830!5m2!1sen!2snl" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 UNEED-IT. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>
