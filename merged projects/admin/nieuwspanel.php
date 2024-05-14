@@ -14,7 +14,7 @@
       </ul>
     </nav>
     <div class="logo">
-      <img src="cropped-logo.png" alt="Company Logo">
+      <img src="../img/logo.png" alt="Company Logo">
     </div>
   </header>
   <main>
