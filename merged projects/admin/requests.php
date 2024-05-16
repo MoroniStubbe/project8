@@ -20,19 +20,20 @@
   <main>
     <?php
     include_once("../database.php");
-    $join = $PDO->prepare("SELECT reparatie_aanvraag.*, contact_info.* FROM reparatie_aanvraag INNER JOIN contact_info ON reparatie_aanvraag.contact_ID = contact_info.ID;");
-    $join->execute();
-    $result1 = $join->fetchAll();
+    include_once("../classes/database.php");
+    include_once("../classes/repair_request.php");
+    $db = new Database($PDO);
+    $repair_request = new RepairRequest($db);
+    $repair_requests = $repair_request->read();
 
     echo "<table class='table1'>";
-    foreach ($result1 as $data) {
+    foreach ($repair_requests as $data) {
       echo "<tr>";
       echo "<td>" . $data["device_type"] . "</td>";
-      echo "<td>" . $data["computer_naam"] . "</td>";
-      echo "<td>" . $data["probleem"] . "</td>";
-      echo "<td>" . $data["contact_ID"] . "</td>";
+      echo "<td>" . $data["device_name"] . "</td>";
+      echo "<td>" . $data["problem"] . "</td>";
       echo "<td>" . $data["email"] . "</td>";
-      echo "<td>" . $data["telefoon_nummer"] . "</td>";
+      echo "<td>" . $data["telephone"] . "</td>";
       echo "</tr>";
     }
     echo "</table>";
