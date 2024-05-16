@@ -33,9 +33,10 @@ header #nav-container nav ul {
   align-items: center;
 }
 header #nav-container nav ul li {
-  margin: 0 1vw;
+  margin: 0 0.5vw;
 }
 header #nav-container nav ul li a {
+  padding: 2vh 1.5vw;
   text-decoration: none;
   color: #fff;
   transition: background-color 0.3s ease;
