@@ -7,12 +7,10 @@ class Database
     public $pdo;
     public $tables;
 
-    public function __construct($config)
+    public function __construct($pdo)
     {
         try {
-            $this->host = $config->host;
-            $this->dbname = $config->dbname;
-            $this->pdo = new PDO("mysql:host=" . $config->host . ";dbname=" . $config->dbname, $config->username, $config->password);
+            $this->pdo = $pdo;
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->tables = $this->get_database_structure();
         } catch (PDOException $e) {
