@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styleadduser.css">
+    <link rel="stylesheet" href="add_user.css">
 </head>
 
 <body>
