@@ -36,14 +36,8 @@
       echo "</tr>";
     }
     echo "</table>";
-
-
-
-
-
     ?>
   </main>
-
 
 </body>
 

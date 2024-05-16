@@ -35,26 +35,21 @@ class RepairRequest
 
     function read($id = null)
     {
-        if (!$id) {
-            if (!$this->id) {
-                return "no id provided";
+        if ($id || $this->id) {
+            if ($id) {
+                $this->id = $id;
             }
 
-            $id = $this->$id;
+            $result = $this->db->read($this->table, where: ["id" => $id])[0];
+            $this->device_type = $result["device_type"];
+            $this->device_name = $result["device_name"];
+            $this->problem = $result["problem"];
+            $this->telephone = $result["telephone"];
+            $this->email = $result["email"];
         } else {
-            $this->id = $id;
+            $result = $this->db->read($this->table);
         }
 
-        $result = $this->db->read($this->table, where: ["id" => $id])[0];
-
-        if (gettype($result) == "string") {
-            return $result;
-        }
-
-        $this->device_type = $result["device_type"];
-        $this->device_name = $result["device_name"];
-        $this->problem = $result["problem"];
-        $this->telephone = $result["telephone"];
-        $this->email = $result["email"];
+        return $result;
     }
 }
