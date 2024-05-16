@@ -40,7 +40,7 @@ class RepairRequest
                 $this->id = $id;
             }
 
-            $result = $this->db->read($this->table, where: ["id" => $id])[0];
+            $result = $this->db->read($this->table, where: ["id" => $this->id])[0];
             $this->device_type = $result["device_type"];
             $this->device_name = $result["device_name"];
             $this->problem = $result["problem"];
