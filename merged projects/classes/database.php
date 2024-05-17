@@ -70,13 +70,13 @@ class Database
     public function create($table, $column_value_pairs)
     {
         if (!$this->check_table_exists($table)) {
-            return "table not found";
+            throw new Exception("table not found");
         }
 
         $columns = array_keys($column_value_pairs);
         foreach ($columns as $column) {
             if (!$this->check_column_exists($table, $column)) {
-                return "column not found";
+                throw new Exception("column not found");
             }
         }
 
@@ -113,13 +113,13 @@ class Database
     public function read($table, $columns = ["*"], $where = [])
     {
         if (!$this->check_table_exists($table)) {
-            return "table not found";
+            throw new Exception("table not found");
         }
 
         if ($columns !== ["*"]) {
             foreach ($columns as $column) {
                 if (!$this->check_column_exists($table, $column)) {
-                    return "column not found";
+                    throw new Exception("column not found");
                 }
             }
         }
@@ -128,7 +128,7 @@ class Database
             $where_columns = array_keys($where);
             foreach ($where_columns as $column) {
                 if (!$this->check_column_exists($table, $column)) {
-                    return "column not found";
+                    throw new Exception("column not found");
                 }
             }
         }
@@ -148,13 +148,13 @@ class Database
     public function update($table, $column_value_pairs, $where = [])
     {
         if (!$this->check_table_exists($table)) {
-            return "table not found";
+            throw new Exception("table not found");
         }
 
         $columns = array_keys($column_value_pairs);
         foreach ($columns as $column) {
             if (!$this->check_column_exists($table, $column)) {
-                return "column not found";
+                throw new Exception("column not found");
             }
         }
 
@@ -162,7 +162,7 @@ class Database
             $where_columns = array_keys($where);
             foreach ($where_columns as $column) {
                 if (!$this->check_column_exists($table, $column)) {
-                    return "column not found";
+                    throw new Exception("column not found");
                 }
             }
         }
@@ -188,14 +188,14 @@ class Database
     public function delete($table, $where = [])
     {
         if (!$this->check_table_exists($table)) {
-            return "table not found";
+            throw new Exception("table not found");
         }
 
         if ($where !== []) {
             $where_columns = array_keys($where);
             foreach ($where_columns as $column) {
                 if (!$this->check_column_exists($table, $column)) {
-                    return "column not found";
+                    throw new Exception("column not found");
                 }
             }
         }
