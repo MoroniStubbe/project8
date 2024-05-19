@@ -8,14 +8,14 @@
   <header>
     <nav class="nav">
       <ul>
-        <li><a href="adduser.php">gebruiker toevoegen</a></li>
-        <li><a href="nieuwspanel.php">nieuws</a></li>
-        <li><a href="aanvragen.php">aanvragen inzien</a></li>
+        <li><a href="add_user.php">gebruiker toevoegen</a></li>
+        <li><a href="news_panel.php">nieuws</a></li>
+        <li><a href="requests.php">aanvragen inzien</a></li>
 
       </ul>
     </nav>
     <div class="logo">
-      <img src="cropped-logo.png" alt="Company Logo">
+      <img src="../img/logo.png" alt="Company Logo">
     </div>
   </header>
   <main>

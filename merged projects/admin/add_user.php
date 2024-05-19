@@ -1,20 +1,20 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styleadduser.css">
+    <link rel="stylesheet" href="add_user.css">
 </head>
 
 <body>
     <header>
         <nav class="nav">
             <ul>
-                <li><a href="nieuwspanel.php">nieuws</a></li>
-                <li><a href="aanvragen.php">aanvragen inzien</a></li>
-                <li><a href="faqpanel.php">FAQ</a></li>
+                <li><a href="news_panel.php">nieuws</a></li>
+                <li><a href="requests.php">aanvragen inzien</a></li>
+                <li><a href="faq_panel.php">FAQ</a></li>
             </ul>
         </nav>
         <div class="logo">
-            <img src="cropped-logo.png" alt="Company Logo">
+            <img src="../img/logo.png" alt="Company Logo">
         </div>
     </header>
     <form method="post" class="adduser">
