@@ -1,10 +1,10 @@
 # project8
 Groep:	Moroni, Kevin, Jiwoo, Aidan\
-Keuze:	webshop\
+Keuze:	Webshop\
 Talen:	HTML, CSS, JS?, PHP, SQL\
-Tools:	VS Code, XAMPP/MAMP (config gebruiken)\
-Github:	https://github.com/MoroniStubbe/project8\
-Trello:	https://trello.com/b/Qd0KNNHJ/project-8\
+Tools:	XAMPP / MAMP\
+Github:	https://github.com/MoroniStubbe/project8 \
+Trello:	https://trello.com/b/Qd0KNNHJ/project-8
 
 # Installation
 1. Clone repo to htdocs in XAMPP or MAMP
