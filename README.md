@@ -1,4 +1,4 @@
-# project8\
+# project8
 groep:	Moroni, Kevin, Jiwoo, Aidan\
 Keuze:	webshop\
 Talen:	HTML, CSS, JS?, PHP, SQL\
