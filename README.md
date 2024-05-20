@@ -1,7 +1,7 @@
-# project8
-groep:	Moroni, Kevin, Jiwoo, Aidan
-Keuze:	webshop
-Talen:	HTML, CSS, JS?, PHP, SQL
-Tools:	VS Code, XAMPP/MAMP (config gebruiken)
-Github:	https://github.com/MoroniStubbe/project8
-Trello:	https://trello.com/b/Qd0KNNHJ/project-8
+# project8__
+groep:	Moroni, Kevin, Jiwoo, Aidan__
+Keuze:	webshop__
+Talen:	HTML, CSS, JS?, PHP, SQL__
+Tools:	VS Code, XAMPP/MAMP (config gebruiken)__
+Github:	https://github.com/MoroniStubbe/project8__
+Trello:	https://trello.com/b/Qd0KNNHJ/project-8__
