@@ -28,13 +28,13 @@
                         <option value="other">Other</option>
                     </select>
                     <label for="name">Computer naam/Telefoon naam:</label>
-                    <input type="text" class="" name="computernaam" placeholder="Computer Name">
+                    <input type="text" class="" name="device_name" placeholder="Computer Name">
                     <label for="email">Email:</label>
                     <input type="text" class="" name="email" placeholder="Email">
                     <label for="telefoonnummer">Telefoon nummer:</label>
-                    <input type="text" class="" name="telefoon_nummer" placeholder="Phone Number">
+                    <input type="text" class="" name="telephone" placeholder="Phone Number">
                     <label for="message">Probleem met product:</label>
-                    <textarea name="probleem" placeholder="Probleem"></textarea>
+                    <textarea name="problem" placeholder="Probleem"></textarea>
                     <input type="submit" id="btn"></input>
                 </form>
             </div>
@@ -46,27 +46,20 @@
 </html>
 <?php
 include_once("database.php");
+include_once("classes/database.php");
+include_once("classes/repair_request.php");
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $probleem = $_POST["probleem"];
-    $telefoon_nummer = $_POST["telefoon_nummer"];
+    $problem = $_POST["problem"];
+    $telephone = $_POST["telephone"];
     $email = $_POST["email"];
-    $computernaam = $_POST["computernaam"];
+    $device_name = $_POST["device_name"];
     $device_type = $_POST["device_type"];
-    try {
-        if (!empty($device_type) && !empty($computernaam) && !empty($email) && !empty($telefoon_nummer) && !empty($probleem)) {
-            $send = $PDO->prepare("INSERT INTO reparatie_aanvraag (device_type, ID, computer_naam, probleem, contact_ID) VALUES (:device_type, NULL, :computernaam, :probleem, (SELECT MAX(ID) FROM contact_info));");
-            $send2 = $PDO->prepare("INSERT INTO contact_info (telefoon_nummer, ID, email) values (:telefoon_nummer, NULL, :email)");
-            $send2->bindParam(':email', $email);
-            $send2->bindParam(':telefoon_nummer', $telefoon_nummer);
-            $send2->execute();
-            $send->bindParam(':device_type', $device_type);
-            $send->bindParam(':computernaam', $computernaam);
-            $send->bindParam(':probleem', $probleem);
-            $send->execute();
-            unset($probleem, $telefoon_nummer, $email, $device_type, $computernaam);
-        }
-    } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+
+    if (!empty($device_type) && !empty($device_name) && !empty($email) && !empty($telephone) && !empty($problem)) {
+        $db = new Database($PDO);
+        $repair_request = new RepairRequest($db);
+        $repair_request->create($device_type, $device_name, $problem, $telephone, $email);
     }
 }
 ?>
