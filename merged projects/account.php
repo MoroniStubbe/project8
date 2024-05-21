@@ -30,7 +30,7 @@
         <div class="edit-info" style="display: none;">
             <h1>Edit Information</h1>
             <div class="changeForm">
-                <form id="changeInfoForm" action="changeinfo.php" method="post" onsubmit="handleFormSubmission()">
+                <form id="changeInfoForm" action="change_info.php" method="post" onsubmit="handleFormSubmission()">
                     <label for="newName">New Name:</label><br>
                     <input type="text" id="newName" name="newName" value="<?php echo $user['naam']; ?>"><br>
                     <label for="newPhoneNumber">New Phone Number:</label><br>
