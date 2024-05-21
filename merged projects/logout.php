@@ -5,5 +5,5 @@ $_SESSION = array();
 
 session_destroy();
 
-header("Location: login_or_signup.html");
+header("Location: login_or_signup.php");
 exit();
