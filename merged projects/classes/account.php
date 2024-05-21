@@ -1,6 +1,7 @@
 <?php
 
-class Account {
+class Account
+{
     private $db;
     private $name;
     private $phone;
@@ -13,11 +14,13 @@ class Account {
     private $newAddress;
     private $newEmail;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function createAccount($name, $phone, $email, $address, $password) {
+    public function createAccount($name, $phone, $email, $address, $password)
+    {
         $this->name = trim($name);
         $this->phone = trim($phone);
         $this->email = trim($email);
@@ -42,7 +45,7 @@ class Account {
                 'role' => $this->role
             ];
 
-            header("Location: index.html");
+            header("Location: index.php");
             exit();
         } catch (Exception $e) {
             echo "Fout bij gebruikersregistratie";
@@ -50,11 +53,12 @@ class Account {
         }
     }
 
-    public function loginAccount($name, $email, $password) {
+    public function loginAccount($name, $email, $password)
+    {
         $this->name = trim($name);
         $this->email = trim($email);
         $this->password = trim($password);
-        
+
         $user = $this->db->read('users', ['*'], ['naam' => $this->name, 'email' => $this->email, 'password' => $this->password]);
 
         $userId = $user[0]['id'];
@@ -68,11 +72,12 @@ class Account {
 
         setcookie('user', session_id(), time() + (86400 * 30 * 5), "/");
 
-        header("Location: index.html");
+        header("Location: index.php");
         exit();
     }
 
-    public function showUser() {
+    public function showUser()
+    {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
             echo "<p><strong>Naam:</strong> {$user['naam']}</p>";
@@ -85,7 +90,8 @@ class Account {
         }
     }
 
-    public function changeInfo($newName, $newPhoneNumber, $newAddress, $newEmail) {
+    public function changeInfo($newName, $newPhoneNumber, $newAddress, $newEmail)
+    {
         $this->newName = trim($newName);
         $this->newPhoneNumber = trim($newPhoneNumber);
         $this->newAddress = trim($newAddress);
@@ -128,4 +134,3 @@ class Account {
         }
     }
 }
-?>
