@@ -32,7 +32,7 @@ class TextPanel
                     $this->id = $id;
                 }
 
-                $result = $this->db->read($this->table, ["*"], ["id" => $this->id]);
+                $result = $this->db->read($this->table, ["*"], ["ID" => $this->id]);
                 if (count($result) > 0) {
                     $this->message = $result[0]["message"];
                     return $result[0];
@@ -64,11 +64,11 @@ class TextPanel
         $this->id = $id;
 
         try {
-             $this->db->delete($this->table, ["ID" => $this->id]);
+            $this->db->delete($this->table, ["ID" => $this->id]);
+            $this->id = null;
             return true;
         } catch (Exception $e) {
             throw new Exception("Failed to delete message: " . $e->getMessage());
         }
     }
 }
-
