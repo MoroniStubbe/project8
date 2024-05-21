@@ -1,7 +1,9 @@
 <?php
 include_once("database.php");
+include_once("./classes/database.php");
+include_once("./classes/account.php");
+
 session_start();
-if (isset($_SESSION['user']) && isset($_POST['newName']) && isset($_POST['newPhoneNumber']) && isset($_POST['newAddress']) && isset($_POST['newEmail'])) {
 
     $user = $_SESSION['user'];
     $newName = $_POST['newName'];
@@ -9,37 +11,11 @@ if (isset($_SESSION['user']) && isset($_POST['newName']) && isset($_POST['newPho
     $newAddress = $_POST['newAddress'];
     $newEmail = $_POST['newEmail'];
 
-
-    if (empty($newName) || empty($newPhoneNumber) || empty($newAddress) || empty($newEmail)) {
-        echo "Vul alstublieft alle velden in.";
-        exit();
-    }
-
-
-    if (!preg_match("/^[0-9]{10}$/", $newPhoneNumber)) {
-        echo "Voer alstublieft een geldig telefoonnummer in.";
-        exit();
-    }
-
-    if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
-        echo "Gelieve een geldig e-mailadres in te geven.";
-        exit();
-    }
-
-    try {
-        $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-        $stmt = $PDO->prepare("UPDATE users SET naam=?, telefoonnummer=?, address=?, email=? WHERE id=?");
-        $stmt->execute([$newName, $newPhoneNumber, $newAddress, $newEmail, $user['id']]);
-
-
-        header("Location: account.php");
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-} else {
-    header("Location: login_or_signup.html");
+if (empty($user) || empty($newName) || empty($newPhoneNumber) || empty($newAddress) || empty($newEmail)){
+    echo "Vul alstublieft alle velden in";
     exit();
+} else{
+    $db = new Database($PDO);
+    $account = new Account($db);
+    $account->changeInfo($newName, $newPhoneNumber, $newAddress, $newEmail);
 }

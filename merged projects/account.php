@@ -16,24 +16,21 @@
             <h1>My Account</h1>
             <div class="info-block">
                 <?php
+                include_once("database.php");
+                include_once("./classes/account.php");
+
                 session_start();
-                if (isset($_SESSION['user'])) {
-                    $user = $_SESSION['user'];
-                    echo "<p><strong>Naam:</strong> {$user['naam']}</p>";
-                    echo "<p><strong>Telefoonnummer:</strong> {$user['telefoonnummer']}</p>";
-                    echo "<p><strong>Adres:</strong> {$user['address']}</p>";
-                    echo "<p><strong>Email:</strong> {$user['email']}</p>";
-                } else {
-                    header("Location: login_or_signup.php");
-                    exit();
-                }
+                $user = $_SESSION['user'];
+
+                $account = new Account($PDO);
+                $account->showUser();
                 ?>
             </div>
         </div>
         <div class="edit-info" style="display: none;">
             <h1>Edit Information</h1>
             <div class="changeForm">
-                <form id="changeInfoForm" action="changeinfo.php" method="post" onsubmit="handleFormSubmission()">
+                <form id="changeInfoForm" action="change_info.php" method="post" onsubmit="handleFormSubmission()">
                     <label for="newName">New Name:</label><br>
                     <input type="text" id="newName" name="newName" value="<?php echo $user['naam']; ?>"><br>
                     <label for="newPhoneNumber">New Phone Number:</label><br>
@@ -65,6 +62,7 @@
                 var editBlock = document.querySelector('.edit-info');
                 var editButton = document.getElementById('editButton');
                 var cancelButton = document.getElementById('cancelButton');
+
                 if (infoBlock.style.display === 'none') {
                     infoBlock.style.display = 'block';
                     editBlock.style.display = 'none';
@@ -98,10 +96,12 @@
                 cancelButton.style.display = 'none';
                 editButton.style.display = 'block';
             }
+
             var editButton = document.getElementById('editButton');
             editButton.addEventListener('click', function() {
                 toggleEdit();
             });
+
             var cancelButton = document.getElementById('cancelButton');
             cancelButton.addEventListener('click', function() {
                 cancelChanges();
