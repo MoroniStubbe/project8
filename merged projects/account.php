@@ -16,17 +16,13 @@
             <h1>My Account</h1>
             <div class="info-block">
                 <?php
+                include_once("database.php");
+                include_once("./classes/account.php");
+
                 session_start();
-                if (isset($_SESSION['user'])) {
-                    $user = $_SESSION['user'];
-                    echo "<p><strong>Naam:</strong> {$user['naam']}</p>";
-                    echo "<p><strong>Telefoonnummer:</strong> {$user['telefoonnummer']}</p>";
-                    echo "<p><strong>Adres:</strong> {$user['address']}</p>";
-                    echo "<p><strong>Email:</strong> {$user['email']}</p>";
-                } else {
-                    header("Location: login_or_signup.php");
-                    exit();
-                }
+                
+                $account = new Account($PDO);
+                $account->showUser();
                 ?>
             </div>
         </div>

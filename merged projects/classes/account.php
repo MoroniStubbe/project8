@@ -1,41 +1,78 @@
 <?php
+
 class Account {
-    public function createAccount(){
-        include_once ("database.php");
+    private $db;
+    private $name;
+    private $phone;
+    private $email;
+    private $address;
+    private $role = "klant";
+    private $password;
+    private $newName;
+    private $newPhoneNumber;
+    private $newAddress;
+    private $newEmail;
 
-        $naam = filter_var(trim($_POST['naam']), FILTER_SANITIZE_STRING);
-        $telefoonnummer = filter_var(trim($_POST['telefoonnummer']), FILTER_SANITIZE_STRING);
-        $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
-        $address = filter_var(trim($_POST['address']), FILTER_SANITIZE_STRING);
-        $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
-
-        $stmt = $PDO->prepare("INSERT INTO `users` (`naam`, `telefoonnummer`, `email`, `address`, `password`, `role`) VALUES (:naam, :telefoonnummer, :email, :address, :password, 'klant')");
-        $stmt->bindParam(':naam', $naam);
-        $stmt->bindParam(':telefoonnummer', $telefoonnummer);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':address', $address);
-        $stmt->bindParam(':password', $password);
-
-        if ($stmt->execute()) {
-            $user = [
-                'naam' => $naam,
-                'telefoonnummer' => $telefoonnummer,
-                'email' => $email,
-                'address' => $address,
-                'password' => $password
-            ];
-        
-            $_SESSION['user'] = $user;
-        
-            header("Location: index.html");
-            exit();
-        } else {
-            echo "Fout bij gebruikersregistratie";
-            exit();
-        }        
+    public function __construct($db) {
+        $this->db = $db;
     }
 
-    public function users(){
+    public function createAccount($name, $phone, $email, $address, $password) {
+        $this->name = trim($name);
+        $this->phone = trim($phone);
+        $this->email = trim($email);
+        $this->address = trim($address);
+        $this->password = trim($password);
+
+        try {
+            $this->db->create('users', [
+                'naam' => $this->name,
+                'telefoonnummer' => $this->phone,
+                'email' => $this->email,
+                'address' => $this->address,
+                'password' => $this->password,
+                'role' => $this->role
+            ]);
+
+            $_SESSION['user'] = [
+                'naam' => $this->name,
+                'telefoonnummer' => $this->phone,
+                'email' => $this->email,
+                'address' => $this->address,
+                'role' => $this->role
+            ];
+
+            header("Location: index.html");
+            exit();
+        } catch (Exception $e) {
+            echo "Fout bij gebruikersregistratie";
+            exit();
+        }
+    }
+
+    public function loginAccount($name, $email, $password) {
+        $this->name = trim($name);
+        $this->email = trim($email);
+        $this->password = trim($password);
+        
+        $user = $this->db->read('users', ['*'], ['naam' => $this->name, 'email' => $this->email, 'password' => $this->password]);
+
+        $userId = $user[0]['id'];
+
+        $_SESSION['idvanklant'] = $userId;
+        $_SESSION['user'] = $user[0];
+        unset($_SESSION['user']['password']);
+        if ($user[0]['role'] === 'admin') {
+            $_SESSION['is_admin'] = true;
+        }
+
+        setcookie('user', session_id(), time() + (86400 * 30 * 5), "/");
+
+        header("Location: index.html");
+        exit();
+    }
+
+    public function showUser() {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
             echo "<p><strong>Naam:</strong> {$user['naam']}</p>";
@@ -47,5 +84,48 @@ class Account {
             exit();
         }
     }
-};
+
+    public function changeInfo($newName, $newPhoneNumber, $newAddress, $newEmail) {
+        $this->newName = trim($newName);
+        $this->newPhoneNumber = trim($newPhoneNumber);
+        $this->newAddress = trim($newAddress);
+        $this->newEmail = trim($newEmail);
+
+        if (empty($this->newName) || empty($this->newPhoneNumber) || empty($this->newAddress) || empty($this->newEmail)) {
+            echo "Vul alstublieft alle velden in";
+            exit();
+        }
+
+        if (!isset($_SESSION['user'])) {
+            echo "Gebruiker niet ingelogd";
+            exit();
+        }
+
+        $user = $_SESSION['user'];
+        $userId = $user['id'];
+
+        try {
+            $this->db->update('users', [
+                'naam' => $this->newName,
+                'telefoonnummer' => $this->newPhoneNumber,
+                'address' => $this->newAddress,
+                'email' => $this->newEmail
+            ], ['id' => $userId]);
+
+            $_SESSION['user'] = [
+                'id' => $userId,
+                'naam' => $this->newName,
+                'telefoonnummer' => $this->newPhoneNumber,
+                'address' => $this->newAddress,
+                'email' => $this->newEmail
+            ];
+
+            header("Location: account.php");
+            exit();
+        } catch (Exception $e) {
+            echo "Fout bij het bijwerken van gebruikersinformatie";
+            exit();
+        }
+    }
+}
 ?>
