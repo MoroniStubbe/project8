@@ -26,6 +26,15 @@ body {
                 .answer.show {
                     display: block;
                 }
+                ul {
+                    display: inline-block;
+                    margin: 0;
+
+                    li {
+                        margin: 2vh 1vw;
+                        word-wrap: break-word;
+                    }
+                }
             }
         }
     }

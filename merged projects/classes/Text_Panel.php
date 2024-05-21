@@ -47,18 +47,6 @@ class TextPanel
         }
     }
 
-    public function update($id, $message)
-    {
-        $this->id = $id;
-        $this->message = $message;
-
-        try {
-            return $this->db->update($this->table, ["message" => $this->message], ["id" => $this->id]);
-        } catch (Exception $e) {
-            throw new Exception("Failed to update message: " . $e->getMessage());
-        }
-    }
-
     public function delete($id)
     {
         $this->id = $id;

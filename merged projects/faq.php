@@ -52,6 +52,25 @@
         }
       </script>
     </div>
+      <section id="faq">
+          <?php
+          include_once("database.php");
+          try {
+              $nieuwsbericht = $PDO->prepare("SELECT * FROM faq");
+              $nieuwsbericht->execute();
+
+              echo '<ul>';
+
+              foreach ($nieuwsbericht->fetchAll() as $data) {
+                  echo "<li>" . $data["message"] . "</li>";
+              }
+
+              echo '</ul>';
+          } catch (PDOException $e) {
+              echo "connection failed" . $e->getMessage();
+          }
+          ?>
+      </section>
   </main>
   <?php readfile("footer.html") ?>
 </body>
