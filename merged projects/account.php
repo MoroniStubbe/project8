@@ -20,7 +20,8 @@
                 include_once("./classes/account.php");
 
                 session_start();
-                
+                $user = $_SESSION['user'];
+
                 $account = new Account($PDO);
                 $account->showUser();
                 ?>
@@ -61,6 +62,7 @@
                 var editBlock = document.querySelector('.edit-info');
                 var editButton = document.getElementById('editButton');
                 var cancelButton = document.getElementById('cancelButton');
+
                 if (infoBlock.style.display === 'none') {
                     infoBlock.style.display = 'block';
                     editBlock.style.display = 'none';
@@ -94,10 +96,12 @@
                 cancelButton.style.display = 'none';
                 editButton.style.display = 'block';
             }
+
             var editButton = document.getElementById('editButton');
             editButton.addEventListener('click', function() {
                 toggleEdit();
             });
+
             var cancelButton = document.getElementById('cancelButton');
             cancelButton.addEventListener('click', function() {
                 cancelChanges();
