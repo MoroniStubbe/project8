@@ -29,7 +29,7 @@
 
         try {
             $db = new Database($PDO);
-            $textPanel = new TextPanel($db, 'nieuws');
+            $textPanel = new TextPanel($db, 'news');
 
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (isset($_POST["addnew"]) && !empty(trim($_POST["addnew"]))) {

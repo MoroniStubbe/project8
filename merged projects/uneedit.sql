@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 12:11 AM
+-- Generation Time: May 24, 2024 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,27 +47,36 @@ INSERT INTO `adminpanel` (`User_name`, `Password`, `ID`) VALUES
 --
 
 CREATE TABLE `faq` (
-  `post` text NOT NULL,
+  `message` text NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`message`, `ID`) VALUES
+('hallo', 43);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nieuws`
+-- Table structure for table `news`
 --
 
-CREATE TABLE `nieuws` (
-  `nieuwsbericht` text NOT NULL,
+CREATE TABLE `news` (
+  `message` text NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `nieuws`
+-- Dumping data for table `news`
 --
 
-INSERT INTO `nieuws` (`nieuwsbericht`, `ID`) VALUES
-('hallo lorem ipsum', 11);
+INSERT INTO `news` (`message`, `ID`) VALUES
+('hallo welkom in de onderwereld', 13),
+('waarom zijn mensen dom', 15),
+('hallo welkom op de pagina', 20);
 
 -- --------------------------------------------------------
 
@@ -89,7 +98,8 @@ CREATE TABLE `repair_request` (
 --
 
 INSERT INTO `repair_request` (`id`, `device_type`, `device_name`, `problem`, `telephone`, `email`) VALUES
-(213, 'telefoon', 'asd', 'asd', 'asd', 'asd');
+(213, 'telefoon', 'asd', 'asd', 'asd', 'asd'),
+(214, 'appel pc/mac', 'iphone 7', 'doet niet', '0643669846', 'volva@mail.com');
 
 -- --------------------------------------------------------
 
@@ -134,9 +144,9 @@ ALTER TABLE `faq`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `nieuws`
+-- Indexes for table `news`
 --
-ALTER TABLE `nieuws`
+ALTER TABLE `news`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -165,19 +175,19 @@ ALTER TABLE `adminpanel`
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `nieuws`
+-- AUTO_INCREMENT for table `news`
 --
-ALTER TABLE `nieuws`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `news`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `repair_request`
 --
 ALTER TABLE `repair_request`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `users`

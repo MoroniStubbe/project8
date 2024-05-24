@@ -17,7 +17,7 @@
                 <?php
                 include_once("database.php");
                 try {
-                    $nieuwsbericht = $PDO->prepare("SELECT * FROM nieuws");
+                    $nieuwsbericht = $PDO->prepare("SELECT * FROM news");
                     $nieuwsbericht->execute();
 
                     echo '<ul>';
