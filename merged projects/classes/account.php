@@ -73,7 +73,7 @@ class Account
         $options = [
             "cost" => 12
         ];
-        return password_hash($password, PASSWORD_BCRYPT, $options);
+        return password_hash($password, PASSWORD_DEFAULT, $options);
     }
 
     public function read($cols = ['*'], $where = [])
@@ -98,14 +98,14 @@ class Account
                 'phone' => $phone,
                 'email' => $email,
                 'address' => $address,
-                'password' => $hashed_password,
+                'password_hash' => $hashed_password,
                 'role' => $this->role
             ]);
 
             $this->from_array($this->read(where: ['name' => $name, 'phone' => $phone, 'email' => $email])[0]);
             return true;
         } catch (Exception $e) {
-            echo "Fout bij gebruikersregistratie";
+            echo "Fout bij gebruikersregistratie ";
             return false;
         }
     }
@@ -123,6 +123,11 @@ class Account
         $this->from_array($account);
         if ($this->password !== $password) {
             return false;
+        }
+
+        if (!password_verify($password, $this->hash_password($password))) { 
+            header("Location: login.php?error=invalid_password");
+            exit;
         }
 
         $this->save_session();
