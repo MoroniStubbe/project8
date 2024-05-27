@@ -3,6 +3,7 @@
 class Account
 {
     private $db;
+    public $id;
     public $name;
     public $phone;
     public $email;
@@ -18,6 +19,7 @@ class Account
     private function to_array()
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
@@ -28,6 +30,9 @@ class Account
 
     private function from_array($account)
     {
+        if (isset($account["id"])) {
+            $this->id = $account["id"];
+        }
         if (isset($account["name"])) {
             $this->name = $account["name"];
         }
@@ -48,7 +53,7 @@ class Account
         }
     }
 
-    private function create_session()
+    private function save_session()
     {
         session_start();
         $_SESSION['account'] = $this->to_array();
@@ -63,51 +68,57 @@ class Account
         $this->from_array($_SESSION['account']);
     }
 
+    public function read($cols = ['*'], $where = [])
+    {
+        return $this->db->read('accounts', $cols, $where);
+    }
+
     public function create($name, $phone, $email, $address, $password)
     {
-        $this->name = $name;
-        $this->phone = $phone;
-        $this->email = $email;
-        $this->address = $address;
-        $this->password = $password;
+        if (
+            count($this->read(where: ['name' => $name])) > 0 ||
+            count($this->read(where: ['phone' => $phone])) > 0 ||
+            count($this->read(where: ['email' => $email])) > 0
+        ) {
+            return false;
+        }
 
         try {
             $this->db->create('accounts', [
-                'name' => $this->name,
-                'phone' => $this->phone,
-                'email' => $this->email,
-                'address' => $this->address,
-                'password' => $this->password,
+                'name' => $name,
+                'phone' => $phone,
+                'email' => $email,
+                'address' => $address,
+                'password' => $password,
                 'role' => $this->role
             ]);
 
-            header("Location: index.php");
-            exit();
+            $this->from_array($this->read(where: ['name' => $name, 'phone' => $phone, 'email' => $email])[0]);
+            return true;
         } catch (Exception $e) {
             echo "Fout bij gebruikersregistratie";
-            exit();
+            return false;
         }
     }
 
     public function log_in($name, $email, $password)
     {
-        $account = $this->db->read('accounts', ['*'], ['name' => $name, 'email' => $email]);
+        $account = $this->read(where: ['name' => $name, 'email' => $email]);
 
         if (!$account) {
             header("Location: login.php?error=account_not_found");
-            exit();
+            return false;
         }
 
         $account = $account[0];
         $this->from_array($account);
-        if ($account->password === $password) {
+        if ($this->password !== $password) {
             return false;
         }
 
-        $this->create_session();
+        $this->save_session();
 
         header("Location: index.php");
-        exit();
     }
 
     public function show()
@@ -120,24 +131,22 @@ class Account
             echo "<p><strong>Email:</strong> {$this->email}</p>";
         } else {
             header("Location: login_or_signup.php");
-            exit();
         }
     }
 
     public function change_info($name, $phone, $address, $email)
     {
+        $this->load_session();
         if (empty($name) || empty($phone) || empty($address) || empty($email)) {
             echo "Vul alstublieft alle velden in";
-            exit();
+            return false;
         }
 
         session_start();
         if (!isset($_SESSION['account'])) {
             echo "Gebruiker niet ingelogd";
-            exit();
+            return false;
         }
-
-        $account = $_SESSION['account'];
 
         try {
             $this->db->update('accounts', [
@@ -145,14 +154,18 @@ class Account
                 'phone' => $phone,
                 'address' => $address,
                 'email' => $email
-            ], ['id' => $account->id]);
+            ], ['id' => $this->id]);
 
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->address = $address;
+            $this->email = $email;
+            $this->save_session();
 
             header("Location: account.php");
-            exit();
         } catch (Exception $e) {
             echo "Fout bij het bijwerken van gebruikersinformatie";
-            exit();
+            return false;
         }
     }
 }

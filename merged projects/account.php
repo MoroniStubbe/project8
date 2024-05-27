@@ -20,7 +20,6 @@
                 include_once("classes/account.php");
 
                 $account = new Account($PDO);
-                $account->load_session();
                 $account->show();
                 ?>
             </div>
@@ -29,14 +28,14 @@
             <h1>Edit Information</h1>
             <div class="changeForm">
                 <form id="changeInfoForm" action="change_info.php" method="post" onsubmit="handleFormSubmission()">
-                    <label for="newName">New Name:</label><br>
-                    <input type="text" id="newName" name="newName" value="<?php echo $account->name; ?>"><br>
-                    <label for="newPhoneNumber">New Phone Number:</label><br>
-                    <input type="text" id="newPhoneNumber" name="newPhoneNumber" value="<?php echo $account->phone; ?>"><br>
-                    <label for="newAddress">New Address:</label><br>
-                    <input type="text" id="newAddress" name="newAddress" value="<?php echo $account->address; ?>"><br>
-                    <label for="newEmail">Email:</label><br>
-                    <input type="text" id="newEmail" name="newEmail" value="<?php echo $account->email; ?>"><br>
+                    <label for="name"> Name:</label><br>
+                    <input type="text" id="name" name="name" value="<?php echo $account->name; ?>"><br>
+                    <label for="phone"> Phone Number:</label><br>
+                    <input type="text" id="phone" name="phone" value="<?php echo $account->phone; ?>"><br>
+                    <label for="address"> Address:</label><br>
+                    <input type="text" id="address" name="address" value="<?php echo $account->address; ?>"><br>
+                    <label for="email">Email:</label><br>
+                    <input type="text" id="email" name="email" value="<?php echo $account->email; ?>"><br>
 
                     <div class="button-group">
                         <button type="submit" style="background-color: mediumturquoise;">Wijzigingen opslaan</button>
@@ -76,11 +75,11 @@
             }
 
             function populateForm() {
-                var user = <?php echo json_encode($user); ?>;
-                document.getElementById('newName').value = user.naam;
-                document.getElementById('newPhoneNumber').value = user.telefoonnummer;
-                document.getElementById('newAddress').value = user.address;
-                document.getElementById('newEmail').value = user.email;
+                var account = <?php echo json_encode($account); ?>;
+                document.getElementById('name').value = account.name;
+                document.getElementById('phone').value = account.phone;
+                document.getElementById('address').value = account.address;
+                document.getElementById('email').value = account.email;
             }
 
             function cancelChanges() {

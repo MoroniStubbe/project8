@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($name) || empty($email) || empty($password)) {
         echo "Geen naam, wachtwoord of e-mailadres ingevoerd";
-        exit();
+        return false;
     } else {
         $db = new Database($PDO);
         $account = new Account($db);
