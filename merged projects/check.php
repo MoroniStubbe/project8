@@ -4,8 +4,8 @@ include_once("classes/database.php");
 include_once("classes/account.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['naam'];
-    $phone = $_POST['telefoonnummer'];
+    $name = $_POST['name'];
+    $phone = $_POST['phone_number'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $password = $_POST['password'];

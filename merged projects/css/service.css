@@ -1,7 +1,7 @@
 body main {
   font-family: Arial, Helvetica, sans-serif;
 }
-body main #onze-service {
+body main #our-service {
   display: inline-block;
   width: 100vw;
   color: red;
@@ -9,10 +9,10 @@ body main #onze-service {
   margin-bottom: 0;
   text-align: center;
 }
-body main #onze-service #service-text {
+body main #our-service #service-text {
   color: mediumturquoise;
 }
-body main #onze-diensten {
+body main #our-support {
   text-align: center;
   font-size: 3vh;
 }
@@ -50,7 +50,7 @@ body main #services .Service-Align .Graphic-Design .Service-Text {
   display: flex;
   justify-content: center;
 }
-body main #services .Service-Align .Graphic-Design .Service-Paragraaf {
+body main #services .Service-Align .Graphic-Design .Service-Pharagraph {
   width: 200px;
 }
 body main #services .Service-Align .red-border {

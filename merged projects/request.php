@@ -31,10 +31,10 @@
                     <input type="text" class="" name="device_name" placeholder="Computer Name">
                     <label for="email">Email:</label>
                     <input type="text" class="" name="email" placeholder="Email">
-                    <label for="telefoonnummer">Telefoon nummer:</label>
+                    <label for="phone_number">Telefoon nummer:</label>
                     <input type="text" class="" name="telephone" placeholder="Phone Number">
                     <label for="message">Probleem met product:</label>
-                    <textarea name="problem" placeholder="Probleem"></textarea>
+                    <textarea name="problem" placeholder="Problem"></textarea>
                     <input type="submit" id="btn"></input>
                 </form>
             </div>
