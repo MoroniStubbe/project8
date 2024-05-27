@@ -9,7 +9,7 @@ class Account
     public $email;
     public $address;
     public $role = "customer";
-    private $password;
+    private $password_hash;
 
     public function __construct($db)
     {
@@ -48,8 +48,8 @@ class Account
         if (isset($account["role"])) {
             $this->role = $account["role"];
         }
-        if (isset($account["password"])) {
-            $this->password = $account["password"];
+        if (isset($account["password_hash"])) {
+            $this->password_hash = $account["password_hash"];
         }
     }
 
@@ -68,14 +68,6 @@ class Account
         $this->from_array($_SESSION['account']);
     }
 
-    private function hash_password($password)
-    {
-        $options = [
-            "cost" => 12
-        ];
-        return password_hash($password, PASSWORD_DEFAULT, $options);
-    }
-
     public function read($cols = ['*'], $where = [])
     {
         return $this->db->read('accounts', $cols, $where);
@@ -92,13 +84,12 @@ class Account
         }
 
         try {
-            $hashed_password = $this->hash_password($password);
             $this->db->create('accounts', [
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
                 'address' => $address,
-                'password_hash' => $hashed_password,
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
                 'role' => $this->role
             ]);
 
@@ -122,7 +113,7 @@ class Account
         $account = $account[0];
         $this->from_array($account);
 
-        if (!password_verify($password, $this->password)) { 
+        if (!password_verify($password, $this->password_hash)) {
             header("Location: login.php?error=invalid_password");
         }
 
