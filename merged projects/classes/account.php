@@ -148,14 +148,12 @@ class Account
             return false;
         }
 
-        $existing_account = $this->read(['id'], ['name' => $name]);
-        if (!empty($existing_account) && $existing_account[0]['id'] !== $this->id) {
+        if (count($this->read(where: ['name' => $name])) > 0) {
             echo "Een account met dit gebruikersnaam bestaat al";
             return false;
         }
 
-        $existing_email_account = $this->read(['id'], ['email' => $email]);
-        if (!empty($existing_email_account) && $existing_email_account[0]['id'] !== $this->id) {
+        if (count($this->read(where: ['email' => $email])) > 0) {
             echo "Een account met dit e-mailadres bestaat al";
             return false;
         }
