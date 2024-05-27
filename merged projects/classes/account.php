@@ -77,7 +77,6 @@ class Account
     {
         if (
             count($this->read(where: ['name' => $name])) > 0 ||
-            count($this->read(where: ['phone' => $phone])) > 0 ||
             count($this->read(where: ['email' => $email])) > 0
         ) {
             return false;
@@ -146,6 +145,18 @@ class Account
         session_start();
         if (!isset($_SESSION['account'])) {
             echo "Gebruiker niet ingelogd";
+            return false;
+        }
+
+        $existing_account = $this->read(['id'], ['name' => $name]);
+        if (!empty($existing_account) && $existing_account[0]['id'] !== $this->id) {
+            echo "Een account met dit gebruikersnaam bestaat al";
+            return false;
+        }
+
+        $existing_email_account = $this->read(['id'], ['email' => $email]);
+        if (!empty($existing_email_account) && $existing_email_account[0]['id'] !== $this->id) {
+            echo "Een account met dit e-mailadres bestaat al";
             return false;
         }
 
