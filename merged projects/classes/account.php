@@ -68,6 +68,14 @@ class Account
         $this->from_array($_SESSION['account']);
     }
 
+    private function hash_password($password)
+    {
+        $options = [
+            "cost" => 12
+        ];
+        return password_hash($password, PASSWORD_BCRYPT, $options);
+    }
+
     public function read($cols = ['*'], $where = [])
     {
         return $this->db->read('accounts', $cols, $where);
@@ -84,12 +92,13 @@ class Account
         }
 
         try {
+            $hashed_password = $this->hash_password($password);
             $this->db->create('accounts', [
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
                 'address' => $address,
-                'password' => $password,
+                'password' => $hashed_password,
                 'role' => $this->role
             ]);
 
