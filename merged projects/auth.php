@@ -1,7 +1,7 @@
 <?php
 include_once("database.php");
-include_once("./classes/database.php");
-include_once("./classes/account.php");
+include_once("classes/database.php");
+include_once("classes/account.php");
 
 session_start();
 

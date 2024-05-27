@@ -112,7 +112,7 @@ class Account
 
     public function log_in($name, $email, $password)
     {
-        $account = $this->read(where: ['name' => $name, 'email' => $email]);
+        $account = $this->read(where: ['name' => $name, 'email' => $email,]);
 
         if (!$account) {
             header("Location: login.php?error=account_not_found");
@@ -121,13 +121,9 @@ class Account
 
         $account = $account[0];
         $this->from_array($account);
-        if ($this->password !== $password) {
-            return false;
-        }
 
-        if (!password_verify($password, $this->hash_password($password))) { 
+        if (!password_verify($password, $this->password)) { 
             header("Location: login.php?error=invalid_password");
-            exit;
         }
 
         $this->save_session();
