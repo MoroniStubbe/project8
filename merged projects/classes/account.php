@@ -3,47 +3,83 @@
 class Account
 {
     private $db;
-    private $name;
-    private $phone;
-    private $email;
-    private $address;
-    private $role = "klant";
+    public $name;
+    public $phone;
+    public $email;
+    public $address;
+    public $role = "customer";
     private $password;
-    private $newName;
-    private $newPhoneNumber;
-    private $newAddress;
-    private $newEmail;
 
     public function __construct($db)
     {
         $this->db = $db;
     }
 
-    public function createAccount($name, $phone, $email, $address, $password)
+    private function to_array()
     {
-        $this->name = trim($name);
-        $this->phone = trim($phone);
-        $this->email = trim($email);
-        $this->address = trim($address);
-        $this->password = trim($password);
+        return [
+            'name' => $this->name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'address' => $this->address,
+            'role' => $this->role
+        ];
+    }
+
+    private function from_array($account)
+    {
+        if (isset($account["name"])) {
+            $this->name = $account["name"];
+        }
+        if (isset($account["phone"])) {
+            $this->phone = $account["phone"];
+        }
+        if (isset($account["email"])) {
+            $this->email = $account["email"];
+        }
+        if (isset($account["address"])) {
+            $this->address = $account["address"];
+        }
+        if (isset($account["role"])) {
+            $this->role = $account["role"];
+        }
+        if (isset($account["password"])) {
+            $this->password = $account["password"];
+        }
+    }
+
+    private function create_session()
+    {
+        session_start();
+        $_SESSION['account'] = $this->to_array();
+        return $_SESSION['account'];
+    }
+
+    public function load_session()
+    {
+        if (!isset($_SESSION['account'])) {
+            session_start();
+        }
+        $this->from_array($_SESSION['account']);
+    }
+
+    public function create($name, $phone, $email, $address, $password)
+    {
+        $this->name = $name;
+        $this->phone = $phone;
+        $this->email = $email;
+        $this->address = $address;
+        $this->password = $password;
 
         try {
-            $this->db->create('users', [
-                'naam' => $this->name,
-                'telefoonnummer' => $this->phone,
+            $this->db->create('accounts', [
+                'name' => $this->name,
+                'phone' => $this->phone,
                 'email' => $this->email,
                 'address' => $this->address,
                 'password' => $this->password,
                 'role' => $this->role
             ]);
-
-            $_SESSION['user'] = [
-                'naam' => $this->name,
-                'telefoonnummer' => $this->phone,
-                'email' => $this->email,
-                'address' => $this->address,
-                'role' => $this->role
-            ];
 
             header("Location: index.php");
             exit();
@@ -53,83 +89,64 @@ class Account
         }
     }
 
-    public function loginAccount($name, $email, $password)
+    public function log_in($name, $email, $password)
     {
-        $this->name = trim($name);
-        $this->email = trim($email);
-        $this->password = trim($password);
+        $account = $this->db->read('accounts', ['*'], ['name' => $name, 'email' => $email]);
 
-        $user = $this->db->read('users', ['*'], ['naam' => $this->name, 'email' => $this->email, 'password' => $this->password]);
-
-        if(!$user){
+        if (!$account) {
             header("Location: login.php?error=account_not_found");
             exit();
         }
 
-        $userId = $user[0]['id'];
-
-        $_SESSION['idvanklant'] = $userId;
-        $_SESSION['user'] = $user[0];
-        unset($_SESSION['user']['password']);
-        if ($user[0]['role'] === 'admin') {
-            $_SESSION['is_admin'] = true;
+        $account = $account[0];
+        $this->from_array($account);
+        if ($account->password === $password) {
+            return false;
         }
 
-        setcookie('user', session_id(), time() + (86400 * 30 * 5), "/");
+        $this->create_session();
 
         header("Location: index.php");
         exit();
     }
 
-    public function showUser()
+    public function show()
     {
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            echo "<p><strong>Naam:</strong> {$user['naam']}</p>";
-            echo "<p><strong>Telefoonnummer:</strong> {$user['telefoonnummer']}</p>";
-            echo "<p><strong>Adres:</strong> {$user['address']}</p>";
-            echo "<p><strong>Email:</strong> {$user['email']}</p>";
+        $this->load_session();
+        if (isset($_SESSION['account'])) {
+            echo "<p><strong>Naam:</strong> {$this->name}</p>";
+            echo "<p><strong>Telefoonnummer:</strong> {$this->phone}</p>";
+            echo "<p><strong>Adres:</strong> {$this->address}</p>";
+            echo "<p><strong>Email:</strong> {$this->email}</p>";
         } else {
             header("Location: login_or_signup.php");
             exit();
         }
     }
 
-    public function changeInfo($newName, $newPhoneNumber, $newAddress, $newEmail)
+    public function change_info($name, $phone, $address, $email)
     {
-        $this->newName = trim($newName);
-        $this->newPhoneNumber = trim($newPhoneNumber);
-        $this->newAddress = trim($newAddress);
-        $this->newEmail = trim($newEmail);
-
-        if (empty($this->newName) || empty($this->newPhoneNumber) || empty($this->newAddress) || empty($this->newEmail)) {
+        if (empty($name) || empty($phone) || empty($address) || empty($email)) {
             echo "Vul alstublieft alle velden in";
             exit();
         }
 
-        if (!isset($_SESSION['user'])) {
+        session_start();
+        if (!isset($_SESSION['account'])) {
             echo "Gebruiker niet ingelogd";
             exit();
         }
 
-        $user = $_SESSION['user'];
-        $userId = $user['id'];
+        $account = $_SESSION['account'];
 
         try {
-            $this->db->update('users', [
-                'naam' => $this->newName,
-                'telefoonnummer' => $this->newPhoneNumber,
-                'address' => $this->newAddress,
-                'email' => $this->newEmail
-            ], ['id' => $userId]);
+            $this->db->update('accounts', [
+                'name' => $name,
+                'phone' => $phone,
+                'address' => $address,
+                'email' => $email
+            ], ['id' => $account->id]);
 
-            $_SESSION['user'] = [
-                'id' => $userId,
-                'naam' => $this->newName,
-                'telefoonnummer' => $this->newPhoneNumber,
-                'address' => $this->newAddress,
-                'email' => $this->newEmail
-            ];
 
             header("Location: account.php");
             exit();

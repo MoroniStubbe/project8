@@ -1,9 +1,7 @@
 <?php
 include_once("database.php");
-include_once("./classes/database.php");
-include_once("./classes/account.php");
-
-session_start();
+include_once("classes/database.php");
+include_once("classes/account.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['naam'];
@@ -18,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $db = new Database($PDO);
         $account = new Account($db);
-        $account->createAccount($name, $phone, $email, $address, $password);
+        $account->create($name, $phone, $email, $address, $password);
     };
 }
-?>

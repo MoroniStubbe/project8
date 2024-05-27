@@ -17,13 +17,11 @@
             <div class="info-block">
                 <?php
                 include_once("database.php");
-                include_once("./classes/account.php");
-
-                session_start();
-                $user = $_SESSION['user'];
+                include_once("classes/account.php");
 
                 $account = new Account($PDO);
-                $account->showUser();
+                $account->load_session();
+                $account->show();
                 ?>
             </div>
         </div>
@@ -32,13 +30,13 @@
             <div class="changeForm">
                 <form id="changeInfoForm" action="change_info.php" method="post" onsubmit="handleFormSubmission()">
                     <label for="newName">New Name:</label><br>
-                    <input type="text" id="newName" name="newName" value="<?php echo $user['naam']; ?>"><br>
+                    <input type="text" id="newName" name="newName" value="<?php echo $account->name; ?>"><br>
                     <label for="newPhoneNumber">New Phone Number:</label><br>
-                    <input type="text" id="newPhoneNumber" name="newPhoneNumber" value="<?php echo $user['telefoonnummer']; ?>"><br>
+                    <input type="text" id="newPhoneNumber" name="newPhoneNumber" value="<?php echo $account->phone; ?>"><br>
                     <label for="newAddress">New Address:</label><br>
-                    <input type="text" id="newAddress" name="newAddress" value="<?php echo $user['address']; ?>"><br>
+                    <input type="text" id="newAddress" name="newAddress" value="<?php echo $account->address; ?>"><br>
                     <label for="newEmail">Email:</label><br>
-                    <input type="text" id="newEmail" name="newEmail" value="<?php echo $user['email']; ?>"><br>
+                    <input type="text" id="newEmail" name="newEmail" value="<?php echo $account->email; ?>"><br>
 
                     <div class="button-group">
                         <button type="submit" style="background-color: mediumturquoise;">Wijzigingen opslaan</button>

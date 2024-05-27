@@ -6,7 +6,7 @@ include_once("./classes/account.php");
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['Naam'];
+    $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -16,6 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $db = new Database($PDO);
         $account = new Account($db);
-        $account->loginAccount($name, $email, $password);
+        $account->log_in($name, $email, $password);
     };
 }
