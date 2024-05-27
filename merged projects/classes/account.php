@@ -61,6 +61,11 @@ class Account
 
         $user = $this->db->read('users', ['*'], ['naam' => $this->name, 'email' => $this->email, 'password' => $this->password]);
 
+        if(!$user){
+            header("Location: login.php?error=account_not_found");
+            exit();
+        }
+
         $userId = $user[0]['id'];
 
         $_SESSION['idvanklant'] = $userId;
