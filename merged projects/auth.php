@@ -6,7 +6,7 @@ include_once("./classes/account.php");
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['Naam'];
+    $name = $_POST['Name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 

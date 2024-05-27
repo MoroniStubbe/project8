@@ -17,13 +17,13 @@
                 <?php
                 include_once("database.php");
                 try {
-                    $nieuwsbericht = $PDO->prepare("SELECT * FROM nieuws");
+                    $nieuwsbericht = $PDO->prepare("SELECT * FROM news");
                     $nieuwsbericht->execute();
 
                     echo '<ul>';
 
                     foreach ($nieuwsbericht->fetchAll() as $data) {
-                        echo "<li>" . $data["nieuwsbericht"] . "</li>";
+                        echo "<li>" . $data["message"] . "</li>";
                     }
 
                     echo '</ul>';

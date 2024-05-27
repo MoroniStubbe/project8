@@ -22,13 +22,13 @@
     include_once("../database.php");
 
     try {
-      $query = $PDO->prepare("SELECT * FROM nieuws");
+      $query = $PDO->prepare("SELECT * FROM news");
       $query->execute();
       $result = $query->fetchAll();
       echo "<table class='table1'>";
       foreach ($result as $data) {
         echo "<tr>";
-        echo "<td>" . $data["nieuwsbericht"] . "</td>";
+        echo "<td>" . $data["message"] . "</td>";
         echo "<td>" . $data["ID"] . "</td>";
         echo "</tr>";
       }
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   try {
     // Check if the submitted value is not empty
     if (!empty($newrm)) {
-      $rm = $PDO->prepare("DELETE FROM `nieuws` WHERE `nieuws`.`ID` = :rmnew");
+      $rm = $PDO->prepare("DELETE FROM `news` WHERE `nieuws`.`ID` = :rmnew");
       $rm->bindParam(':rmnew', $newrm, PDO::PARAM_INT);
       $rm->execute();
     }
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if the submitted value is not empty
     if (!empty($addnew)) {
 
-      $send = $PDO->prepare("INSERT INTO `nieuws` (`nieuwsbericht`) VALUES (:addnieuws);");
+      $send = $PDO->prepare("INSERT INTO `news` (`message`) VALUES (:addnieuws);");
 
       $send->bindParam(':addnieuws', $addnew);
       $send->execute();

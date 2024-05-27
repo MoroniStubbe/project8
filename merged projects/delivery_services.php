@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bezorgdiensten</title>
+  <title>delivery service</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/delivery_services.css">
 </head>
@@ -13,24 +13,24 @@
   <?php readfile("header.html") ?>
   <main>
     <div class="container">
-      <div id="bezorgbox-container">
-        <div class="bezorgbox">
-          <h1 class="textbezorg">Bezorgdiensten</h1>
-          <p class="textbezorg"> Als gebruiker wil ik informatie zien over bezorgdiensten zoals UPS, DHL, Homerr, zodat ik kan
+      <div id="delivery_box-container">
+        <div class="delivery_box">
+          <h1 class="text_delivery">Bezorgdiensten</h1>
+          <p class="text_delivery"> Als gebruiker wil ik informatie zien over bezorgdiensten zoals UPS, DHL, Homerr, zodat ik kan
             kiezen voor ophalen en verzenden.</p>
-          <p class="textbezorg">Kies een bezorgdienst:</p>
+          <p class="text_delivery">Kies een bezorgdienst:</p>
           <ul>
-            <li><button class="bezorgdiensten" onclick="selectBezorgdienst('UPS')">UPS</button></li>
-            <li><button class="bezorgdiensten" onclick="selectBezorgdienst('DHL')">DHL</button></li>
-            <li><button class="bezorgdiensten" onclick="selectBezorgdienst('Homerr')">Homerr</button></li>
-            <!-- Voeg hier andere bezorgdiensten toe -->
+            <li><button class="delivery_service" onclick="select_service('UPS')">UPS</button></li>
+            <li><button class="delivery_service" onclick="select_service('DHL')">DHL</button></li>
+            <li><button class="delivery_service" onclick="select_service('Homerr')">Homerr</button></li>
+
           </ul>
-          <div id="result" class="textbezorg"></div>
+          <div id="result" class="text_delivery"></div>
         </div>
         <script>
-          function selectBezorgdienst(bezorgdienst) {
-            document.getElementById('result').innerText = `Je hebt ${bezorgdienst} gekozen.`;
-            // Hier kun je verdere acties toevoegen afhankelijk van de geselecteerde bezorgdienst
+          function select_service(delivery_service) {
+            document.getElementById('result').innerText = `Je hebt ${delivery_service} gekozen.`;
+
           }
         </script>
       </div>
