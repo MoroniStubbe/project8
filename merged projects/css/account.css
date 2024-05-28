@@ -1,10 +1,12 @@
-.account-info {
+#main-account {
+  display: flow-root;
+}
+#main-account .account-info {
   width: 80%;
   margin: 0 auto;
   text-align: center;
 }
-
-.info-block {
+#main-account .account-info .info-block {
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -13,17 +15,30 @@
   max-width: 600px;
   margin: 0 auto;
 }
-.info-block p {
+#main-account .account-info .info-block p {
   margin: 10px 0;
 }
-
-.buttons {
+#main-account .edit-info {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  display: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 600px;
+}
+#main-account .edit-info .changeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#main-account .buttons {
   text-align: center;
   margin-top: 20px;
   display: flex;
   justify-content: center;
 }
-.buttons button {
+#main-account .buttons button {
   margin: 0 10px;
   background-color: #4caf50;
   color: #fff;
@@ -31,14 +46,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.buttons button:hover {
+#main-account .buttons button:hover {
   background-color: #45a049;
-}
-
-.changeForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .button-group {
@@ -57,14 +66,4 @@
 }
 .button-group button:hover {
   opacity: 0.8;
-}
-
-.edit-info {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  display: none;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  max-width: 600px;
 }/*# sourceMappingURL=account.css.map */
