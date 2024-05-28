@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< Updated upstream
 -- Generation Time: May 27, 2024 at 06:00 PM
-=======
--- Generation Time: May 28, 2024 at 11:41 AM
->>>>>>> Stashed changes
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -116,12 +112,7 @@ CREATE TABLE `repair_request` (
 --
 
 INSERT INTO `repair_request` (`id`, `device_type`, `device_name`, `problem`, `telephone`, `email`) VALUES
-<<<<<<< Updated upstream
 (213, 'telefoon', 'asd', 'asd', 'asd', 'asd');
-=======
-(213, 'telefoon', 'asd', 'asd', 'asd', 'asd'),
-(214, 'appel pc/mac', 'iphone 7', 'doet niet', '0643669846', 'volva@mail.com');
->>>>>>> Stashed changes
 
 --
 -- Indexes for dumped tables
@@ -189,7 +180,7 @@ ALTER TABLE `nieuws`
 -- AUTO_INCREMENT for table `repair_request`
 --
 ALTER TABLE `repair_request`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
