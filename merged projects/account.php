@@ -11,7 +11,7 @@
 <body>
     <?php readfile("header.html") ?>
     </nav>
-    <main id="mainAccount">
+    <main id="main-account">
         <div class="account-info">
             <h1>My Account</h1>
             <div class="info-block">
