@@ -15,9 +15,9 @@
             <h1 class="form-title">Registration</h1>
             <form id="registration-form" action="check.php" method="post">
                 <label for="naam">Name:</label>
-                <input type="text" name="naam" id="naam" placeholder="Name" required><br>
+                <input type="text" name="name" id="name" placeholder="Name" required><br>
                 <label for="telefoonnummer">Phone:</label>
-                <input type="text" name="telefoonnummer" id="telefoonnummer" placeholder="Phone Number" required><br>
+                <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required><br>
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" placeholder="Email" required><br>
                 <label for="address">Address:</label>

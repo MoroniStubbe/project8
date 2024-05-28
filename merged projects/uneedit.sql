@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `password_hash` char(60) NOT NULL,
+  `role` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `name`, `phone`, `email`, `address`, `password_hash`, `role`) VALUES
+(20, 'asd2', 'asd', 'asd@asd', 'asd', 'asd', 'customer');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `adminpanel`
 --
 
@@ -132,6 +155,12 @@ INSERT INTO `users` (`id`, `naam`, `telefoonnummer`, `email`, `address`, `passwo
 --
 
 --
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `adminpanel`
 --
 ALTER TABLE `adminpanel`
@@ -156,14 +185,14 @@ ALTER TABLE `repair_request`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `adminpanel`
@@ -187,13 +216,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `repair_request`
 --
 ALTER TABLE `repair_request`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,26 +12,26 @@
 <body>
     <?php readfile("header.html") ?>
     <main>
-        <h1 id="onze-service">ONZE <span id="service-text">SERVICE</span></h1>
-        <p id="onze-diensten">Dit zijn alle diensten die wij leveren.</p>
+        <h1 id="our-service">ONZE <span id="service-text">SERVICE</span></h1>
+        <p id="our-support">Dit zijn alle diensten die wij leveren.</p>
         <div id="services">
             <div class="Service-Align">
                 <div class="Graphic-Design">
                     <img src="" alt="">
                     <h1 class="Service-Text">Graphic Design</h1>
-                    <p class="Service-Paragraaf">Ons bedrijf biedt grafisch ontwerp diensten aan, zoals logo's, branding,
+                    <p class="Service-Pharagraph">Ons bedrijf biedt grafisch ontwerp diensten aan, zoals logo's, branding,
                         webdesign, printmaterialen en visuele content.</p>
                 </div>
                 <div class="Graphic-Design red-border">
                     <img src="" alt="">
                     <h1 class="Service-Text">Software Development</h1>
-                    <p class="Service-Paragraaf">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit dignissimos,
+                    <p class="Service-Pharagraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit dignissimos,
                         facere consectetur, ipsam delectus voluptatibus reiciendis quas, </p>
                 </div>
                 <div class="Graphic-Design">
                     <img src="" alt="">
                     <h1 class="Service-Text">Product Design</h1>
-                    <p class="Service-Paragraaf">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis nihil
+                    <p class="Service-Pharagraph">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis nihil
                         provident ipsa ut optio sunt tenetur vitae excepturi consequuntur est, </p>
                 </div>
             </div>
@@ -39,19 +39,19 @@
                 <div class="Graphic-Design red-border">
                     <img src="" alt="">
                     <h1 class="Service-Text">Blog Writing</h1>
-                    <p class="Service-Paragraaf">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora deleniti,
+                    <p class="Service-Pharagraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora deleniti,
                         dolorum dolore, </p>
                 </div>
                 <div class="Graphic-Design">
                     <img src="" alt="">
                     <h1 class="Service-Text">Social Marketing</h1>
-                    <p class="Service-Paragraaf">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi ab quo
+                    <p class="Service-Pharagraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi ab quo
                         tempore? </p>
                 </div>
                 <div class="Graphic-Design red-border">
                     <img src="" alt="">
                     <h1 class="Service-Text">IT Services</h1>
-                    <p class="Service-Paragraaf">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti,
+                    <p class="Service-Pharagraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti,
                         accusantium? </p>
                 </div>
             </div>
