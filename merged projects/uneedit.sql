@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2024 at 02:06 PM
+-- Generation Time: May 28, 2024 at 11:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -124,32 +124,6 @@ INSERT INTO `repair_request` (`id`, `device_type`, `device_name`, `problem`, `te
 (213, 'telefoon', 'asd', 'asd', 'asd', 'asd'),
 (214, 'appel pc/mac', 'iphone 7', 'doet niet', '0643669846', 'volva@mail.com');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `naam` varchar(50) NOT NULL,
-  `telefoonnummer` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `naam`, `telefoonnummer`, `email`, `address`, `password`, `role`) VALUES
-(1, 'Vova Hladkov', '0997729404', 'vovagladkov33@gmail.com', 'opopopo 34', 'admin007', 'klant'),
-(4, 'admin007', '9977294040', 'admin007@gmail.com', 'adminstraat 007', 'admin007', 'admin'),
-(7, 'klant007', '090909090909', 'klant@gmail.com', 'klantstraat 007', 'klant007', 'klant'),
-(8, 'asd', '1231231231', 'asd@asd.com', 'asd', 'asd', 'klant');
-
 --
 -- Indexes for dumped tables
 --
@@ -216,7 +190,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `repair_request`
 --
 ALTER TABLE `repair_request`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
