@@ -22,7 +22,6 @@ class Product
         return $this->db->update("products", $column_value_pairs, $where);
     }
 
-    private function read()
     private function from_array($product)
     {
         if (isset($product["id"])) {
@@ -53,6 +52,13 @@ class Product
     }
 
     private function inflate_price()
+    private function read($columns = ["*"], $where = [])
     {
+        $products = $this->db->read("products", $columns, $where);
+        if (count($products) > 0) {
+            $this->from_array($products[0]);
+        }
+        return $products[0];
+    }
     }
 }
