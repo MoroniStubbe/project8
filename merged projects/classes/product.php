@@ -23,7 +23,33 @@ class Product
     }
 
     private function read()
+    private function from_array($product)
     {
+        if (isset($product["id"])) {
+            $this->id = $product["id"];
+        }
+        if (isset($product["name"])) {
+            $this->name = $product["name"];
+        }
+        if (isset($product["description"])) {
+            $this->description = $product["description"];
+        }
+        if (isset($product["image_url"])) {
+            $this->image_url = $product["image_url"];
+        }
+        if (isset($product["price"])) {
+            $this->price = $product["price"];
+        }
+        if (isset($product["stock"])) {
+            $this->stock = $product["stock"];
+        }
+        //TODO enable when shopping cart class exists
+        // if (isset($product["shopping_cart_id"])) {
+        //     $this->password_hash = new ShoppingCart($this->db, $product["shopping_cart_id"]);
+        // }
+        if (isset($product["category"])) {
+            $this->category = $product["category"];
+        }
     }
 
     private function inflate_price()
