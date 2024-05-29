@@ -2,14 +2,15 @@
 
 class Product
 {
-    private $id;
-    private $name;
-    private $description;
-    private $image_url;
-    private $price;
-    private $stock;
-    private $shopping_cart;
-    private $category;
+    private $db;
+    public $id;
+    public $name;
+    public $description;
+    public $image_url;
+    public $price;
+    public $stock;
+    public $shopping_cart;
+    public $category;
 
     function __construct()
     {
