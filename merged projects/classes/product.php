@@ -17,8 +17,9 @@ class Product
         $this->db = $db;
     }
 
-    private function update()
+    private function update($column_value_pairs, $where = [])
     {
+        return $this->db->update("products", $column_value_pairs, $where);
     }
 
     private function read()
