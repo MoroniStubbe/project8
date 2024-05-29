@@ -51,7 +51,6 @@ class Product
         }
     }
 
-    private function inflate_price()
     private function read($columns = ["*"], $where = [])
     {
         $products = $this->db->read("products", $columns, $where);
@@ -60,5 +59,10 @@ class Product
         }
         return $products[0];
     }
+
+    private function inflate_price($price)
+    {
+        $this->price = $price;
+        $this->update(["price" => $price], ["id" => $this->id]);
     }
 }
