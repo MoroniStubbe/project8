@@ -12,8 +12,9 @@ class Product
     public $shopping_cart;
     public $category;
 
-    function __construct()
+    function __construct($db)
     {
+        $this->db = $db;
     }
 
     private function update()
