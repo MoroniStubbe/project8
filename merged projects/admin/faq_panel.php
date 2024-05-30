@@ -1,68 +1,76 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
+<header>
     <nav class="nav">
-      <ul>
-        <li><a href="add_user.php">gebruiker toevoegen</a></li>
-        <li><a href="news_panel.php">nieuws</a></li>
-        <li><a href="requests.php">aanvragen inzien</a></li>
-      </ul>
+        <ul>
+            <li><a href="add_user.php">gebruiker toevoegen</a></li>
+            <li><a href="news_panel.php">nieuws</a></li>
+            <li><a href="requests.php">aanvragen inzien</a></li>
+        </ul>
     </nav>
     <div class="logo">
-      <img src="../img/logo.png" alt="Company Logo">
+        <img src="../img/logo.png" alt="Company Logo">
     </div>
-  </header>
-  <main>
-      <?php
-      include_once("../database.php");
-      include_once("../classes/database.php");
-      include_once("../classes/Text_Panel.php");
+</header>
+<main>
+    <?php
+    include_once("../database.php");
+    include_once("../classes/database.php");
+    include_once("../classes/Text_Panel.php");
 
-      try {
-          $db = new Database($PDO);
-          $textPanel = new TextPanel($db, 'faq');
+    try {
+        $db = new Database($PDO);
+        $textPanel = new TextPanel($db, 'faq');
 
-          if ($_SERVER["REQUEST_METHOD"] === "POST") {
-              if (isset($_POST["addnew"]) && !empty(trim($_POST["addnew"]))) {
-                  $textPanel->create(trim($_POST["addnew"]));
-                  echo "Message added successfully.";
-              }
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (isset($_POST["addmessage"]) && isset($_POST["addanswer"]) &&
+                !empty(trim($_POST["addmessage"])) && !empty(trim($_POST["addanswer"]))) {
+                $textPanel->create(trim($_POST["addmessage"]), trim($_POST["addanswer"]));
+                echo "Entry added successfully.";
+            }
 
-              if (isset($_POST["rmnew"]) && !empty(trim($_POST["rmnew"]))) {
-                  $idToDelete = (int)trim($_POST["rmnew"]);
-                  if ($textPanel->delete($idToDelete)) {
-                      echo "Message with ID $idToDelete deleted successfully.";
-                  } else {
-                      echo "Failed to delete message with ID $idToDelete.";
-                  }
-              }
-          }
-          $result = $textPanel->read();
-          echo "<table class='table1'>";
-          foreach ($result as $data) {
-              echo "<tr>";
-              echo "<td>" . htmlspecialchars($data["message"]) . "</td>";
-              echo "<td>" . htmlspecialchars($data["ID"]) . "</td>";
-              echo "</tr>";
-          }
-          echo "</table>";
-      } catch (Exception $e) {
-          echo "Error: " . $e->getMessage();
-      }
-      ?>
-  </main>
-  <form method="post" class="input1">
-      <input name="addnew" type="text" placeholder="Add something by entering your text and then pressing submit">
-      <input type="submit">
-  </form>
-  <form method="post" class="input1">
-      <input name="rmnew" type="text" placeholder="Remove something by entering id and then pressing submit">
-      <input type="submit">
-  </form>
+            if (isset($_POST["rmnew"]) && !empty(trim($_POST["rmnew"]))) {
+                $idToDelete = (int)trim($_POST["rmnew"]);
+                if ($textPanel->delete($idToDelete)) {
+                    echo "Entry with ID $idToDelete deleted successfully.";
+                } else {
+                    echo "Failed to delete entry with ID $idToDelete.";
+                }
+            }
+        }
+        $result = $textPanel->read();
+        if (!empty($result)) {
+            echo "<table class='table1'>";
+            foreach ($result as $data) {
+                echo "<tr>";
+                echo "<td>" . (isset($data["message"]) ? htmlspecialchars($data["message"]) : 'N/A') . "</td>";
+                echo "<td>" . (isset($data["answer"]) ? htmlspecialchars($data["answer"]) : 'N/A') . "</td>";
+                echo "<td>" . htmlspecialchars($data["ID"]) . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "No entries found.";
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    ?>
+</main>
+<form method="post" class="input1">
+    <input name="addmessage" type="text" placeholder="Add question">
+    <input name="addanswer" type="text" placeholder="Add answer">
+    <input type="submit">
+</form>
+<form method="post" class="input1">
+    <input name="rmnew" type="text" placeholder="Remove entry by entering id">
+    <input type="submit">
+</form>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
-
 class TextPanel
 {
     private $db;
     private $table;
     private $id;
-    private $message;
+    private $message; // This represents the question
+    private $answer;
 
     public function __construct($db, $table)
     {
@@ -13,14 +13,15 @@ class TextPanel
         $this->table = $table;
     }
 
-    public function create($message)
+    public function create($message, $answer)
     {
         $this->message = $message;
+        $this->answer = $answer;
 
         try {
-            $this->db->create($this->table, ["message" => $this->message]);
+            $this->db->create($this->table, ["message" => $this->message, "answer" => $this->answer]);
         } catch (Exception $e) {
-            throw new Exception("Failed to create message: " . $e->getMessage());
+            throw new Exception("Failed to create entry: " . $e->getMessage());
         }
     }
 
@@ -35,15 +36,16 @@ class TextPanel
                 $result = $this->db->read($this->table, ["*"], ["ID" => $this->id]);
                 if (count($result) > 0) {
                     $this->message = $result[0]["message"];
+                    $this->answer = $result[0]["answer"];
                     return $result[0];
                 } else {
-                    throw new Exception("Message with id $this->id not found.");
+                    throw new Exception("Entry with id $this->id not found.");
                 }
             } else {
                 return $this->db->read($this->table);
             }
         } catch (Exception $e) {
-            throw new Exception("Failed to read message: " . $e->getMessage());
+            throw new Exception("Failed to read entry: " . $e->getMessage());
         }
     }
 
@@ -56,7 +58,7 @@ class TextPanel
             $this->id = null;
             return true;
         } catch (Exception $e) {
-            throw new Exception("Failed to delete message: " . $e->getMessage());
+            throw new Exception("Failed to delete entry: " . $e->getMessage());
         }
     }
 }
