@@ -54,10 +54,15 @@ class Product
     private function read($columns = ["*"], $where = [])
     {
         $products = $this->db->read("products", $columns, $where);
+    public function get_by_id($id)
+    {
+        $products = $this->read(where: ["id" => $id]);
         if (count($products) > 0) {
+            $this->id = $id;
             $this->from_array($products[0]);
+            return true;
         }
-        return $products[0];
+        return false;
     }
 
     private function inflate_price($price)
