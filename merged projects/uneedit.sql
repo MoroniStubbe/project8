@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 11:44 AM
+-- Generation Time: May 30, 2024 at 03:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `name`, `phone`, `email`, `address`, `password_hash`, `role`) VALUES
-(20, 'asd2', 'asd', 'asd@asd', 'asd', 'asd', 'customer');
+(20, 'asd2', 'asd', 'asd@asd2', 'asd', 'asd', 'customer'),
+(21, 'asd2', 'asd2', 'asd2@asd', 'asd2', '$2y$10$rnoGvJf92zqASvADhc5fBul1gVpOElV62rKRa3SZuevsjasxEZ7zO', 'customer');
 
 -- --------------------------------------------------------
 
@@ -104,6 +105,23 @@ INSERT INTO `news` (`message`, `ID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `description` varchar(4) NOT NULL,
+  `image_url` varchar(256) NOT NULL,
+  `price` float NOT NULL,
+  `stock` int(16) NOT NULL,
+  `category` varchar(64) NOT NULL,
+  `shopping_cart_id` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `repair_request`
 --
 
@@ -122,7 +140,8 @@ CREATE TABLE `repair_request` (
 
 INSERT INTO `repair_request` (`id`, `device_type`, `device_name`, `problem`, `telephone`, `email`) VALUES
 (213, 'telefoon', 'asd', 'asd', 'asd', 'asd'),
-(214, 'appel pc/mac', 'iphone 7', 'doet niet', '0643669846', 'volva@mail.com');
+(214, 'appel pc/mac', 'iphone 7', 'doet niet', '0643669846', 'volva@mail.com'),
+(215, 'device_type', 'device_name', 'problem', 'telephone', 'email');
 
 --
 -- Indexes for dumped tables
@@ -153,6 +172,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `repair_request`
 --
 ALTER TABLE `repair_request`
@@ -166,7 +191,7 @@ ALTER TABLE `repair_request`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `adminpanel`
@@ -187,10 +212,16 @@ ALTER TABLE `news`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `repair_request`
 --
 ALTER TABLE `repair_request`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
