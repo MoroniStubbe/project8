@@ -17,12 +17,12 @@ class Product
         $this->db = $db;
     }
 
-    private function update($column_value_pairs, $where = [])
+    public function update($column_value_pairs, $where = [])
     {
         return $this->db->update("products", $column_value_pairs, $where);
     }
 
-    private function from_array($product)
+    public function from_array($product)
     {
         if (isset($product["id"])) {
             $this->id = $product["id"];
@@ -51,9 +51,11 @@ class Product
         }
     }
 
-    private function read($columns = ["*"], $where = [])
+    public function read($columns = ["*"], $where = [])
     {
-        $products = $this->db->read("products", $columns, $where);
+        return $this->db->read("products", $columns, $where);
+    }
+
     public function get_by_id($id)
     {
         $products = $this->read(where: ["id" => $id]);
@@ -65,9 +67,13 @@ class Product
         return false;
     }
 
-    private function inflate_price($price)
+    public function inflate_price($price)
     {
-        $this->price = $price;
-        $this->update(["price" => $price], ["id" => $this->id]);
+        if ($this->id !== null) {
+            $this->price = $price;
+            $this->update(["price" => $price], ["id" => $this->id]);
+            return true;
+        }
+        return false;
     }
 }
