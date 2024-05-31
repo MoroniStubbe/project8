@@ -1,10 +1,11 @@
 <?php
+
 class TextPanel
 {
     private $db;
     private $table;
     private $id;
-    private $message; // This represents the question
+    private $message;
     private $answer;
 
     public function __construct($db, $table)
@@ -13,18 +14,22 @@ class TextPanel
         $this->table = $table;
     }
 
-    public function create($message, $answer)
+    public function create($message, $answer = null)
     {
         $this->message = $message;
         $this->answer = $answer;
 
         try {
-            $this->db->create($this->table, ["message" => $this->message, "answer" => $this->answer]);
+            $data = ["message" => $this->message];
+            if ($this->table === 'faq') {
+                $data["answer"] = $this->answer;
+            }
+            $this->db->create($this->table, $data);
         } catch (Exception $e) {
-            throw new Exception("Failed to create entry: " . $e->getMessage());
+            throw new Exception("Failed to create message: " . $e->getMessage());
         }
     }
-
+    
     public function read($id = null)
     {
         try {
