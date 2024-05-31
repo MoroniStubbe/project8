@@ -17,12 +17,12 @@
                 <?php
                 include_once("database.php");
                 try {
-                    $nieuwsbericht = $PDO->prepare("SELECT * FROM news");
-                    $nieuwsbericht->execute();
+                    $message = $PDO->prepare("SELECT * FROM news");
+                    $message->execute();
 
                     echo '<ul>';
 
-                    foreach ($nieuwsbericht->fetchAll() as $data) {
+                    foreach ($message->fetchAll() as $data) {
                         echo "<li>" . $data["message"] . "</li>";
                     }
 
