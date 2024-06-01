@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2024 at 03:11 PM
+-- Generation Time: May 31, 2024 at 01:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,15 +72,18 @@ INSERT INTO `adminpanel` (`User_name`, `Password`, `ID`) VALUES
 
 CREATE TABLE `faq` (
   `message` text NOT NULL,
-  `ID` int(11) NOT NULL
+  `ID` int(11) NOT NULL,
+  `answer` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `faq`
 --
 
-INSERT INTO `faq` (`message`, `ID`) VALUES
-('hallo', 43);
+INSERT INTO `faq` (`message`, `ID`, `answer`) VALUES
+('hallo', 43, ''),
+('asd', 44, 'asd'),
+('asd', 45, 'asd');
 
 -- --------------------------------------------------------
 
@@ -100,7 +103,8 @@ CREATE TABLE `news` (
 INSERT INTO `news` (`message`, `ID`) VALUES
 ('hallo welkom in de onderwereld', 13),
 ('waarom zijn mensen dom', 15),
-('hallo welkom op de pagina', 20);
+('hallo welkom op de pagina', 20),
+('asd', 22);
 
 -- --------------------------------------------------------
 
@@ -111,13 +115,20 @@ INSERT INTO `news` (`message`, `ID`) VALUES
 CREATE TABLE `products` (
   `id` int(16) NOT NULL,
   `name` varchar(256) NOT NULL,
-  `description` varchar(4) NOT NULL,
+  `description` varchar(4096) NOT NULL,
   `image_url` varchar(256) NOT NULL,
   `price` float NOT NULL,
   `stock` int(16) NOT NULL,
   `category` varchar(64) NOT NULL,
   `shopping_cart_id` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `image_url`, `price`, `stock`, `category`, `shopping_cart_id`) VALUES
+(0, 'asd', 'asd', 'asd', 50, 1, 'asd', 0);
 
 -- --------------------------------------------------------
 
@@ -203,19 +214,19 @@ ALTER TABLE `adminpanel`
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `repair_request`
