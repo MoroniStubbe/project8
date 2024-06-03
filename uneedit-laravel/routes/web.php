@@ -46,7 +46,7 @@ Route::get('/login_or_signup', function () {
     return view('login_or_signup');
 });
 
-Route::get('/logout', function () {
+Route::post('/logout', function () {
     return view('logout');
 });
 
