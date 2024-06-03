@@ -2,7 +2,7 @@
 <header>
     <div id="nav-container">
         <div id="logo">
-            <a href="index.php"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
+            <a href="index"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
         </div>
         <nav>
             <ul>

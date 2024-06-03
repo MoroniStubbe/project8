@@ -47,7 +47,7 @@
         </div>
         <div class="buttons">
             <button id="editButton">Informatie bewerken</button>
-            <form action="logout.php" method="post">
+            <form action="logout" method="post">
                 <button type="submit" name="logout">Log Out</button>
             </form>
         </div>
