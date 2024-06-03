@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php readfile("header.html") ?>
+    <x-header></x-header>
     <main>
         <section class="hero">
             <div class="container">
@@ -40,7 +40,7 @@
             </div>
         </section>
     </main>
-    <?php readfile("footer.html") ?>
+    <x-footer></x-footer>
 </body>
 
 </html>

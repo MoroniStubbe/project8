@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <?php readfile("header.html") ?>
+        <x-header></x-header>
         <main>
             <h2>Recent News</h2>
             <section id="news">
@@ -33,7 +33,7 @@
                 ?>
             </section>
         </main>
-        <?php readfile("footer.html") ?>
+        <x-footer></x-footer>
     </body>
 
     </html>

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php readfile("header.html") ?>
+    <x-header></x-header>
     <main class="main-content">
         <div class="form-container">
             <h1 class="form-title">Registration</h1>
@@ -28,7 +28,7 @@
             </form>
         </div>
     </main>
-    <?php readfile("footer.html") ?>
+    <x-footer></x-footer>
 </body>
 
 </html>

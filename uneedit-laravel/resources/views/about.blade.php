@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php readfile("header.html") ?>
+    <x-header></x-header>
     <main>
         <div id="background"></div>
         <section id="about-container">
@@ -44,7 +44,7 @@
             </div>
         </section>
     </main>
-    <?php readfile("footer.html") ?>
+    <x-footer></x-footer>
 </body>
 
 </html>
