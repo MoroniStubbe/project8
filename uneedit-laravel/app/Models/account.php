@@ -62,10 +62,14 @@ class Account
 
     public function load_session()
     {
-        if (!isset($_SESSION['account'])) {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
-        $this->from_array($_SESSION['account']);
+        if (isset($_SESSION['account'])) {
+            $this->from_array($_SESSION['account']);
+            return true;
+        }
+        return false;
     }
 
     public function read($cols = ['*'], $where = [])
