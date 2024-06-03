@@ -14,21 +14,21 @@
     <main>
         <section id="faq">
             <?php
-            include_once("database.php");
+            $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
             try {
-                $faqEntries = $PDO->prepare("SELECT * FROM faq");
+                $faqEntries = $PDO->prepare('SELECT * FROM faq');
                 $faqEntries->execute();
-
+            
                 echo '<ul>';
-
+            
                 foreach ($faqEntries->fetchAll() as $data) {
-                    echo "<li><strong>Question:</strong> " . htmlspecialchars($data["message"]) . "<br>";
-                    echo "<span>Answer:</span> " . htmlspecialchars($data["answer"]) . "</li>";
+                    echo '<li><strong>Question:</strong> ' . htmlspecialchars($data['message']) . '<br>';
+                    echo '<span>Answer:</span> ' . htmlspecialchars($data['answer']) . '</li>';
                 }
-
+            
                 echo '</ul>';
             } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+                echo 'Connection failed: ' . $e->getMessage();
             }
             ?>
         </section>

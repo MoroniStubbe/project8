@@ -16,9 +16,9 @@
             <h1>My Account</h1>
             <div class="info-block">
                 <?php
-                include_once("database.php");
-                include_once("classes/account.php");
-
+                $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+                include_once app_path('Models/account.php');
+                
                 $account = new Account($PDO);
                 $account->show();
                 ?>
@@ -39,7 +39,8 @@
 
                     <div class="button-group">
                         <button type="submit" style="background-color: mediumturquoise;">Wijzigingen opslaan</button>
-                        <button type="button" onclick="cancelChanges()" id="cancelButton" style="background-color: red;">Cancel Changes</button>
+                        <button type="button" onclick="cancelChanges()" id="cancelButton"
+                            style="background-color: red;">Cancel Changes</button>
                     </div>
                 </form>
             </div>

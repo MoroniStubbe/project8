@@ -1,7 +1,7 @@
 <?php
-include_once("../database.php");
-include_once("../classes/database.php");
-include_once("../classes/product.php");
+$PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+include_once("app_path('Models/database.php");
+include_once("app_path('Models/product.php");
 
 
 $db = new Database($PDO);

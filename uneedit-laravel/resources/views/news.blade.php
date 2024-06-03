@@ -15,21 +15,21 @@
             <h2>Recent News</h2>
             <section id="news">
                 <?php
-                include_once("database.php");
-                include_once("classes/database.php");
-                include_once("classes/text_panel.php");
+                $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+                include_once app_path('Models/database.php');
+                include_once app_path('Models/text_panel.php');
                 $db = new Database($PDO);
-                $news = new TextPanel($db, "news");
+                $news = new TextPanel($db, 'news');
                 $news = $news->read();
-
+                
                 echo '<ul>';
-
+                
                 foreach ($news as $news_item) {
-                    echo "<li>" . $news_item["message"] . "</li>";
+                    echo '<li>' . $news_item['message'] . '</li>';
                 }
-
+                
                 echo '</ul>';
-
+                
                 ?>
             </section>
         </main>

@@ -29,7 +29,7 @@ class TextPanel
             throw new Exception("Failed to create message: " . $e->getMessage());
         }
     }
-    
+
     public function read($id = null)
     {
         try {

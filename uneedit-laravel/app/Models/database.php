@@ -19,7 +19,7 @@ class Database
     }
 
     //returns array of tables from database
-    private function get_tables()
+    public function get_tables()
     {
         $sql = "SHOW TABLES";
         $statement = $this->pdo->query($sql);

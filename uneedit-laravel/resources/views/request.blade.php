@@ -45,16 +45,16 @@
 
 </html>
 <?php
-include_once("database.php");
-include_once("classes/database.php");
-include_once("classes/repair_request.php");
+$PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+include_once app_path('Models/database.php');
+include_once app_path('Models/repair_request.php');
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $problem = $_POST["problem"];
-    $telephone = $_POST["telephone"];
-    $email = $_POST["email"];
-    $device_name = $_POST["device_name"];
-    $device_type = $_POST["device_type"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $problem = $_POST['problem'];
+    $telephone = $_POST['telephone'];
+    $email = $_POST['email'];
+    $device_name = $_POST['device_name'];
+    $device_type = $_POST['device_type'];
 
     if (!empty($device_type) && !empty($device_name) && !empty($email) && !empty($telephone) && !empty($problem)) {
         $db = new Database($PDO);

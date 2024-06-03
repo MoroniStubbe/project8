@@ -1,9 +1,7 @@
 <?php
-
-
-include_once("../database.php");
-include_once("../classes/database.php");
-include_once("../classes/repair_request.php");
+$PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+include_once("app_path('Models/database.php");
+include_once("app_path('Models/repair_request.php");
 
 
 $db = new Database($PDO);
