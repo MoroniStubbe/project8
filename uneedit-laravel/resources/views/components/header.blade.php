@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 <header>
     <div id="nav-container">
         <div id="logo">
@@ -6,14 +6,14 @@
         </div>
         <nav>
             <ul>
-                <li><a href="about.php">About</a></li>
-                <li><a href="news.php">Nieuws</a></li>
-                <li><a href="service.php">Service </a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="request.php">Aanvraag</a></li>
-                <li><a href="faq.php">FAQ</a></li>
-                <li><a href="delivery_services.php">Bezorgdiensten</a></li>
-                <li><a href="account.php">Account</a>
+                <li><a href="about">About</a></li>
+                <li><a href="news">Nieuws</a></li>
+                <li><a href="service">Service </a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="request">Aanvraag</a></li>
+                <li><a href="faq">FAQ</a></li>
+                <li><a href="delivery_services">Bezorgdiensten</a></li>
+                <li><a href="account">Account</a>
             </ul>
         </nav>
     </div>

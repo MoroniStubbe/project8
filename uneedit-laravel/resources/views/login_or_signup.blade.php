@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login or Sign Up</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/login_or_signup.css">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login_or_signup.css') }}">
 </head>
 
 <body>

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>My Account</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 
 <body>
