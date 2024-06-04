@@ -10,7 +10,9 @@
 </head>
 
 <body>
+
 <?php readfile("header.html") ?>
+
 <main>
     <section id="faq">
         <?php
@@ -22,8 +24,8 @@
             echo '<ul>';
 
             foreach ($faqEntries->fetchAll() as $data) {
-                echo "<li><strong>Question:</strong> " . htmlspecialchars($data["message"]) . "<br>";
-                echo "<span>Answer:</span> " . htmlspecialchars($data["answer"]) . "</li>";
+                echo "<li><span class='question'>" . htmlspecialchars($data["message"]) . "</span>";
+                echo "<div class='answer'>" . htmlspecialchars($data["answer"]) . "</div></li>";
             }
 
             echo '</ul>';
@@ -33,7 +35,26 @@
         ?>
     </section>
 </main>
+
 <?php readfile("footer.html") ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const questions = document.querySelectorAll(".question");
+
+        questions.forEach(question => {
+            question.addEventListener("click", function() {
+                const answer = this.nextElementSibling;
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                } else {
+                    answer.style.display = "block";
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>

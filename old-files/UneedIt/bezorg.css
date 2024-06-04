@@ -154,7 +154,7 @@ body{
     justify-content: center;
 }
 
-.Service-Pharagraph{
+.Service-Paragraaf{
     width: 200px;
 
 }
@@ -227,14 +227,14 @@ body {
     background-color: gray;
 }
 
-.text_delivery{
+.textbezorg{
     display: flex;
     justify-content: center;
     margin-left: 50px;
     width: 400px;
 }
 
-.delivery_service{
+.bezorgdiensten{
     display: flex;
     justify-content: center;
     width: 430px;
