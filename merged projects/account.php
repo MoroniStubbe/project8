@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <x-header></x-header>
+    <?php readfile("header.html") ?>
     </nav>
     <main id="main-account">
         <div class="account-info">
@@ -51,7 +51,7 @@
             </form>
         </div>
     </main>
-    <x-footer></x-footer>
+    <?php readfile("footer.html") ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             function toggleEdit() {

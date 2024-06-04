@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <x-header></x-header>
+    <?php readfile("header.html") ?>
     <main>
         <h1 id="our-service">ONZE <span id="service-text">SERVICE</span></h1>
         <p id="our-support">Dit zijn alle diensten die wij leveren.</p>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </main>
-    <x-footer></x-footer>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

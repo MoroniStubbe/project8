@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <x-header></x-header>
+    <?php readfile("header.html") ?>
     <main>
         <section id="hero">
             <h1>Welcome to UNEED-IT</h1>
@@ -42,7 +42,7 @@
             </div>
         </section>
     </main>
-    <x-footer></x-footer>
+    <?php readfile("footer.html") ?>
 </body>
 
 </html>

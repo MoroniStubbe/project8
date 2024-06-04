@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <x-header></x-header>
+  <?php readfile("header.html") ?>
   <main>
     <div class="container">
       <div id="delivery_box-container">
@@ -36,7 +36,7 @@
       </div>
     </div>
   </main>
-  <x-footer></x-footer>
+  <?php readfile("footer.html") ?>
 </body>
 
 </html>
