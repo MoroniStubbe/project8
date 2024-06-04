@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 $idvanklant = $_SESSION['idvanklant'];
 
-$mysql = new PDO('mysql:host=localhost;dbname=uneedit', 'root', '');
+$mysql = new PDO('mysql:host=localhost;dbname=school', 'root', '');
 
 if (!$mysql) {
     die("Verbindingsfout: " . $mysql->errorInfo()[2]);
@@ -31,7 +31,7 @@ if (!$user_exists) {
 }
 
 $photo_path = "";
-if(isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
@@ -47,4 +47,3 @@ if ($stmt->rowCount() > 0) {
 } else {
     echo "Fout: Het verzoek kon niet worden verzonden";
 }
-?>

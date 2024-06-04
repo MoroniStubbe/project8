@@ -6,7 +6,7 @@ if (!isset($_POST['Naam']) || !isset($_POST['password']) || !isset($_POST['email
     exit();
 }
 
-$mysql = new PDO('mysql:host=localhost;dbname=uneedit', 'root', '');
+$mysql = new PDO('mysql:host=localhost;dbname=school', 'root', '');
 
 $naam = filter_var(trim($_POST['Naam']), FILTER_SANITIZE_STRING);
 $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
@@ -40,4 +40,3 @@ setcookie('user', session_id(), time() + (86400 * 30 * 5), "/"); // 86400 sec - 
 
 header("Location: home.html");
 exit();
-?>
