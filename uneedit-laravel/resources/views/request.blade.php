@@ -18,6 +18,7 @@
             <div class="container">
                 <h1>Aanvraag</h1>
                 <form method="POST">
+                    @csrf
                     <label for="platform">Select Platform:</label>
                     <select name="device_type" id="cars">
                         <option></option>
