@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$account->create($name, $phone, $email, $address, $password)) {
             echo 'Account bestaat al';
         } else {
-            header('Location: login.php');
+            redirect()->route('login');
         }
     }
 }

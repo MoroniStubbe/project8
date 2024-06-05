@@ -106,7 +106,7 @@ class Account
         $account = $this->read(where: ['name' => $name, 'email' => $email,]);
 
         if (!$account) {
-            header("Location: login.php?error=account_not_found");
+            redirect()->route('login')->with('error', 'account_not_found');
             return false;
         }
 
@@ -114,12 +114,11 @@ class Account
         $this->from_array($account);
 
         if (!password_verify($password, $this->password_hash)) {
-            header("Location: login.php?error=invalid_password");
+            redirect()->route('login')->with('error', 'invalid_password');
         }
 
         $this->save_session();
-
-        header("Location: index.php");
+        redirect()->route('index');
     }
 
     public function show()
@@ -131,7 +130,7 @@ class Account
             echo "<p><strong>Adres:</strong> {$this->address}</p>";
             echo "<p><strong>Email:</strong> {$this->email}</p>";
         } else {
-            header("Location: login_or_signup.php");
+            redirect()->route('login_or_signup');
         }
     }
 
@@ -167,7 +166,7 @@ class Account
             $this->email = $email;
             $this->save_session();
 
-            header("Location: account.php");
+            redirect()->route('account');
         } catch (Exception $e) {
             echo "Fout bij het bijwerken van gebruikersinformatie";
             return false;
