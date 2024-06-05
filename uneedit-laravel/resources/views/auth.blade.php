@@ -3,8 +3,6 @@ $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
 include_once app_path('Models/database.php');
 include_once app_path('Models/account.php');
 
-session_start();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];

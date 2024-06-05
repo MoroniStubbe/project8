@@ -55,18 +55,16 @@ class Account
 
     private function save_session()
     {
-        session_start();
-        $_SESSION['account'] = $this->to_array();
-        return $_SESSION['account'];
+        session(['account' => $this->to_array()]);
+        return session('account');
     }
 
     public function load_session()
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
         }
-        if (isset($_SESSION['account'])) {
-            $this->from_array($_SESSION['account']);
+        if (session()->has('account')) {
+            $this->from_array(session('account'));
             return true;
         }
         return false;
@@ -127,7 +125,7 @@ class Account
     public function show()
     {
         $this->load_session();
-        if (isset($_SESSION['account'])) {
+        if (session()->has('account')) {
             echo "<p><strong>Naam:</strong> {$this->name}</p>";
             echo "<p><strong>Telefoonnummer:</strong> {$this->phone}</p>";
             echo "<p><strong>Adres:</strong> {$this->address}</p>";
@@ -145,7 +143,7 @@ class Account
             return false;
         }
 
-        if (!isset($_SESSION['account'])) {
+        if (!session()->has('account')) {
             echo "Gebruiker niet ingelogd";
             return false;
         }
