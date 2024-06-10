@@ -9,17 +9,21 @@
 <body>
     <x-header></x-header>
     <main>
-        <h1>Title</h1>
+        <h1>$product_name</h1>
         <div id="container-1">
-            <div id="container-2">
+            <div id="container-2" class="container">
                 <img src="" alt="product">
                 <p>
-                    Description
+                    $description
                 </p>
             </div>
-            <div id="container-3">
-                <div id="price">price</div>
-                <div id="stock">stock</div>
+            <div id="container-3" class="container">
+                <div id="price-container">
+                    <div id="price">$price</div>
+                </div>
+                <div id="stock-container">
+                    <div id="stock">$stock</div>
+                </div>
                 <button>Winkelwagen</button>
             </div>
         </div>
