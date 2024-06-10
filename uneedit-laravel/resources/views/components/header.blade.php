@@ -2,7 +2,7 @@
 <header>
     <div id="nav-container">
         <div id="logo">
-            <a href="index"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
+            <a href="../public"><img src="img/logo.png" alt="UNEED-IT Logo"></a>
         </div>
         <nav>
             <ul>
