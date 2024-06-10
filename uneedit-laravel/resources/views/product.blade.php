@@ -10,14 +10,18 @@
     <x-header></x-header>
     <main>
         <h1>Title</h1>
-        <img src="" alt="product">
-        <p>
-            Description
-        </p>
-        <div>
-            <div>price</div>
-            <div>stock</div>
-            <button>Winkelwagen</button>
+        <div id="container-1">
+            <div id="container-2">
+                <img src="" alt="product">
+                <p>
+                    Description
+                </p>
+            </div>
+            <div id="container-3">
+                <div id="price">price</div>
+                <div id="stock">stock</div>
+                <button>Winkelwagen</button>
+            </div>
         </div>
     </main>
     <x-footer></x-footer>
