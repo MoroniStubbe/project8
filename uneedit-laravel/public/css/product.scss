@@ -35,6 +35,8 @@ body {
             }
 
             #container-3 {
+                font-size: x-large;
+
                 #price-container {
                     display: ruby;
 
@@ -47,7 +49,9 @@ body {
                     #stock {}
                 }
 
-                button {}
+                button {
+                    font-size: inherit;
+                }
             }
         }
     }
