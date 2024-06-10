@@ -65,3 +65,7 @@ Route::get('/request', function () {
 Route::get('/service', function () {
     return view('service');
 });
+
+Route::get('/product', function () {
+    return view('product');
+});
