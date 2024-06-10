@@ -19,12 +19,12 @@
             </div>
             <div id="container-3" class="container">
                 <div id="price-container">
-                    <div id="price">$price</div>
+                    Prijs: <div id="price">$price</div>
                 </div>
                 <div id="stock-container">
-                    <div id="stock">$stock</div>
+                    Voorraad: <div id="stock">$stock</div>
                 </div>
-                <button>Winkelwagen</button>
+                <button>Voeg toe aan winkelwagen</button>
             </div>
         </div>
     </main>
