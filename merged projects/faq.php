@@ -10,33 +10,29 @@
 </head>
 
 <body>
-
 <?php readfile("header.html") ?>
-
 <main>
     <section id="faq">
         <?php
+
         include_once("database.php");
-        try {
-            $faqEntries = $PDO->prepare("SELECT * FROM faq");
-            $faqEntries->execute();
+        include_once("classes/database.php");
+        include_once("classes/text_panel.php");
+        $db = new Database($PDO);
+        $faq = new TextPanel($db, "faq");
+        $faq = $faq->read();
 
-            echo '<ul>';
+        echo '<ul>';
 
-            foreach ($faqEntries->fetchAll() as $data) {
-                echo "<li><span class='question'>" . htmlspecialchars($data["message"]) . "</span>";
-                echo "<div class='answer'>" . htmlspecialchars($data["answer"]) . "</div></li>";
-            }
-
-            echo '</ul>';
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+        foreach ($faq as $faq_item) {
+            echo "<li><span class='question'>" . $faq_item["message"] . "</span>";
+            echo "<div class='answer'>" . $faq_item["answer"] . "</li>";
         }
         ?>
     </section>
 </main>
-
 <?php readfile("footer.html") ?>
+</body>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -55,6 +51,6 @@
     });
 </script>
 
-</body>
+
 
 </html>

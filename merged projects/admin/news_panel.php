@@ -25,7 +25,7 @@
     <?php
     include_once("../database.php");
     include_once("../classes/database.php");
-    include_once("../classes/text_panel.php");
+    include_once("../classes/Text_Panel.php");
 
     try {
       $db = new Database($PDO);

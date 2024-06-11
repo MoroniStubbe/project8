@@ -16,20 +16,20 @@
             <section id="news">
                 <?php
                 include_once("database.php");
-                include_once("classes/database.php");
-                include_once("classes/text_panel.php");
-                $db = new Database($PDO);
-                $news = new TextPanel($db, "news");
-                $news = $news->read();
+                try {
+                    $nieuwsbericht = $PDO->prepare("SELECT * FROM news");
+                    $nieuwsbericht->execute();
 
-                echo '<ul>';
+                    echo '<ul>';
 
-                foreach ($news as $news_item) {
-                    echo "<li>" . $news_item["message"] . "</li>";
+                    foreach ($nieuwsbericht->fetchAll() as $data) {
+                        echo "<li>" . $data["message"] . "</li>";
+                    }
+
+                    echo '</ul>';
+                } catch (PDOException $e) {
+                    echo "connection failed" . $e->getMessage();
                 }
-
-                echo '</ul>';
-
                 ?>
             </section>
         </main>
