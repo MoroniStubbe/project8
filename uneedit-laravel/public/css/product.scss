@@ -23,8 +23,13 @@ body {
                 height: 50vh;
                 margin: 0;
                 border-radius: 12px;
-                background-color: #2c3e50;
-                color: white;
+                background-color: ghostwhite;
+                color: black;
+                border: solid 3px #6e7491;
+                border-top-left-radius: 37px 140px;
+                border-top-right-radius: 23px 130px;
+                border-bottom-left-radius: 110px 19px;
+                border-bottom-right-radius: 120px 24px;
             }
 
             #container-2 {
@@ -51,6 +56,27 @@ body {
 
                 button {
                     font-size: inherit;
+                    background-color: #2c3e50;
+                    border: solid transparent;
+                    border-radius: 16px;
+                    border-width: 0 0 4px;
+                    box-sizing: border-box;
+                    color: whitesmoke;
+                    font-family: din-round,sans-serif;
+                    font-size: 15px;
+                    font-weight: 700;
+                    letter-spacing: .8px;
+                    line-height: 20px;
+                    margin: 0;
+                    outline: none;
+                    overflow: visible;
+                    padding: 13px 16px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    touch-action: manipulation;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    width: 50%;
                 }
             }
         }
