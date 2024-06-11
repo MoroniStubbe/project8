@@ -69,3 +69,7 @@ Route::get('/service', function () {
 Route::get('/product', function () {
     return view('product');
 });
+
+Route::get('/shopping_cart', function () {
+    return view('shopping_cart');
+});
