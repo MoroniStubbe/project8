@@ -1,104 +1,76 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
+<header>
     <nav class="nav">
-      <ul>
-        <li><a href="add_user.php">gebruiker toevoegen</a></li>
-        <li><a href="news_panel.php">nieuws</a></li>
-        <li><a href="requests.php">aanvragen inzien</a></li>
-
-      </ul>
+        <ul>
+            <li><a href="add_user.php">gebruiker toevoegen</a></li>
+            <li><a href="news_panel.php">nieuws</a></li>
+            <li><a href="requests.php">aanvragen inzien</a></li>
+        </ul>
     </nav>
     <div class="logo">
-      <img src="../img/logo.png" alt="Company Logo">
+        <img src="../img/logo.png" alt="Company Logo">
     </div>
-  </header>
-  <main>
+</header>
+<main>
     <?php
     include_once("../database.php");
-    $query = $PDO->prepare("SELECT * FROM faq");
-    $query->execute();
-    $result = $query->fetchAll();
-    echo "<table class='table1'>";
-    foreach ($result as $data) {
-      echo "<tr>";
-      echo "<td>" . $data["post"] . "</td>";
-      echo "<td>" . $data["ID"] . "</td>";
-      echo "</tr>";
+    include_once("../classes/database.php");
+    include_once("../classes/Text_Panel.php");
+
+    try {
+        $db = new Database($PDO);
+        $textPanel = new TextPanel($db, 'faq');
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (isset($_POST["addmessage"]) && isset($_POST["addanswer"]) &&
+                !empty(trim($_POST["addmessage"])) && !empty(trim($_POST["addanswer"]))) {
+                $textPanel->create(trim($_POST["addmessage"]), trim($_POST["addanswer"]));
+                echo "Entry added successfully.";
+            }
+
+            if (isset($_POST["rmnew"]) && !empty(trim($_POST["rmnew"]))) {
+                $idToDelete = (int)trim($_POST["rmnew"]);
+                if ($textPanel->delete($idToDelete)) {
+                    echo "Entry with ID $idToDelete deleted successfully.";
+                } else {
+                    echo "Failed to delete entry with ID $idToDelete.";
+                }
+            }
+        }
+        $result = $textPanel->read();
+        if (!empty($result)) {
+            echo "<table class='table1'>";
+            foreach ($result as $data) {
+                echo "<tr>";
+                echo "<td>" . (isset($data["message"]) ? htmlspecialchars($data["message"]) : 'N/A') . "</td>";
+                echo "<td>" . (isset($data["answer"]) ? htmlspecialchars($data["answer"]) : 'N/A') . "</td>";
+                echo "<td>" . htmlspecialchars($data["ID"]) . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "No entries found.";
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
     }
-    echo "</table>";
-
-
-
-
     ?>
-  </main>
-  <form method="post" class="intput1">
-
-    <input name="addfaq" type="text" placeholder="add something by entering your text and then pressing submit">
+</main>
+<form method="post" class="input1">
+    <input name="addmessage" type="text" placeholder="Add question">
+    <input name="addanswer" type="text" placeholder="Add answer">
     <input type="submit">
-  </form>
-  <form method="post" class="intput1">
-    <input name="faqrm" type="text" placeholder="remove something by entering id and then pressing submit">
+</form>
+<form method="post" class="input1">
+    <input name="rmnew" type="text" placeholder="Remove entry by entering id">
     <input type="submit">
-
-  </form>
-
-
+</form>
 </body>
-
 </html>
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $faqrm = (int) $_POST["faqrm"];
-
-  try {
-
-    if (!empty($faqrm)) {
-      $rm = $PDO->prepare("DELETE FROM `faq` WHERE `faq`.`ID` = :faqrm");
-      $rm->bindParam(':faqrm', $faqrm, PDO::PARAM_INT);
-      $rm->execute();
-    }
-  } catch (PDOException $e) {
-    echo "Error deleting FAQ: " . $e->getMessage();
-  }
-}
-
-
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $faqadd = $_POST["addfaq"];
-
-  try {
-
-
-    if (!empty($faqadd)) {
-
-      $send = $PDO->prepare("INSERT INTO `faq` (`post`) VALUES (:faqadd);");
-
-      $send->bindParam(':faqadd', $faqadd);
-      $send->execute();
-    }
-  } catch (PDOException $e) {
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
