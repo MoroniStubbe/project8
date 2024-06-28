@@ -21,26 +21,21 @@
 
 <?php
 $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-$password = $_POST["password"];
-$username = $_POST["username"];
-
+$password = isset($_POST['password']) ? $_POST['password'] : null;
+$username = isset($_POST['username']) ? $_POST['username'] : null;
 
 try {
-    $passworddb = $PDO->prepare("SELECT * FROM adminpanel");
+    $passworddb = $PDO->prepare('SELECT * FROM adminpanel');
     $passworddb->execute();
 
     $result = $passworddb->fetchAll();
     foreach ($result as $data) {
-        if ($password === $data["Password"] and $username === $data["User_name"]) {
-            header("location: aanvragen.php");
+        if ($password === $data['Password'] and $username === $data['User_name']) {
+            header('location: aanvragen.php');
         }
     }
 } catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    echo 'Connection failed: ' . $e->getMessage();
 }
-
-
-
-
 
 ?>
