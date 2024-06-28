@@ -9,9 +9,9 @@
 <header>
     <nav class="nav">
         <ul>
-            <li><a href="add_user.php">gebruiker toevoegen</a></li>
-            <li><a href="news_panel.php">nieuws</a></li>
-            <li><a href="requests.php">aanvragen inzien</a></li>
+            <li><a href="add_user">gebruiker toevoegen</a></li>
+            <li><a href="news_panel">nieuws</a></li>
+            <li><a href="requests">aanvragen inzien</a></li>
         </ul>
     </nav>
     <div class="logo">
