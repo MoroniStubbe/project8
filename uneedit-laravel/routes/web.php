@@ -70,22 +70,22 @@ Route::get('/product', function () {
     return view('product');
 });
 
-Route::get('/admin/add_user', function() {
+Route::get('/admin/add_user', function () {
     return view('admin.add_user');
 });
 
-Route::get('/admin/requests', function() {
+Route::get('/admin/requests', function () {
     return view('admin.requests');
 });
 
-Route::get('/admin/faq_panel', function() {
+Route::get('/admin/faq_panel', function () {
     return view('admin.faq_panel');
 });
 
-Route::get('/admin/login_admin', function() {
+Route::get('/admin', function () {
     return view('admin.login_admin');
 });
 
-Route::get('/admin/news_panel', function() {
+Route::get('/admin/news_panel', function () {
     return view('admin.news_panel');
 });
