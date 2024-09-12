@@ -27,7 +27,7 @@ Route::get('/faq', function () {
 });
 
 Route::get('/', function () {
-    return view('index');
+    return view('index')->name('index');
 });
 
 Route::get('/login', function () {
