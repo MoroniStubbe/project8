@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 Route::get('/about', function () {
     return view('about');
@@ -49,6 +50,8 @@ Route::get('/news', function () {
 Route::get('/registration', function () {
     return view('registration');
 });
+
+Route::post('/registration', [UserController::class, 'store'])->name('registration.store');
 
 Route::get('/request', function () {
     return view('request');
