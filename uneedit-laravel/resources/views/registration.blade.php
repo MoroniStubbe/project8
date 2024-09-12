@@ -13,18 +13,62 @@
     <main class="main-content">
         <div class="form-container">
             <h1 class="form-title">Registration</h1>
-            <form id="registration-form" action="registration" method="post">
+            <!-- Display validation errors if any -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            <form id="registration-form" action="{{ route('registration.store') }}" method="post">
                 @csrf
-                <label for="naam">Name:</label>
-                <input type="text" name="name" id="name" placeholder="Name" required><br>
-                <label for="telefoonnummer">Phone:</label>
-                <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required><br>
+
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="Name" value="{{ old('name') }}" required>
+                @error('name')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" id="phone" placeholder="Phone" value="{{ old('phone') }}" required>
+                @error('phone')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
                 <label for="email">Email:</label>
-                <input type="email" name="email" id="email" placeholder="Email" required><br>
+                <input type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required>
+                @error('email')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
                 <label for="address">Address:</label>
-                <input type="text" name="address" id="address" placeholder="Address" required><br>
+                <input type="text" name="address" id="address" placeholder="Address" value="{{ old('address') }}" required>
+                @error('address')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" placeholder="Password" required><br>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                @error('password')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
+                <label for="password_confirmation">Confirm Password:</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
+                @error('password_confirmation')
+                <p class="error-message">{{ $message }}</p>
+                @enderror
+                <br>
+
                 <button type="submit">Register</button>
             </form>
         </div>
