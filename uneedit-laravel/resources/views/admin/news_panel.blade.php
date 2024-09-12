@@ -61,10 +61,12 @@
     ?>
   </main>
   <form method="post" class="input1">
+  @csrf
     <input name="addnew" type="text" placeholder="Add something by entering your text and then pressing submit">
     <input type="submit">
   </form>
   <form method="post" class="input1">
+  @csrf
     <input name="rmnew" type="text" placeholder="Remove something by entering id and then pressing submit">
     <input type="submit">
   </form>

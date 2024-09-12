@@ -74,14 +74,22 @@ Route::get('/admin/requests', function () {
     return view('admin.requests');
 });
 
-Route::get('/admin/faq_panel', function () {
-    return view('admin.faq_panel');
-});
-
 Route::get('/admin', function () {
     return view('admin.login_admin');
 });
 
 Route::get('/admin/news_panel', function () {
     return view('admin.news_panel');
+});
+
+Route::post('/admin/news_panel', function () {
+    return view('admin.news_panel');
+});
+
+Route::get('/admin/faq_panel', function () {
+    return view('admin.faq_panel');
+});
+
+Route::post('/admin/faq_panel', function () {
+    return view('admin.faq_panel');
 });

@@ -64,11 +64,13 @@
     ?>
 </main>
 <form method="post" class="input1">
+    @csrf
     <input name="addmessage" type="text" placeholder="Add question">
     <input name="addanswer" type="text" placeholder="Add answer">
     <input type="submit">
 </form>
 <form method="post" class="input1">
+    @csrf
     <input name="rmnew" type="text" placeholder="Remove entry by entering id">
     <input type="submit">
 </form>
