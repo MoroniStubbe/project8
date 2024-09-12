@@ -14,10 +14,6 @@ Route::get('/change_info', function () {
     return view('change_info');
 });
 
-Route::get('/check', function () {
-    return view('check');
-});
-
 Route::get('/contact', function () {
     return view('contact');
 });
