@@ -13,7 +13,7 @@
     <main class="main-content">
         <div class="form-container">
             <h2 class="form-title">Login</h2>
-            <form id="registration-form" action="auth.php" method="post">
+            <form id="registration-form" action="{{ route('user.login') }}" method="post">
                 @csrf
                 <input type="text" class="" name="name" id="Naam" placeholder="Naam"><br>
                 <input type="text" class="" name="email" id="email" placeholder="Email"><br>
