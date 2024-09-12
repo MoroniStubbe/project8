@@ -6,10 +6,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/account', function () {
-    return view('account');
-});
-
 Route::get('/auth', function () {
     return view('auth');
 });
