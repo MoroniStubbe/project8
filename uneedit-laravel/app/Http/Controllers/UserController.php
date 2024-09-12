@@ -22,7 +22,7 @@ class UserController extends Controller
         $validated['password'] = bcrypt($validated['password']);
 
         // Create the user
-        $user = User::create($validated);
+        User::create($validated);
 
         // Redirect or return a response
         return redirect()->route('index')->with('success', 'User created successfully.');
