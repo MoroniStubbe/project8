@@ -79,11 +79,11 @@ Route::post('/admin/faq_panel', function () {
     return view('admin.faq_panel');
 });
 
+Route::post('/user/create', [UserController::class, 'store'])->name('user.create');
+
 Route::get('/user/create', function () {
     return view('user/create');
 })->name('user.create.view');
-
-Route::post('/user/create', [UserController::class, 'store'])->name('user.create');
 
 Route::post('/user/update', function () {
     return view('update');
