@@ -15,13 +15,16 @@
             <h2 class="form-title">Login</h2>
             <form id="registration-form" action="{{ route('user.login') }}" method="post">
                 @csrf
-                <input type="text" class="" name="name" id="Naam" placeholder="Naam"><br>
-                <input type="text" class="" name="email" id="email" placeholder="Email"><br>
-                <input type="password" class="" name="password" id="password" placeholder="Password"><br>
+                <input type="text" name="name" id="name" placeholder="Name" required><br>
+                <input type="email" name="email" id="email" placeholder="Email" required><br>
+                <input type="password" name="password" id="password" placeholder="Password" required><br>
+
                 <button type="submit">Log in</button>
-                <?php if (isset($_GET['error']) && $_GET['error'] == "account_not_found") {
-                    echo "deze account bestaat nog niet";
-                } ?>
+
+                <!-- Handle errors using Laravel Blade -->
+                @if(session('error'))
+                <p style="color:red;">{{ session('error') }}</p>
+                @endif
             </form>
         </div>
     </main>
