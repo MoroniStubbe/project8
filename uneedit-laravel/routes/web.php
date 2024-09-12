@@ -70,6 +70,10 @@ Route::get('/admin/add_user', function () {
     return view('admin.add_user');
 });
 
+Route::post('/admin/add_user', function () {
+    return view('admin.add_user');
+});
+
 Route::get('/admin/requests', function () {
     return view('admin.requests');
 });

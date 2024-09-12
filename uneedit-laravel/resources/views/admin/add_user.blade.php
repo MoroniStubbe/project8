@@ -18,6 +18,7 @@
         </div>
     </header>
     <form method="post" class="adduser">
+        @csrf
         <p>add user</p>
         <input type="text" name="useradd">
         <input type="password" name="passwordadd">
