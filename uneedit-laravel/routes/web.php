@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+
 Route::get('/about', function () {
     return view('about');
 });
 
 Route::get('/auth', function () {
     return view('auth');
-});
-
-Route::get('/change_info', function () {
-    return view('change_info');
 });
 
 Route::get('/contact', function () {
@@ -27,31 +27,13 @@ Route::get('/faq', function () {
     return view('faq');
 });
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-
-Route::get('/login', function () {
-    return view('login');
-});
-
 Route::get('/login_or_signup', function () {
     return view('login_or_signup');
-});
-
-Route::post('/logout', function () {
-    return view('logout');
 });
 
 Route::get('/news', function () {
     return view('news');
 });
-
-Route::get('/registration', function () {
-    return view('registration');
-});
-
-Route::post('/registration', [UserController::class, 'store'])->name('registration.store');
 
 Route::get('/request', function () {
     return view('request');
@@ -96,3 +78,29 @@ Route::get('/admin/faq_panel', function () {
 Route::post('/admin/faq_panel', function () {
     return view('admin.faq_panel');
 });
+
+Route::get('/user/create', function () {
+    return view('user/create');
+})->name('user.create.view');
+
+Route::post('/user/create', [UserController::class, 'store'])->name('user.create');
+
+Route::post('/user/update', function () {
+    return view('update')->name('user.update');
+});
+
+Route::get('/user/update', function () {
+    return view('update')->name('user.update.view');
+});
+
+Route::post('/user/login', function () {
+    return view('user/login');
+})->name('user.login');
+
+Route::get('/user/login', function () {
+    return view('user/login');
+})->name('user.login.view');
+
+Route::post('/user/logout', function () {
+    return view('user/logout');
+})->name('user.logout');
