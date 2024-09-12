@@ -13,7 +13,7 @@
     <main class="main-content">
         <div class="form-container">
             <h1 class="form-title">Registration</h1>
-            <form id="registration-form" action="check.php" method="post">
+            <form id="registration-form" action="registration" method="post">
                 @csrf
                 <label for="naam">Name:</label>
                 <input type="text" name="name" id="name" placeholder="Name" required><br>
