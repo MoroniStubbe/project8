@@ -93,9 +93,7 @@ Route::get('/user/update', function () {
     return view('update');
 })->name('user.update.view');
 
-Route::post('/user/login', function () {
-    return view('user/login');
-})->name('user.login');
+Route::post('/user/login', [UserController::class, 'login'])->name('user.login');
 
 Route::get('/user/login', function () {
     return view('user/login');
