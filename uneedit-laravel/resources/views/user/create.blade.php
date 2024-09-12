@@ -24,7 +24,7 @@
             </div>
             @endif
 
-            <form id="registration-form" action="{{ route('registration.store') }}" method="post">
+            <form id="registration-form" action="{{ route('user.create') }}" method="post">
                 @csrf
 
                 <label for="name">Name:</label>
