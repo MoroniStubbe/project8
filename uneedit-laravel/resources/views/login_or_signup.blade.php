@@ -15,8 +15,10 @@
             <div class="login-signup">
                 <h1>Het lijkt erop dat jij niet ingelogd is</h1>
                 <div>
-                    <button onclick="window.location.href='login'">Log In</button>
-                    <button onclick="window.location.href='registration'">Sign Up</button>
+                    <a href="{{ route('user.login.view') }}">
+                        <button>Log In</button></a>
+                    <a href="{{ route('user.create.view') }}">
+                        <button>Sign Up</button></a>
                 </div>
             </div>
         </div>
