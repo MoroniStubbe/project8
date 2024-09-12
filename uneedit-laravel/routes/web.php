@@ -86,12 +86,12 @@ Route::get('/user/create', function () {
 Route::post('/user/create', [UserController::class, 'store'])->name('user.create');
 
 Route::post('/user/update', function () {
-    return view('update')->name('user.update');
-});
+    return view('update');
+})->name('user.update');
 
 Route::get('/user/update', function () {
-    return view('update')->name('user.update.view');
-});
+    return view('update');
+})->name('user.update.view');
 
 Route::post('/user/login', function () {
     return view('user/login');
