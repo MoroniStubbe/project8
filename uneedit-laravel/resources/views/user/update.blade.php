@@ -18,7 +18,7 @@
                 <?php
                 $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
                 include_once app_path('Models/account.php');
-                
+
                 $account = new Account($PDO);
                 $account->show();
                 ?>
