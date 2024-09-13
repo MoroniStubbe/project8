@@ -93,7 +93,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::group(['middleware' => 'guest'], function () {
+    Route::group(['middleware' => ['RedirectIfAuthenticated', 'guest']], function () {
         Route::get('/login_or_signup', function () {
             return view('login_or_signup');
         })->name('login_or_signup');
