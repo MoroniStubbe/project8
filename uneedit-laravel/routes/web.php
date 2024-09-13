@@ -6,10 +6,6 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/account', function () {
-    return view('account');
-});
-
 Route::get('/auth', function () {
     return view('auth');
 });
@@ -68,4 +64,36 @@ Route::get('/service', function () {
 
 Route::get('/product', function () {
     return view('product');
+});
+
+Route::get('/admin/add_user', function () {
+    return view('admin.add_user');
+});
+
+Route::post('/admin/add_user', function () {
+    return view('admin.add_user');
+});
+
+Route::get('/admin/requests', function () {
+    return view('admin.requests');
+});
+
+Route::get('/admin', function () {
+    return view('admin.login_admin');
+});
+
+Route::get('/admin/news_panel', function () {
+    return view('admin.news_panel');
+});
+
+Route::post('/admin/news_panel', function () {
+    return view('admin.news_panel');
+});
+
+Route::get('/admin/faq_panel', function () {
+    return view('admin.faq_panel');
+});
+
+Route::post('/admin/faq_panel', function () {
+    return view('admin.faq_panel');
 });

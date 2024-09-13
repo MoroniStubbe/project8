@@ -13,7 +13,7 @@
                 <li><a href="request">Aanvraag</a></li>
                 <li><a href="faq">FAQ</a></li>
                 <li><a href="delivery_services">Bezorgdiensten</a></li>
-                <li><a href="account">Account</a>
+                <li><a href="login_or_signup">Account</a>
             </ul>
         </nav>
     </div>
