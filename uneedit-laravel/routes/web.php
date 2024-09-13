@@ -28,39 +28,39 @@ Route::get('/about', function () {
 
 Route::get('/auth', function () {
     return view('auth');
-});
+})->name('auth');
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');
 
 Route::get('/delivery_services', function () {
     return view('delivery_services');
-});
+})->name('delivery_services');
 
 Route::get('/faq', function () {
     return view('faq');
-});
+})->name('faq');
 
 Route::get('/login_or_signup', function () {
     return view('login_or_signup');
-});
+})->name('login_or_signup');
 
 Route::get('/news', function () {
     return view('news');
-});
+})->name('news');
 
 Route::get('/request', function () {
     return view('request');
-});
+})->name('request');
 
 Route::get('/service', function () {
     return view('service');
-});
+})->name('service');
 
 Route::get('/product', function () {
     return view('product');
-});
+})->name('product');
 
 Route::prefix('admin')->group(function () {
     Route::get('/add_user', function () {
