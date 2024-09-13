@@ -93,33 +93,37 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::get('/login_or_signup', function () {
-        return view('login_or_signup');
-    })->name('login_or_signup');
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login_or_signup', function () {
+            return view('login_or_signup');
+        })->name('login_or_signup');
 
-    Route::post('/create', [UserController::class, 'store'])->name('user.create');
+        Route::post('/create', [UserController::class, 'store'])->name('user.create');
 
-    Route::get('/create', function () {
-        return view('user/create');
-    })->name('user.create.view');
+        Route::get('/create', function () {
+            return view('user/create');
+        })->name('user.create.view');
 
-    Route::post('/update', function () {
-        return view('user/update');
-    })->name('user.update');
+        Route::post('/login', [UserController::class, 'login'])->name('user.login');
 
-    Route::get('/update', function () {
-        return view('user/update');
-    })->name('user.update.view');
+        Route::get('/login', function () {
+            return view('user/login');
+        })->name('user.login.view');
+    });
 
-    Route::post('/login', [UserController::class, 'login'])->name('user.login');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/update', function () {
+            return view('user/update');
+        })->name('user.update');
 
-    Route::get('/login', function () {
-        return view('user/login');
-    })->name('user.login.view');
+        Route::get('/update', function () {
+            return view('user/update');
+        })->name('user.update.view');
 
-    Route::post('/logout', function () {
-        return view('user/logout');
-    })->name('user.logout');
+        Route::post('/logout', function () {
+            return view('user/logout');
+        })->name('user.logout');
+    });
 });
 
 require __DIR__ . '/auth.php';
