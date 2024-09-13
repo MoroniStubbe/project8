@@ -13,7 +13,7 @@
                 <li><a href="{{route('request')}}">Aanvraag</a></li>
                 <li><a href="{{route('faq')}}">FAQ</a></li>
                 <li><a href="{{route('delivery_services')}}">Bezorgdiensten</a></li>
-                <li><a href="{{route('account')}}">Account</a>
+                <li><a href="{{route('login_or_signup')}}">Account</a>
             </ul>
         </nav>
     </div>

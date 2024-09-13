@@ -42,10 +42,6 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
-Route::get('/login_or_signup', function () {
-    return view('login_or_signup');
-})->name('login_or_signup');
-
 Route::get('/news', function () {
     return view('news');
 })->name('news');
@@ -97,6 +93,10 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
+    Route::get('/login_or_signup', function () {
+        return view('login_or_signup');
+    })->name('login_or_signup');
+
     Route::post('/create', [UserController::class, 'store'])->name('user.create');
 
     Route::get('/create', function () {
