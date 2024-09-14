@@ -32,33 +32,41 @@ use Illuminate\Support\Facades\Auth;
                     @csrf
                     <?php $user = Auth::user(); ?>
 
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
                     <label for="name">Name:</label><br>
                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"><br>
+                    @error('name')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <label for="phone">Phone Number:</label><br>
                     <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"><br>
+                    @error('phone')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <label for="address">Address:</label><br>
                     <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}"><br>
+                    @error('address')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <label for="email">Email:</label><br>
                     <input type="text" id="email" name="email" value="{{ old('email', $user->email) }}"><br>
+                    @error('email')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <label for="password">New Password:</label><br>
                     <input type="password" id="password" name="password" placeholder="Leave blank if not changing"><br>
+                    @error('password')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <label for="password_confirmation">Confirm Password:</label><br>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password"><br>
+                    @error('password_confirmation')
+                    <span style="color:red;">{{ $message }}</span><br>
+                    @enderror
 
                     <div class="button-group">
                         <button type="submit" style="background-color: mediumturquoise;">Save Changes</button>

@@ -13,17 +13,6 @@
     <main class="main-content">
         <div class="form-container">
             <h1 class="form-title">Registration</h1>
-            <!-- Display validation errors if any -->
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-
             <form id="registration-form" action="{{ route('user.create') }}" method="post">
                 @csrf
 
