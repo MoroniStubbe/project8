@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function store(Request $request)
+    public function create(Request $request)
     {
         // Validate the incoming data
         $validated = $request->validate([

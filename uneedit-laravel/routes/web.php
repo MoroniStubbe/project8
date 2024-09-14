@@ -98,7 +98,7 @@ Route::prefix('user')->group(function () {
             return view('login_or_signup');
         })->name('login_or_signup');
 
-        Route::post('/create', [UserController::class, 'store'])->name('user.create');
+        Route::post('/create', [UserController::class, 'create'])->name('user.create');
 
         Route::get('/create', function () {
             return view('user/create');
