@@ -118,9 +118,7 @@ Route::prefix('user')->group(function () {
             return view('user/save');
         })->name('user.save.view');
 
-        Route::post('/logout', function () {
-            return view('user/logout');
-        })->name('user.logout');
+        Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
 });
 

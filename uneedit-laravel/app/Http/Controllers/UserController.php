@@ -90,4 +90,14 @@ class UserController extends Controller
         // If authentication fails, redirect back with an error message
         return redirect()->back()->with('error', 'Invalid email or password.');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
+    }
 }
