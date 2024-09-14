@@ -60,7 +60,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.update.view')->with('success', 'Profile updated successfully.');
+        return redirect()->route('user.save.view')->with('success', 'Profile updated successfully.');
     }
 
     public static function show()

@@ -112,11 +112,11 @@ Route::prefix('user')->group(function () {
     });
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('/update', [UserController::class, 'save'])->name('user.update');
+        Route::post('/save', [UserController::class, 'save'])->name('user.save');
 
-        Route::get('/update', function () {
-            return view('user/update');
-        })->name('user.update.view');
+        Route::get('/save', function () {
+            return view('user/save');
+        })->name('user.save.view');
 
         Route::post('/logout', function () {
             return view('user/logout');

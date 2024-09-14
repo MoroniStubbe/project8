@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
         if (Auth::check()) {
             switch ($request->getPathInfo()) {
                 case '/user/login_or_signup':
-                    return redirect()->route('user.update');
+                    return redirect()->route('user.save.view');
             }
         }
 

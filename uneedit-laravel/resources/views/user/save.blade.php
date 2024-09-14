@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Auth;
         <div class="edit-info" style="display: none;">
             <h1>Edit Information</h1>
             <div class="changeForm">
-                <form id="changeInfoForm" action="{{ route('user.update') }}" method="post" onsubmit="handleFormSubmission()">
+                <form id="changeInfoForm" action="{{ route('user.save') }}" method="post" onsubmit="handleFormSubmission()">
                     @csrf
                     <?php $user = Auth::user(); ?>
 
@@ -69,7 +69,8 @@ use Illuminate\Support\Facades\Auth;
         </div>
         <div class="buttons">
             <button id="editButton">Informatie bewerken</button>
-            <form action="logout" method="post">
+            <form action="{{ route('user.logout') }}" method="post">
+                @csrf
                 <button type="submit" name="logout">Log Out</button>
             </form>
         </div>
