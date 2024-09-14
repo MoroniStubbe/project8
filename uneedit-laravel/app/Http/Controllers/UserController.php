@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -27,6 +29,47 @@ class UserController extends Controller
 
         // Redirect or return a response
         return redirect()->route('index')->with('success', 'User created successfully.');
+    }
+
+    public function save(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validate the input
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|confirmed|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Update user information
+        $user->name = $request->input('name');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+        $user->email = $request->input('email');
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->route('user.update.view')->with('success', 'Profile updated successfully.');
+    }
+
+    public static function show()
+    {
+        $user = Auth::user();
+        echo "<p><strong>Naam:</strong> {$user->name}</p>";
+        echo "<p><strong>Telefoonnummer:</strong> {$user->phone}</p>";
+        echo "<p><strong>Adres:</strong> {$user->address}</p>";
+        echo "<p><strong>Email:</strong> {$user->email}</p>";
     }
 
     public function login(Request $request)
