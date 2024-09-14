@@ -1,3 +1,10 @@
+<?php
+
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,32 +22,47 @@
         <div class="account-info">
             <h1>My Account</h1>
             <div class="info-block">
-                <?php
-                $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-                include_once app_path('Models/account.php');
-
-                $account = new Account($PDO);
-                $account->show();
-                ?>
+                <?php UserController::show(); ?>
             </div>
         </div>
         <div class="edit-info" style="display: none;">
             <h1>Edit Information</h1>
             <div class="changeForm">
-                <form id="changeInfoForm" action="change_info.php" method="post" onsubmit="handleFormSubmission()">
-                    <label for="name"> Name:</label><br>
-                    <input type="text" id="name" name="name" value="<?php echo $account->name; ?>"><br>
-                    <label for="phone"> Phone Number:</label><br>
-                    <input type="text" id="phone" name="phone" value="<?php echo $account->phone; ?>"><br>
-                    <label for="address"> Address:</label><br>
-                    <input type="text" id="address" name="address" value="<?php echo $account->address; ?>"><br>
+                <form id="changeInfoForm" action="{{ route('user.update') }}" method="post" onsubmit="handleFormSubmission()">
+                    @csrf
+                    <?php $user = Auth::user(); ?>
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"><br>
+
+                    <label for="phone">Phone Number:</label><br>
+                    <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"><br>
+
+                    <label for="address">Address:</label><br>
+                    <input type="text" id="address" name="address" value="{{ old('address', $user->address) }}"><br>
+
                     <label for="email">Email:</label><br>
-                    <input type="text" id="email" name="email" value="<?php echo $account->email; ?>"><br>
+                    <input type="text" id="email" name="email" value="{{ old('email', $user->email) }}"><br>
+
+                    <label for="password">New Password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Leave blank if not changing"><br>
+
+                    <label for="password_confirmation">Confirm Password:</label><br>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password"><br>
 
                     <div class="button-group">
-                        <button type="submit" style="background-color: mediumturquoise;">Wijzigingen opslaan</button>
-                        <button type="button" onclick="cancelChanges()" id="cancelButton"
-                            style="background-color: red;">Cancel Changes</button>
+                        <button type="submit" style="background-color: mediumturquoise;">Save Changes</button>
+                        <button type="button" onclick="cancelChanges()" id="cancelButton" style="background-color: red;">Cancel Changes</button>
                     </div>
                 </form>
             </div>
@@ -76,11 +98,11 @@
             }
 
             function populateForm() {
-                var account = <?php echo json_encode($account); ?>;
-                document.getElementById('name').value = account.name;
-                document.getElementById('phone').value = account.phone;
-                document.getElementById('address').value = account.address;
-                document.getElementById('email').value = account.email;
+                var user = <?php echo json_encode($user); ?>;
+                document.getElementById('name').value = user.name;
+                document.getElementById('phone').value = user.phone;
+                document.getElementById('address').value = user.address;
+                document.getElementById('email').value = user.email;
             }
 
             function cancelChanges() {
