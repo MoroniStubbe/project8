@@ -9,18 +9,7 @@
 </head>
 
 <body>
-  <header>
-    <nav class="nav">
-      <ul>
-        <li><a href="add_user">gebruiker toevoegen</a></li>
-        <li><a href="requests">aanvragen inzien</a></li>
-        <li><a href="faq_panel">FAQ</a></li>
-      </ul>
-    </nav>
-    <div class="logo">
-      <img src="../img/logo.png" alt="Company Logo">
-    </div>
-  </header>
+  <x-admin_nav></x-admin_nav>
   <main>
     <?php
     $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
@@ -61,12 +50,12 @@
     ?>
   </main>
   <form method="post" class="input1">
-  @csrf
+    @csrf
     <input name="addnew" type="text" placeholder="Add something by entering your text and then pressing submit">
     <input type="submit">
   </form>
   <form method="post" class="input1">
-  @csrf
+    @csrf
     <input name="rmnew" type="text" placeholder="Remove something by entering id and then pressing submit">
     <input type="submit">
   </form>

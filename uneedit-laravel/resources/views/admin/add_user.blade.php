@@ -5,18 +5,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="nav">
-            <ul>
-                <li><a href="news_panel">nieuws</a></li>
-                <li><a href="requests">aanvragen inzien</a></li>
-                <li><a href="faq_panel">FAQ</a></li>
-            </ul>
-        </nav>
-        <div class="logo">
-            <img src="../img/logo.png" alt="Company Logo">
-        </div>
-    </header>
+    <x-admin_nav></x-admin_nav>
     <form method="post" class="adduser">
         @csrf
         <p>add user</p>

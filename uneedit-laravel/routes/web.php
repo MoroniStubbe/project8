@@ -59,38 +59,36 @@ Route::get('/product', function () {
 })->name('product');
 
 Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('', function () {
-        return view('admin.login_admin');
+    Route::get('/', function () {
+        return view('admin.index');
+    })->name('admin.index.view');
+
+    Route::get('/add_user', function () {
+        return view('admin.add_user');
+    })->name('admin.add.user.view');
+
+    Route::post('/add_user', function () {
+        return view('admin.add_user');
     });
 
-    Route::middleware('admin')->group(function () {
-        Route::get('/add_user', function () {
-            return view('admin.add_user');
-        });
+    Route::get('/requests', function () {
+        return view('admin.requests');
+    })->name('admin.requests.view');
 
-        Route::post('/add_user', function () {
-            return view('admin.add_user');
-        });
+    Route::get('/news_panel', function () {
+        return view('admin.news_panel');
+    })->name('admin.news.panel.view');
 
-        Route::get('/requests', function () {
-            return view('admin.requests');
-        });
+    Route::post('/news_panel', function () {
+        return view('admin.news_panel');
+    });
 
-        Route::get('/news_panel', function () {
-            return view('admin.news_panel');
-        });
+    Route::get('/faq_panel', function () {
+        return view('admin.faq_panel');
+    })->name('admin.faq.panel.view');
 
-        Route::post('/news_panel', function () {
-            return view('admin.news_panel');
-        });
-
-        Route::get('/faq_panel', function () {
-            return view('admin.faq_panel');
-        });
-
-        Route::post('/faq_panel', function () {
-            return view('admin.faq_panel');
-        });
+    Route::post('/faq_panel', function () {
+        return view('admin.faq_panel');
     });
 });
 
