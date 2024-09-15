@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(RedirectIfAuthenticated::class);
-        $middleware->alias(['RedirectIfAuthenticated' => RedirectIfAuthenticated::class]);
+        $middleware->alias(['redirect_if_authenticated' => RedirectIfAuthenticated::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
