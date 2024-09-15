@@ -18,10 +18,7 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            switch ($request->getPathInfo()) {
-                case '/user/login_or_signup':
-                    return redirect()->route('user.save.view');
-            }
+            return redirect()->route('user.save.view');
         }
 
         return $next($request);
