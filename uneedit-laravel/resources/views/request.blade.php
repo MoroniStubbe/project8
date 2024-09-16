@@ -21,7 +21,6 @@
                     @csrf
                     <label for="platform">Select Platform:</label>
                     <select name="device_type" id="cars">
-                        <option></option>
                         <option value="telefoon">Telefoon</option>
                         <option value="pc">PC</option>
                         <option value="appel pc/mac">Apple PC/Mac</option>
@@ -45,22 +44,3 @@
 </body>
 
 </html>
-<?php
-$PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-include_once app_path('Models/database.php');
-include_once app_path('Models/repair_request.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $problem = $_POST['problem'];
-    $telephone = $_POST['telephone'];
-    $email = $_POST['email'];
-    $device_name = $_POST['device_name'];
-    $device_type = $_POST['device_type'];
-
-    if (!empty($device_type) && !empty($device_name) && !empty($email) && !empty($telephone) && !empty($problem)) {
-        $db = new Database($PDO);
-        $repair_request = new RepairRequest($db);
-        $repair_request->create($device_type, $device_name, $problem, $telephone, $email);
-    }
-}
-?>
