@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NewsController;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -75,13 +76,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.requests');
     })->name('admin.requests.view');
 
+    
+    Route::post( '/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
+
+    Route::post( '/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+
     Route::get('/news_panel', function () {
         return view('admin.news_panel');
     })->name('admin.news.panel.view');
-
-    Route::post('/news_panel', function () {
-        return view('admin.news_panel');
-    });
 
     Route::get('/faq_panel', function () {
         return view('admin.faq_panel');

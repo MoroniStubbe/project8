@@ -5,59 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ asset('css/admin_panel.css') }}">
-  <title>Text Panel</title>
+  <title>News Panel</title>
 </head>
 
 <body>
   <x-admin_nav></x-admin_nav>
+
   <main>
-    <?php
-    $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-    include_once app_path('Models/database.php');
-    include_once app_path('Models/text_panel.php');
+    <!-- Display success and error messages -->
+    @if (session('success'))
+      <p>{{ session('success') }}</p>
+    @endif
 
-    try {
-      $db = new Database($PDO);
-      $textPanel = new TextPanel($db, 'news');
+    @if (session('error'))
+      <p>{{ session('error') }}</p>
+    @endif
 
-      if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST["addnew"]) && !empty(trim($_POST["addnew"]))) {
-          $textPanel->create(trim($_POST["addnew"]));
-          echo "Message added successfully.";
-        }
+    <!-- Display validation errors -->
+    @if ($errors->any())
+      <div>
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
-        if (isset($_POST["rmnew"]) && !empty(trim($_POST["rmnew"]))) {
-          $idToDelete = (int)trim($_POST["rmnew"]);
-          if ($textPanel->delete($idToDelete)) {
-            echo "Message with ID $idToDelete deleted successfully.";
-          } else {
-            echo "Failed to delete message with ID $idToDelete.";
-          }
-        }
-      }
-      $result = $textPanel->read();
-      echo "<table class='table1'>";
-      foreach ($result as $data) {
-        echo "<tr>";
-        echo "<td>" . htmlspecialchars($data["message"]) . "</td>";
-        echo "<td>" . htmlspecialchars($data["ID"]) . "</td>";
-        echo "</tr>";
-      }
-      echo "</table>";
-    } catch (Exception $e) {
-      echo "Error: " . $e->getMessage();
-    }
-    ?>
+    <!-- Display all news items -->
+    <h2>Current News</h2>
+    <ul>
+     
+    </ul>
   </main>
-  <form method="post" class="input1">
+
+  <!-- Form to add new news -->
+  <form method="post" action="{{ route('admin.news.create') }}" class="input1">
     @csrf
     <input name="addnew" type="text" placeholder="Add something by entering your text and then pressing submit">
-    <input type="submit">
+    <input type="submit" value="Add News">
   </form>
-  <form method="post" class="input1">
+
+  <!-- Form to remove news by ID -->
+  <form method="post" action="{{ route('admin.news.delete') }}" class="input1">
     @csrf
-    <input name="rmnew" type="text" placeholder="Remove something by entering id and then pressing submit">
-    <input type="submit">
+    <input name="rmnew" type="text" placeholder="Remove something by entering ID and then pressing submit">
+    <input type="submit" value="Remove News">
   </form>
 </body>
 
