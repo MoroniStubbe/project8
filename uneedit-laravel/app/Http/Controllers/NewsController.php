@@ -41,4 +41,8 @@ class NewsController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'News deleted successfully!');
     }
+    public static function show(){
+        return NewsModel::all();
+    }
+   
 }
