@@ -10,7 +10,7 @@
                 <li><a href="{{route('news')}}">Nieuws</a></li>
                 <li><a href="{{route('service')}}">Service </a></li>
                 <li><a href="{{route('contact')}}">Contact</a></li>
-                <li><a href="{{route('request')}}">Aanvraag</a></li>
+                <li><a href="{{route('request.view')}}">Aanvraag</a></li>
                 <li><a href="{{route('faq')}}">FAQ</a></li>
                 <li><a href="{{route('delivery_services')}}">Bezorgdiensten</a></li>
                 <li><a href="{{route('login_or_signup')}}">Account</a>
