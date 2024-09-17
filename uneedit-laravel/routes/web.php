@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\RequestController;
+use Symfony\Component\Routing\RequestContext;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -49,7 +51,9 @@ Route::get('/news', function () {
 
 Route::get('/request', function () {
     return view('request');
-})->name('request');
+})->name('request.view');
+
+Route::post('/request/create', [RequestController::class, 'create'])->name('request.create');
 
 Route::get('/service', function () {
     return view('service');
@@ -76,10 +80,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.requests');
     })->name('admin.requests.view');
 
-    
-    Route::post( '/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
 
-    Route::post( '/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+    Route::post('/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
 
     Route::get('/news_panel', function () {
         return view('admin.news_panel');
