@@ -1,3 +1,5 @@
+<?php use App\Http\Controllers\NewsController; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,28 +16,31 @@
   <main>
     <!-- Display success and error messages -->
     @if (session('success'))
-      <p>{{ session('success') }}</p>
+    <p>{{ session('success') }}</p>
     @endif
 
     @if (session('error'))
-      <p>{{ session('error') }}</p>
+    <p>{{ session('error') }}</p>
     @endif
 
     <!-- Display validation errors -->
     @if ($errors->any())
-      <div>
-        <ul>
-          @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
+    <div>
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
     @endif
 
     <!-- Display all news items -->
     <h2>Current News</h2>
+    <?php $newsItems = NewsController::show(); ?>
     <ul>
-     
+      @foreach ($newsItems as $news)
+      <li>{{ $news->id }}: {{ $news->message }}</li>
+      @endforeach
     </ul>
   </main>
 
