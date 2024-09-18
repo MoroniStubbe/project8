@@ -59,7 +59,8 @@ Route::get('/product', function () {
     return view('product');
 })->name('product');
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+// Admin routes with 'is_admin' middleware
+Route::prefix('admin')->middleware('is_admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.index.view');
@@ -76,10 +77,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.requests');
     })->name('admin.requests.view');
 
-    
-    Route::post( '/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
+    Route::post('/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
 
-    Route::post( '/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+    Route::post('/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
 
     Route::get('/news_panel', function () {
         return view('admin.news_panel');
