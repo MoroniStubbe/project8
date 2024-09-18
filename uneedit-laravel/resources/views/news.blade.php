@@ -1,3 +1,5 @@
+<?php use App\Http\Controllers\NewsController; ?>
+    
     <!DOCTYPE html>
     <html lang="en">
 
@@ -14,23 +16,12 @@
         <main>
             <h2>Recent News</h2>
             <section id="news">
-                <?php
-                $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-                include_once app_path('Models/database.php');
-                include_once app_path('Models/text_panel.php');
-                $db = new Database($PDO);
-                $news = new TextPanel($db, 'news');
-                $news = $news->read();
-                
-                echo '<ul>';
-                
-                foreach ($news as $news_item) {
-                    echo '<li>' . $news_item['message'] . '</li>';
-                }
-                
-                echo '</ul>';
-                
-                ?>
+            <?php $newsItems = NewsController::show(); ?>
+                <ul>
+                 @foreach ($newsItems as $news)
+                 <li>{{ $news->id }}: {{ $news->message }}</li>
+                 @endforeach
+             </ul>
             </section>
         </main>
         <x-footer></x-footer>
