@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Middleware\IsAdmin;
-use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,11 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(RedirectIfAuthenticated::class);
-        $middleware->alias(['redirect_if_authenticated' => RedirectIfAuthenticated::class]);
-
-        $middleware->append(IsAdmin::class);
-        $middleware->alias(['is_admin' => IsAdmin::class]);
+        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -19,10 +19,9 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->is_admin == 1) {
-            return redirect()->route('admin.index.view');
+            return $next($request);
         }
-    
 
-        return redirect()->route("index")->with('error', 'You do not have admin access.');
+        return redirect()->route('index')->with('error', 'You do not have admin access.');
     }
 }

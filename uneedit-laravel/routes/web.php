@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RequestController;
-use Symfony\Component\Routing\RequestContext;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\IsAdmin;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -64,7 +65,7 @@ Route::get('/product', function () {
 })->name('product');
 
 // Admin routes with 'is_admin' middleware
-Route::prefix('admin')->middleware('is_admin')->group(function () {
+Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.index.view');
@@ -99,7 +100,7 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::group(['middleware' => ['redirect_if_authenticated']], function () {
+    Route::group(['middleware' => RedirectIfAuthenticated::class], function () {
         Route::get('/login_or_signup', function () {
             return view('login_or_signup');
         })->name('login_or_signup');
