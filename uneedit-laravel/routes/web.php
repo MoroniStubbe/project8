@@ -70,6 +70,14 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.index');
     })->name('admin.index.view');
 
+    Route::get('/add_product', function () {
+        return view('admin.add_product');
+    })->name('admin.add.product.view');
+
+    Route::post('/add_product', function () {
+        return view('admin.add_product');
+    })->name('admin.add.product');
+
     Route::get('/add_user', function () {
         return view('admin.add_user');
     })->name('admin.add.user.view');
