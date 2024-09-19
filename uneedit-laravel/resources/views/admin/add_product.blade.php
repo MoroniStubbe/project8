@@ -6,6 +6,7 @@
 
 <body>
     <x-admin_nav></x-admin_nav>
+    <main>
     <form action="{{ route('admin.add.product') }}" method="POST">
         @csrf
         <label for="type">Type:</label>
@@ -32,13 +33,8 @@
         <textarea name="description">{{ old('description') }}</textarea>
         <br>
 
-        <label for="order_product_id">Order Product ID:</label>
-        <input type="number" name="order_product_id" value="{{ old('order_product_id') }}">
-        <br>
-
         <button type="submit">Submit</button>
     </form>
-    <main>
     </main>
 </body>
 
