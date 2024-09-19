@@ -1,4 +1,9 @@
-<html>
+<?php
+
+use App\Http\Controllers\UserController; ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="{{ asset('css/add_user.css') }}">
@@ -6,64 +11,51 @@
 
 <body>
     <x-admin_nav></x-admin_nav>
-    <form method="post" class="adduser">
-        @csrf
-        <p>add user</p>
-        <input type="text" name="useradd">
-        <input type="password" name="passwordadd">
-        <input type="submit">
-    </form>
-    <main>
-        <?php
-        $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-        $query = $PDO->prepare("SELECT * FROM adminpanel");
-        $query->execute();
-        $result = $query->fetchAll();
-        echo "<table class='table1'>";
-        foreach ($result as $data) {
-            echo "<tr>";
-            echo "<td>" . $data["User_name"] . "</td>";
-            echo "<td>" . $data["Password"] . "</td>";
-            echo "<td>" . $data["ID"] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
 
+    <h2>Admins</h2>
+    <table>
+        <?php $admins = UserController::get_admins(); ?>
+        @foreach ($admins as $admin)
+        <tr>
+            <td>{{ $admin->id }}</td>
+            <td>{{ $admin->name }}</td>
+            <td>{{ $admin->email }}</td>
+            <td>
+                <form method="POST" action="{{ route('admin.users.removeAdmin', $admin->id) }}">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit">Demote to User</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </table>
 
+    <h2>Users</h2>
+    <table>
+        <?php $users = UserController::get_users(); ?>
+        @foreach ($users as $user)
+        <tr>
+            <td>{{ $user->id }}</td>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>
+                <form method="POST" action="{{ route('admin.users.makeAdmin', $user->id) }}">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit">Promote to Admin</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </table>
 
-
-        ?>
-    </main>
-
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
 
 </body>
 
 </html>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $useradd = $_POST["useradd"];
-    $passwordadd = $_POST["passwordadd"];
-
-    try {
-
-
-        if (!empty($useradd) && !empty($passwordadd)) {
-            $send = $PDO->prepare("INSERT INTO `adminpanel` (`User_name`, `Password`, `ID`) VALUES (:useradd, :passwordadd, NULL);");
-            $send->bindParam(':useradd', $useradd);
-            $send->bindParam(':passwordadd', $passwordadd);
-            $send->execute();
-
-
-            unset($useradd, $passwordadd);
-        }
-    } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
-
-
-
-
-
-?>
