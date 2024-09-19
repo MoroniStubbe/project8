@@ -101,7 +101,7 @@ class UserController extends Controller
         return redirect()->route('index');
     }
 
-    public function makeAdmin($id)
+    public function make_admin($id)
     {
         $user = User::findOrFail($id);
         $user->is_admin = true;
@@ -113,7 +113,7 @@ class UserController extends Controller
     /**
      * Demote an admin to a regular user.
      */
-    public function removeAdmin($id)
+    public function remove_admin($id)
     {
         $user = User::findOrFail($id);
         $user->is_admin = false;
