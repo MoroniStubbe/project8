@@ -1,3 +1,5 @@
+<?php use App\Http\Controllers\FaqController; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,23 +32,16 @@
     <x-header></x-header>
     <main>
         <section id="faq">
-            <?php
-            include_once app_path('Models/database.php');
-            include_once app_path('Models/text_panel.php');
-            $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
-            $db = new Database($PDO);
-            $faq = new TextPanel($db, 'faq');
-            $faq = $faq->read();
             
-            echo '<ul>';
-            
-            foreach ($faq as $faq_item) {
-                echo "<li><span class='question'>" . $faq_item['message'] . '</span>';
-                echo "<div class='answer'>" . $faq_item['answer'] . '</li>';
-            }
-            
-            echo '</ul>';
-            ?>
+            <?php $faqItems = FaqController::show(); ?>
+            <ul>
+                @foreach ($faqItems as $faq)
+                <li>
+                    <span class="question">{{ $faq->message }}</span>
+                    <div class="answer" style="display: none;">{{ $faq->answer }}</div>
+                </li>
+                @endforeach
+            </ul>
         </section>
     </main>
     <x-footer></x-footer>
