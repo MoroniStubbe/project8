@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -105,6 +106,10 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::post('/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
 
     Route::post('/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+
+    Route::post('/faq_panel/create', [FaqController::class, 'create'])->name('admin.faq.create');
+
+    Route::post('/faq_panel/delete', [FaqController::class, 'delete'])->name('admin.faq.delete');
 
     Route::get('/news_panel', function () {
         return view('admin.news_panel');
