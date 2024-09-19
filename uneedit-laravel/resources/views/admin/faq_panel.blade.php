@@ -1,69 +1,71 @@
+<?php use App\Http\Controllers\FaqController; ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/admin_panel.css') }}">
+    <title>FAQ Panel</title>
 </head>
 
 <body>
     <x-admin_nav></x-admin_nav>
+
     <main>
-        <?php
-        include_once app_path('Models/database.php');
-        include_once app_path('Models/text_panel.php');
-        $PDO = DB::connection(env('DB_CONNECTION_UNEEDIT'))->getPdo();
+        <!-- Display success and error messages -->
+        @if (session('success'))
+        <p>{{ session('success') }}</p>
+        @endif
 
-        try {
-            $db = new Database($PDO);
-            $textPanel = new TextPanel($db, 'faq');
+        @if (session('error'))
+        <p>{{ session('error') }}</p>
+        @endif
 
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                if (
-                    isset($_POST["addmessage"]) && isset($_POST["addanswer"]) &&
-                    !empty(trim($_POST["addmessage"])) && !empty(trim($_POST["addanswer"]))
-                ) {
-                    $textPanel->create(trim($_POST["addmessage"]), trim($_POST["addanswer"]));
-                    echo "Entry added successfully.";
-                }
+        <!-- Display validation errors -->
+        @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
-                if (isset($_POST["rmnew"]) && !empty(trim($_POST["rmnew"]))) {
-                    $idToDelete = (int)trim($_POST["rmnew"]);
-                    if ($textPanel->delete($idToDelete)) {
-                        echo "Entry with ID $idToDelete deleted successfully.";
-                    } else {
-                        echo "Failed to delete entry with ID $idToDelete.";
-                    }
-                }
-            }
-            $result = $textPanel->read();
-            if (!empty($result)) {
-                echo "<table class='table1'>";
-                foreach ($result as $data) {
-                    echo "<tr>";
-                    echo "<td>" . (isset($data["message"]) ? htmlspecialchars($data["message"]) : 'N/A') . "</td>";
-                    echo "<td>" . (isset($data["answer"]) ? htmlspecialchars($data["answer"]) : 'N/A') . "</td>";
-                    echo "<td>" . htmlspecialchars($data["ID"]) . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            } else {
-                echo "No entries found.";
-            }
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-        ?>
+        <!-- Display all FAQ entries -->
+        <h2>Current FAQs</h2>
+        <?php $faqItems = FaqController::show(); ?>
+        <table class="table1">
+            <tr>
+                <th>Message</th>
+                <th>Answer</th>
+                <th>ID</th>
+            </tr>
+            @foreach ($faqItems as $faq)
+            <tr>
+                <td>{{ $faq->message }}</td>
+                <td>{{ $faq->answer }}</td>
+                <td>{{ $faq->id }}</td>
+            </tr>
+            @endforeach
+        </table>
     </main>
-    <form method="post" class="input1">
+
+    <!-- Form to add new FAQ -->
+    <form method="post" action="{{ route('admin.faq.create') }}" class="input1">
         @csrf
-        <input name="addmessage" type="text" placeholder="Add question">
-        <input name="addanswer" type="text" placeholder="Add answer">
-        <input type="submit">
+        <input name="message" type="text" placeholder="Add question" required>
+        <input name="answer" type="text" placeholder="Add answer" required>
+        <input type="submit" value="Add FAQ">
     </form>
-    <form method="post" class="input1">
+
+    <!-- Form to remove FAQ by ID -->
+    <form method="post" action="{{ route('admin.faq.delete') }}" class="input1">
         @csrf
-        <input name="rmnew" type="text" placeholder="Remove entry by entering id">
-        <input type="submit">
+        <input name="rmfaq" type="text" placeholder="Remove entry by entering ID" required>
+        <input type="submit" value="Remove FAQ">
     </form>
 </body>
 
