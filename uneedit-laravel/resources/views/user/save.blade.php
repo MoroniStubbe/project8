@@ -77,6 +77,9 @@ use Illuminate\Support\Facades\Auth;
         </div>
         <div class="buttons">
             <button id="editButton">Informatie bewerken</button>
+            <?php if (Auth::user()->is_admin == true) { ?>
+                <a href="{{ route('admin.index.view') }}" style="text-decoration: none; color: inherit;"><button>Admin</button></a>
+            <?php } ?>
             <form action="{{ route('user.logout') }}" method="post">
                 @csrf
                 <button type="submit" name="logout">Log Out</button>
