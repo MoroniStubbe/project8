@@ -21,9 +21,8 @@ use App\Http\Controllers\UserController; ?>
             <td>{{ $admin->name }}</td>
             <td>{{ $admin->email }}</td>
             <td>
-                <form method="POST" action="{{ route('admin.users.removeAdmin', $admin->id) }}">
+                <form method="POST" action="{{ route('admin.remove', $admin->id) }}">
                     @csrf
-                    @method('PATCH')
                     <button type="submit">Demote to User</button>
                 </form>
             </td>
@@ -40,9 +39,8 @@ use App\Http\Controllers\UserController; ?>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                <form method="POST" action="{{ route('admin.users.makeAdmin', $user->id) }}">
+                <form method="POST" action="{{ route('admin.make', $user->id) }}">
                     @csrf
-                    @method('PATCH')
                     <button type="submit">Promote to Admin</button>
                 </form>
             </td>
