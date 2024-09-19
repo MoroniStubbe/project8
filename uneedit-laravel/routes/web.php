@@ -86,6 +86,14 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.add_user');
     });
 
+    Route::get('/add_admin', function () {
+        return view('admin.add_admin');
+    })->name('admin.add.admin.view');
+
+    Route::post('/add_admin', function () {
+        return view('admin.add_admin');
+    })->name('admin.add.admin');
+
     Route::get('/requests', function () {
         return view('admin.requests');
     })->name('admin.requests.view');
