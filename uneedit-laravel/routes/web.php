@@ -94,6 +94,10 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.add_admin');
     })->name('admin.add.admin');
 
+    Route::post('/make/{id}', [UserController::class, 'make_admin'])->name('admin.make');
+
+    Route::post('/remove/{id}', [UserController::class, 'remove_admin'])->name('admin.remove');
+
     Route::get('/requests', function () {
         return view('admin.requests');
     })->name('admin.requests.view');
