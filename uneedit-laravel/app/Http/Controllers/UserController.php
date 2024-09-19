@@ -100,4 +100,44 @@ class UserController extends Controller
 
         return redirect()->route('index');
     }
+
+    public function makeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_admin = true;
+        $user->save();
+
+        return redirect()->back()->with('success', 'User promoted to admin.');
+    }
+
+    /**
+     * Demote an admin to a regular user.
+     */
+    public function removeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_admin = false;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Admin demoted to user.');
+    }
+
+    /**
+     * Display the list of users categorized by their role.
+     */
+    public function index()
+    {
+
+        return view('admin.add.user.index', compact('admins', 'users'));
+    }
+
+    public static function get_admins()
+    {
+        return User::where('is_admin', true)->get();
+    }
+
+    public static function get_users()
+    {
+        return User::where('is_admin', false)->get();
+    }
 }
