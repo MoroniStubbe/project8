@@ -1,4 +1,6 @@
-<?php use App\Http\Controllers\NewsController; ?>
+<?php
+
+use App\Http\Controllers\NewsController; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +39,17 @@
     <!-- Display all news items -->
     <h2>Current News</h2>
     <?php $newsItems = NewsController::show(); ?>
-    <ul>
+    <table class="table1">
+      <th>ID</th>
+      <th>Bericht</th>
       @foreach ($newsItems as $news)
-      <li>{{ $news->id }}: {{ $news->message }}</li>
+      <tr>
+        <td>{{ $news->id }}</td>
+        <td>{{ $news->message }}</td>
+      </tr>
       @endforeach
+    </table>
+    <ul>
     </ul>
   </main>
 
