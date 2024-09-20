@@ -7,7 +7,7 @@ header {
   
   .nav {
     display: flex;
-    justify-content: space-between; 
+    flex-direction: column;
     margin: 0 10px; 
   }
   
@@ -42,11 +42,7 @@ header {
   }
 
   .logo {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-
-    margin: 0 auto; 
+    width: 20vw;
   }
   
 
