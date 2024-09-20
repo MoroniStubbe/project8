@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="{{ asset('css/add_user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin_panel.css') }}">
 </head>
 
 <body>
