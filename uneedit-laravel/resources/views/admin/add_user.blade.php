@@ -6,18 +6,19 @@ use App\Http\Controllers\UserController; ?>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="{{ asset('css/add_user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin_panel.css') }}">
 </head>
 
 <body>
     <x-admin_nav></x-admin_nav>
     <main>
         <h2>Admins</h2>
-        <table>
+        <table class="table1">
             <tr>
                 <th>id</th>
                 <th>name</th>
                 <th>email</th>
+                <th>Demote to User</th>
             </tr>
             <?php $admins = UserController::get_admins(); ?>
             @foreach ($admins as $admin)
@@ -36,11 +37,12 @@ use App\Http\Controllers\UserController; ?>
         </table>
 
         <h2>Users</h2>
-        <table>
+        <table class="table1">
             <tr>
                 <th>id</th>
                 <th>name</th>
                 <th>email</th>
+                <th>Promote to Admin</th>
             </tr>
             <?php $users = UserController::get_users(); ?>
             @foreach ($users as $user)
