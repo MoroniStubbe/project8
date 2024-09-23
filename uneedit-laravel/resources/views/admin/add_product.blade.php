@@ -1,3 +1,10 @@
+<?php
+
+use App\Models\User;
+use App\Http\Controllers\FormController;
+
+?>
+
 <html>
 
 <head>
@@ -7,6 +14,7 @@
 <body>
     <x-admin_nav></x-admin_nav>
     <main>
+        <?php FormController::print_table(Product::all()->toArray()); ?>
         <form action="{{ route('admin.add.product') }}" method="POST">
             @csrf
             <table>
