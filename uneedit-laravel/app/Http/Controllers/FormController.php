@@ -8,21 +8,23 @@ class FormController extends Controller
 {
     public static function print_table($data)
     {
-        echo "<form>";
-        echo csrf_field();
-        echo "<table class='table1'><tr>";
-        foreach (array_keys($data[0]) as $key) {
-            echo "<th>" . $key . "</th>";
-        }
-        echo "</tr>";
-
-        foreach ($data as $row) {
-            echo "<tr>";
-            foreach ($row as $col) {
-                echo "<td>" . $col . "</td>";
+        if (count($data)) {
+            echo "<form>";
+            echo csrf_field();
+            echo "<table class='table1'><tr>";
+            foreach (array_keys($data[0]) as $key) {
+                echo "<th>" . $key . "</th>";
             }
             echo "</tr>";
+
+            foreach ($data as $row) {
+                echo "<tr>";
+                foreach ($row as $col) {
+                    echo "<td>" . $col . "</td>";
+                }
+                echo "</tr>";
+            }
+            echo "</table></form>";
         }
-        echo "</table></form>";
     }
 }
