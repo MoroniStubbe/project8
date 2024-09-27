@@ -61,9 +61,13 @@ Route::get('/service', function () {
     return view('service');
 })->name('service');
 
-Route::get('/product', function () {
-    return view('product');
+Route::get('/webshop/product', function () {
+    return view('webshop.product');
 })->name('product');
+
+Route::get('/webshop/webshop', function () {
+    return view('webshop.webshop');
+})->name('webshop');
 
 // Admin routes with 'is_admin' middleware
 Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
