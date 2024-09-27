@@ -65,6 +65,10 @@ Route::get('/product', function () {
     return view('product');
 })->name('product');
 
+Route::get('/webshop', function () {
+    return view('webshop');
+})->name('webshop');
+
 // Admin routes with 'is_admin' middleware
 Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/', function () {
