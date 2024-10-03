@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Models\Product;
 
 ?>
@@ -13,7 +14,7 @@ use App\Models\Product;
 <body>
     <x-admin_nav></x-admin_nav>
     <main>
-        <x-form-table :data="Product::all()->toArray()" action="{{ route('admin-form-submit') }}">
+        <x-form-table :tableData="$table_data" :action="$action" />
     </main>
 </body>
 
