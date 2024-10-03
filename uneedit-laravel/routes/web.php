@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\IsAdmin;
 
@@ -75,9 +76,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.index');
     })->name('admin.index.view');
 
-    Route::get('/add_product', function () {
-        return view('admin.add_product');
-    })->name('admin.add.product.view');
+    Route::get('/add_product', [ProductController::class, 'show'])->name('admin.add.product.view');
 
     Route::post('/add_product', function () {
         return view('admin.add_product');
