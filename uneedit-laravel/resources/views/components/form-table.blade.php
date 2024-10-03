@@ -5,7 +5,7 @@
     <table class="table1">
         <thead>
             <tr>
-                @foreach(array_keys($data[0]) as $header)
+                @foreach(array_keys($table_data[0]) as $header)
                 <th>{{ $header }}</th>
                 @endforeach
                 <th>Edit</th>
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $row)
+            @foreach($table_data as $row)
             <tr>
                 @foreach($row as $value)
                 <td>{{ $value }}</td>
