@@ -2,9 +2,13 @@
 <script src="{{ asset('js/form_table.js') }}"></script>
 @endonce
 
-<form {{ $attributes }} method="POST" action="{{ $action }}">
+<?php
+$form_id = $attributes->get('id');
+?>
+
+<form id="{{ $form_id }}" method="POST" action="{{ $action }}">
     @csrf
-    <button type="submit" id="createButton">Create</button>
+    <button form-id="{{ $form_id }}" type="submit" id="createButton">Create</button>
 
     <table class="table1">
         <thead>
@@ -22,8 +26,8 @@
                 @foreach($row as $value)
                 <td>{{ $value }}</td>
                 @endforeach
-                <td><button type="button">Edit</button></td>
-                <td><button type="button">Delete</button></td>
+                <td><button form-id="{{ $form_id }}" type="button">Edit</button></td>
+                <td><button form-id="{{ $form_id }}" type="button">Delete</button></td>
             </tr>
             @endforeach
         </tbody>
