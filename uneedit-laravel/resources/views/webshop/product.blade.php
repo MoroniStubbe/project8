@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <x-header></x-header>
+<x-webshop-header></x-webshop-header>
     <main>
         <h1>$product_name</h1>
         <div id="container-1">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </main>
-    <x-footer></x-footer>
+    
 </body>
 
 </html>

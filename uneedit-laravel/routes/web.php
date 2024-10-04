@@ -70,6 +70,10 @@ Route::get('/webshop/webshop', function () {
     return view('webshop.webshop');
 })->name('webshop');
 
+Route::get('/webshop/shopping_cart', function() {
+    return view('webshop.shopping_cart');
+})->name('shopping_cart');
+
 // Admin routes with 'is_admin' middleware
 Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/', function () {
