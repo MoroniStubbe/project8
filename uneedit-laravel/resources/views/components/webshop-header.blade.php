@@ -7,7 +7,7 @@
         <nav>
             <ul>
                 <li><a href="{{route('webshop')}}">Webshop</a></li>
-                <li><a href="{{route('webshop')}}">Karretje</a>
+                <li><a href="{{route('shopping_cart')}}">Karretje</a>
                 <li><a href="{{route('login_or_signup')}}">Account</a>
             </ul>
         </nav>
