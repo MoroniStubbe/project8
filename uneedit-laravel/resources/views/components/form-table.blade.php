@@ -1,4 +1,8 @@
-<form method="POST" action="{{ $action }}">
+@once
+<script src="{{ asset('js/form_table.js') }}"></script>
+@endonce
+
+<form {{ $attributes }} method="POST" action="{{ $action }}">
     @csrf
     <button type="submit" id="createButton">Create</button>
 
