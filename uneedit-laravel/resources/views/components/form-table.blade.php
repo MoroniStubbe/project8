@@ -27,7 +27,7 @@ $form_id = $attributes->get('id');
                 <td>{{ $value }}</td>
                 @endforeach
                 <td><button form-id="{{ $form_id }}" type="button">Edit</button></td>
-                <td><button form-id="{{ $form_id }}" type="button">Delete</button></td>
+                <td><button class="delete-button" form-id="{{ $form_id }}" type="button">Delete</button></td>
             </tr>
             @endforeach
         </tbody>
