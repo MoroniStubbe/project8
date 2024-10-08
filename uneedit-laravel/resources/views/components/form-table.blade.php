@@ -18,11 +18,13 @@ $form_id = $attributes->get('id');
     <table class="table1">
         <thead>
             <tr>
+                @if(!empty($table_data))
                 @foreach(array_keys($table_data[0]) as $header)
                 <th>{{ $header }}</th>
                 @endforeach
                 <th>Edit</th>
                 <th>Delete</th>
+                @endif
             </tr>
         </thead>
         <tbody>
