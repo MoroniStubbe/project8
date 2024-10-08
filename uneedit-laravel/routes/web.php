@@ -66,7 +66,7 @@ Route::get('/webshop/product', function () {
     return view('webshop.product');
 })->name('product');
 
-Route::get('/webshop/webshop', function () {
+Route::get('/webshop', function () {
     return view('webshop.webshop');
 })->name('webshop');
 
