@@ -1,4 +1,9 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @once
+<script>
+    const destroyURL = "{{ url('/admin/add_product/destroy/') }}";
+</script>
 <script src="{{ asset('js/form_table.js') }}"></script>
 @endonce
 

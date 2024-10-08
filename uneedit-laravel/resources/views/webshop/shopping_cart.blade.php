@@ -20,27 +20,32 @@
                     <p>$product_price</p>
                 </div>
                 <div>
-                    <p>$update_quantity</p>
                     <label for="quantity">
-                    <input type="number" name="quantity" min="0" max="10">
-                    <input class="button" type="submit" value="$delete">
+                        <p>$update_quantity</p>
+                        <input type="number" name="quantity" min="0" max="10" value="1">
+                        <input class="button" type="submit" value="$delete">
                     </label>
                 </div>
             </div>
         </div>
+
         <div class="checkout">
             <div class="title">
                 <h2>Overview</h2>
             </div>
             <div class="summary">
-                <p>$product_summary</p>
+                <div class="product-summary">
+                    <p>Items:</p>
+                    <p>$product_items</p>
+                </div>
+                <div class="price-summary">
+                <p>Price:</p>
                 <p>$total_price</p>
+                </div>
                 <input class="button" type="submit" value="$checkout">
             </div>
         </div>
     </div>
 </main>
-
-<x-footer></x-footer>
 </body>
 </html>

@@ -66,11 +66,11 @@ Route::get('/webshop/product', function () {
     return view('webshop.product');
 })->name('product');
 
-Route::get('/webshop/webshop', function () {
+Route::get('/webshop', function () {
     return view('webshop.webshop');
 })->name('webshop');
 
-Route::get('/webshop/shopping_cart', function() {
+Route::get('/webshop/shopping_cart', function () {
     return view('webshop.shopping_cart');
 })->name('shopping_cart');
 
@@ -82,9 +82,11 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
 
     Route::get('/add_product', [ProductController::class, 'show'])->name('admin.add.product.view');
 
-    Route::post('/add_product', function () {
-        return view('admin.add_product');
-    })->name('admin.add.product');
+    Route::post('/add_product/create', [ProductController::class, 'create'])->name('product.create');
+
+    Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    Route::put('/add_product/save/{id}', [ProductController::class, 'save'])->name('product.save');
 
     Route::get('/add_user', function () {
         return view('admin.add_user');
