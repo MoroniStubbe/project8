@@ -2,6 +2,7 @@
 
 @once
 <script>
+    const createURL = "{{ url('/admin/add_product/create/') }}";
     const destroyURL = "{{ url('/admin/add_product/destroy/') }}";
 </script>
 <script src="{{ asset('js/form_table.js') }}"></script>
@@ -13,7 +14,7 @@ $form_id = $attributes->get('id');
 
 <form id="{{ $form_id }}" method="POST" action="{{ $action }}">
     @csrf
-    <button form-id="{{ $form_id }}" type="submit" id="createButton">Create</button>
+    <button form-id="{{ $form_id }}" type="submit" class="create-button">Create</button>
 
     <table class="table1">
         <thead>
