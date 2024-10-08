@@ -21,34 +21,49 @@ function getRowData(row) {
 }
 
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const deleteButtons = document.querySelectorAll('.delete-button');
 
     deleteButtons.forEach(button => {
         button.addEventListener('click', function () {
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Define the URL of the resource you're updating
-            var url = "/destroy/"; // Replace with your actual endpoint and product ID
-
-            // Configure the request: method (PUT) and URL
-            xhr.open("POST", url, true);
-
-            // Set the request headers (optional, but necessary for sending JSON)
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
             // Get the parent row of the clicked button
             const row = this.closest('tr');
 
-            // Create the data object to send with the PUT request
-            var updatedProductData = getRowData(row);
+            // Create the data object to send with the DELETE request
+            const updatedProductData = getRowData(row);
 
-            // Convert the JavaScript object to a JSON string
-            var jsonData = JSON.stringify(updatedProductData);
+            // Extract the ID for the product
+            const id = updatedProductData['id']; // Ensure your table has a header with 'id'
 
-            // Send the PUT request with the data
-            xhr.send(jsonData);
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Define the URL of the resource you're deleting
+            var url = destroyURL + '/' + id; // Replace with your actual endpoint
+
+            // Configure the request: method (DELETE) and URL
+            xhr.open("DELETE", url, true);
+
+            // Set the request headers (including CSRF token for Laravel)
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content')); // Get the CSRF token
+
+            // Handle response
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Handle success (e.g., remove the row from the table)
+                    console.log('Row deleted successfully:', xhr.responseText);
+                    row.remove(); // Remove the row from the table
+                } else {
+                    // Handle error
+                    console.error('Error deleting row:', xhr.statusText);
+                }
+            };
+
+            // Send the request
+            xhr.send();
         });
     });
 });
