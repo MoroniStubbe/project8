@@ -9,6 +9,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\IsAdmin;
+use App\Models\product;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -62,9 +63,10 @@ Route::get('/service', function () {
     return view('service');
 })->name('service');
 
-Route::get('/webshop/product', function () {
-    return view('webshop.product');
-})->name('product');
+Route::get('/webshop/product/{id}', function($id) {
+    $product = Product::find($id);
+    return view('webshop.product', ['product' => $product]);
+});
 
 Route::get('/webshop', function () {
     return view('webshop.webshop');
