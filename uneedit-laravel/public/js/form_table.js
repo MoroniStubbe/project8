@@ -107,3 +107,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const createButtons = document.querySelectorAll('.edit-button');
+
+    createButtons.forEach(button => {
+        button.addEventListener('click', function (event) { // Add 'event' parameter
+            const row = button.closest('tr');
+            const cells = row.querySelectorAll('td');
+
+            cells.forEach((cell, index) => {
+                if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = cell.innerText; // Set input value to current cell value
+                    cell.innerHTML = ''; // Clear cell
+                    cell.appendChild(input); // Append input to the cell
+                }
+            });
+        });
+    });
+});
