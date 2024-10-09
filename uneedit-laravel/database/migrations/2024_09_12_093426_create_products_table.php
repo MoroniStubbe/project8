@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("picture");
             $table->integer("stock");
             $table->string("description");
-            $table->integer("order_product_id");
+            $table->integer("order_product_id")->nullable();
         });
     }
 

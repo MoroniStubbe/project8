@@ -19,6 +19,33 @@ class ProductController extends Controller
         return view('admin.add_product', compact('table_data', 'action'));
     }
 
+    public function create(Request $request)
+    {
+        // Validate the input data with default values
+        $validatedData = $request->validate([
+            'name' => 'string|max:255',
+            'price' => 'numeric|min:0',
+            'description' => 'nullable|string',
+            'stock' => 'integer|min:0',
+            'type' => 'string|max:255',
+            'picture' => 'string|max:255',
+        ]);
+
+        // Create a new product instance
+        $product = new Product();
+        $product->name = $validatedData['name'] ?? ''; // Default to empty string if null
+        $product->price = $validatedData['price'] ?? 0; // Default to 0 if null
+        $product->description = $validatedData['description'] ?? ''; // Default to empty string if null
+        $product->stock = $validatedData['stock'] ?? 0; // Default to 0 if null
+        $product->type = $validatedData['type'] ?? ''; // Default to 0 if null
+        $product->picture = $validatedData['picture'] ?? ''; // Default to 0 if null
+
+        // Save the new product to the database
+        $product->save();
+
+        return response()->json(['message' => 'Product created successfully.', 'product' => $product], 201);
+    }
+
     public function destroy($id)
     {
         // Find the row by ID and delete it
@@ -32,7 +59,7 @@ class ProductController extends Controller
         return response()->json(['message' => 'Row not found.'], 404);
     }
 
-    public function save(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // Validate the input data
         $validatedData = $request->validate([
