@@ -88,7 +88,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
 
     Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-    Route::put('/add_product/save/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::put('/add_product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 
     Route::get('/add_user', function () {
         return view('admin.add_user');
