@@ -4,6 +4,7 @@
 <script>
     const createURL = "{{ url('/admin/add_product/create/') }}";
     const destroyURL = "{{ url('/admin/add_product/destroy/') }}";
+    const updateURL = "{{ url('/admin/add_product/update/') }}";
 </script>
 <script src="{{ asset('js/form_table.js') }}"></script>
 @endonce
