@@ -63,7 +63,7 @@ Route::get('/service', function () {
     return view('service');
 })->name('service');
 
-Route::get('/webshop/product/{id}', function($id) {
+Route::get('/webshop/product/{id}', function ($id) {
     $product = Product::find($id);
     return view('webshop.product', ['product' => $product]);
 });
@@ -88,7 +88,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
 
     Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-    Route::put('/add_product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::post('/add_product/update', [ProductController::class, 'update'])->name('product.update');
 
     Route::get('/add_user', function () {
         return view('admin.add_user');
