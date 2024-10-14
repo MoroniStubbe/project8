@@ -125,9 +125,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 cells.forEach((cell, index) => {
                     if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
+                        // Get the computed width of the current cell
+                        const cellWidth = window.getComputedStyle(cell).width;
+
+                        // Create an input element
                         const input = document.createElement('input');
                         input.type = 'text';
                         input.value = cell.innerText; // Set input value to current cell value
+
+                        // Set the input width to match the cell width
+                        input.style.width = cellWidth;
+
                         cell.innerHTML = ''; // Clear cell
                         cell.appendChild(input); // Append input to the cell
                     }
