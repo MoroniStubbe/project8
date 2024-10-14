@@ -1,48 +1,91 @@
+/* General header styling */
 header {
   width: 100vw;
   height: 12vh;
+  /* Header will be 12% of the viewport height */
   background-color: #2c3e50;
   color: #fff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Container for navigation items */
 header #nav-container {
   display: flex;
   width: 90vw;
   height: inherit;
   margin: 0 auto;
   justify-content: space-between;
+  align-items: center;
+  /* Vertically align everything inside the nav container */
 }
+
+/* Logo styling */
 header #nav-container #logo {
   height: inherit;
 }
+
 header #nav-container #logo a {
   display: block;
-  height: inherit;
+  height: 100%;
 }
+
 header #nav-container #logo a img {
-  height: inherit;
+  height: 100%;
+  /* Logo takes full height */
+  width: auto;
+  /* Maintain aspect ratio */
 }
+
+/* Navigation bar styling */
 header #nav-container nav {
   height: inherit;
 }
+
+/* Ensure the ul aligns and spaces items consistently */
 header #nav-container nav ul {
   display: flex;
-  height: inherit;
+  height: 100%;
   margin: 0;
+  padding: 0;
   list-style: none;
   align-items: center;
+  /* Vertically aligns items inside the ul */
 }
+
+/* Ensure each li is consistent and centered */
 header #nav-container nav ul li {
-  margin: 0 0.5vw;
+  margin: 0 1vw;
 }
+
+/* Adjust the a link to be properly centered and fit within the nav */
 header #nav-container nav ul li a {
-  padding: 2vh 1.5vw;
+  display: flex;
+  align-items: center;
+  /* Vertically center text */
+  justify-content: center;
   text-decoration: none;
   color: #fff;
+  padding: 2.2vh 1.6vw;
+  /* Adjust padding so it's not too tall */
   transition: background-color 0.3s ease;
   border-radius: 5px;
   background-color: #34495e;
+  height: auto;
+  /* Ensure the anchor is not taking full li height */
+  line-height: normal;
+  /* Ensure no extra line height is added */
 }
-header #nav-container nav ul li :hover {
+
+/* Hover effect for the a link */
+header #nav-container nav ul li a:hover {
   background-color: #2c3e50;
-}/*# sourceMappingURL=header.css.map */
+}
+
+/* Styling for image inside the li */
+header #nav-container nav ul li a img {
+  width: 20px;
+  /* Adjust size of the image */
+  height: auto;
+  /* Maintain aspect ratio */
+  object-fit: contain;
+}
