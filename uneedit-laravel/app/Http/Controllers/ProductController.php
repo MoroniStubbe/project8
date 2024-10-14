@@ -59,7 +59,7 @@ class ProductController extends Controller
         return response()->json(['message' => 'Row not found.'], 404);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // Validate the input data
         $validatedData = $request->validate([
@@ -68,9 +68,9 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'stock' => 'required|integer|min:0',
         ]);
-
         // Find the product by its ID
-        $product = Product::find($id);
+        $product = Product::find($request->id);
+
 
         // If the product exists, update its attributes
         if ($product) {
