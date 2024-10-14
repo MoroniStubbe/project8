@@ -111,22 +111,60 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const createButtons = document.querySelectorAll('.edit-button');
+    const editButtons = document.querySelectorAll('.edit-button');
 
-    createButtons.forEach(button => {
-        button.addEventListener('click', function (event) { // Add 'event' parameter
+    editButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
             const row = button.closest('tr');
             const cells = row.querySelectorAll('td');
 
-            cells.forEach((cell, index) => {
-                if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.value = cell.innerText; // Set input value to current cell value
-                    cell.innerHTML = ''; // Clear cell
-                    cell.appendChild(input); // Append input to the cell
-                }
-            });
+            // Check if the button is in 'Edit' mode or 'Save' mode
+            if (button.innerText === 'Edit') {
+                // Switch to 'Save' mode
+                button.innerText = 'Save';
+
+                cells.forEach((cell, index) => {
+                    if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.value = cell.innerText; // Set input value to current cell value
+                        cell.innerHTML = ''; // Clear cell
+                        cell.appendChild(input); // Append input to the cell
+                    }
+                });
+            } else if (button.innerText === 'Save') {
+                // Switch back to 'Edit' mode
+                button.innerText = 'Edit';
+
+                cells.forEach((cell, index) => {
+                    if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
+                        const input = cell.querySelector('input');
+                        if (input) {
+                            cell.innerText = input.value; // Set the cell text to the input value
+                        }
+                    }
+                });
+
+                // Get updated row data using the getRowData function
+                const rowData = getRowData(row);
+
+                // Send XHR request to update the data
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', updateURL, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content')); // Get the CSRF token
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log('Row updated successfully!');
+                    } else if (xhr.readyState === 4) {
+                        console.error('Error updating row');
+                    }
+                };
+
+                // Send the rowData as a JSON object
+                xhr.send(JSON.stringify(rowData));
+            }
         });
     });
 });
