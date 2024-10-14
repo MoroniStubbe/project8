@@ -68,7 +68,7 @@ class ProductController extends Controller
             'price' => 'numeric|min:0',
             'picture' => 'string|max:255',
             'stock' => 'integer|min:0',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:255',
             'order_product_id' => 'integer|min:0',
         ]);
         // Find the product by its ID
