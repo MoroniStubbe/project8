@@ -63,10 +63,13 @@ class ProductController extends Controller
     {
         // Validate the input data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'stock' => 'required|integer|min:0',
+            'type' => 'string|max:255',
+            'name' => 'string|max:255',
+            'price' => 'numeric|min:0',
+            'picture' => 'string|max:255',
+            'stock' => 'integer|min:0',
+            'description' => 'string|max:255',
+            'order_product_id' => 'integer|min:0',
         ]);
         // Find the product by its ID
         $product = Product::find($request->id);
@@ -74,10 +77,13 @@ class ProductController extends Controller
 
         // If the product exists, update its attributes
         if ($product) {
+            $product->type = $validatedData['type'];
             $product->name = $validatedData['name'];
             $product->price = $validatedData['price'];
-            $product->description = $validatedData['description'] ?? $product->description;
+            $product->picture = $validatedData['picture'];
             $product->stock = $validatedData['stock'];
+            $product->description = $validatedData['description'];
+            $product->order_product_id = $validatedData['order_product_id'];
 
             // Save the changes
             $product->save();
