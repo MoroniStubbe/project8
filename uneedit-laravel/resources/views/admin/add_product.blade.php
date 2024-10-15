@@ -14,7 +14,12 @@ use App\Models\Product;
 <body>
     <x-admin_nav></x-admin_nav>
     <main>
-        <x-form-table id="form-1" :tableData="$table_data" :action="$action" />
+        <x-form-table
+            id="form-1"
+            :tableData="$table_data"
+            create_URL="{{ url('/admin/add_product/create/') }}"
+            update_URL="{{ url('/admin/add_product/update/') }}"
+            destroy_URL="{{ url('/admin/add_product/destroy/') }}" />
     </main>
 </body>
 
