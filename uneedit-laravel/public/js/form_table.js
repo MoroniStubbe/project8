@@ -21,6 +21,41 @@ function getRowData(row) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const createButtons = document.querySelectorAll('.create-button');
+
+    createButtons.forEach(button => {
+        button.addEventListener('click', function (event) { // Add 'event' parameter
+            event.preventDefault(); // Call preventDefault on the event object
+            console.log(this.formId); // If you're trying to log the formId attribute
+
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Configure the request: method (POST) and URL
+            xhr.open("POST", this.attributes.url.value, true); // Use POST instead of DELETE for creation
+
+            // Set the request headers (including CSRF token for Laravel)
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content')); // Get the CSRF token
+
+            // Handle response
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Handle success (e.g., reload the page or update the UI)
+                    console.log('Row created successfully:', xhr.responseText);
+                    location.reload(); // Reload the page
+                } else {
+                    // Handle error
+                    console.error('Error creating row:', xhr.statusText);
+                }
+            };
+
+            // Send the request
+            xhr.send();
+        });
+    });
+});
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -41,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var xhr = new XMLHttpRequest();
 
             // Define the URL of the resource you're deleting
-            var url = destroyURL + '/' + id; // Replace with your actual endpoint
+            var url = this.attributes.url.value + '/' + id; // Replace with your actual endpoint
 
             // Configure the request: method (DELETE) and URL
             xhr.open("DELETE", url, true);
@@ -67,47 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const createButtons = document.querySelectorAll('.create-button');
-
-    createButtons.forEach(button => {
-        button.addEventListener('click', function (event) { // Add 'event' parameter
-            event.preventDefault(); // Call preventDefault on the event object
-            console.log(this.formId); // If you're trying to log the formId attribute
-
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Define the URL of the resource you're creating
-            var url = createURL; // Ensure createURL is defined elsewhere in your code
-
-            // Configure the request: method (POST) and URL
-            xhr.open("POST", url, true); // Use POST instead of DELETE for creation
-
-            // Set the request headers (including CSRF token for Laravel)
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content')); // Get the CSRF token
-
-            // Handle response
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    // Handle success (e.g., reload the page or update the UI)
-                    console.log('Row created successfully:', xhr.responseText);
-                    location.reload(); // Reload the page
-                } else {
-                    // Handle error
-                    console.error('Error creating row:', xhr.statusText);
-                }
-            };
-
-            // Send the request
-            xhr.send();
-        });
-    });
-});
-
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -158,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Send XHR request to update the data
                 const xhr = new XMLHttpRequest();
-                xhr.open('POST', updateURL, true);
+                xhr.open('POST', this.attributes.url.value, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content')); // Get the CSRF token
 
