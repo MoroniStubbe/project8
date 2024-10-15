@@ -9,7 +9,6 @@ use Illuminate\View\Component;
 class FormTable extends Component
 {
     public $table_data;
-    public $action; // Add action variable
 
     /**
      * Create a new component instance.
@@ -18,10 +17,9 @@ class FormTable extends Component
      * @param string $action
      * @return void
      */
-    public function __construct($tableData, $action)
+    public function __construct($tableData)
     {
         $this->table_data = $tableData;
-        $this->action = $action; // Assign action variable
     }
 
     /**
