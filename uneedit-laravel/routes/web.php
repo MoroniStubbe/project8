@@ -92,12 +92,12 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.index');
     })->name('admin.index.view');
 
-    Route::get('/add_product', [ProductController::class, 'show_admin'])->name('admin.add.product.view');
-
-    Route::post('/add_product/create', [ProductController::class, 'create'])->name('product.create');
-    Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
-
-    Route::post('/add_product/update', [ProductController::class, 'update'])->name('product.update');
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'show_admin'])->name('admin.products.view');
+        Route::post('/create', [ProductController::class, 'create']);
+        Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
+        Route::post('/update', [ProductController::class, 'update']);
+    });
 
     // User Management Routes
     Route::get('/add_user', function () {
