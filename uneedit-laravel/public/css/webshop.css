@@ -1,69 +1,47 @@
 .center-container {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 80vh;
+    flex-direction: column; /* Zorgt ervoor dat de inhoud in kolommen wordt uitgelijnd */
+    align-items: center; /* Centraal in het midden */
+    margin-top: 20px;
 }
 
 .product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Vier gelijke kolommen */
+    gap: 20px; /* Ruimte tussen de producten */
+    justify-items: center;
     margin: 0 auto;
     width: 80%; 
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
 .product {
-    flex: 1;
-    min-width: 22%;
-    max-width: 22%; 
     background-color: #f5f5f5;
     padding: 10px;
     padding-bottom: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    position: relative; 
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Zorgt ervoor dat alle productblokken dezelfde breedte hebben */
+    box-sizing: border-box; /* Houdt rekening met padding bij het instellen van de breedte */
 }
 
 .product img {
-    width: 100%; 
-    height: auto; 
-    object-fit: cover; 
+    width: 100%; /* Zorgt ervoor dat de afbeelding de volledige breedte van het product inneemt */
+    height: auto;
+    object-fit: cover; /* Past de afbeelding aan binnen de container zonder de verhoudingen te verliezen */
 }
 
 .product-info {
-    bottom: 0;
-    left: 0;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8); 
-    width: 100%;
-    text-align: left; 
-}
-
-.product h3 {
-    font-size: 1.2em;
-    margin: 0;
-}
-
-.product p {
-    margin: 5px 0 0 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%; /* Zorgt ervoor dat de productinfo ook 100% van de breedte beslaat */
+    text-align: left;
 }
 
 .webshop {
-    margin-top:  -70px;
+    margin-top: 0; /* Zet de marge bovenaan op nul */
+    margin-bottom: 20px; /* Voeg wat ruimte onder de h1 toe */
+    text-align: center; /* Zorg dat de tekst gecentreerd is */
+    font-size: 2.5em; /* Grotere tekstgrootte voor betere zichtbaarheid */
 }
-
-.more-products {
-    transform: translateX(-100px);
-}
-
-
