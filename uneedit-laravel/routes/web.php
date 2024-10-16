@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\IsAdmin;
 use App\Models\product;
@@ -75,6 +76,13 @@ Route::get('/webshop', function () {
 Route::get('/webshop/shopping_cart', function () {
     return view('webshop.shopping_cart');
 })->name('shopping_cart');
+
+Route::prefix('shopping_cart')->name('shopping_cart.')->group(function () {
+    Route::get('/', [ShoppingCartController::class, 'index'])->name('index');
+    Route::post('/add/{id}', [ShoppingCartController::class, 'add'])->name('add');
+    Route::post('/remove/{id}', [ShoppingCartController::class, 'remove'])->name('remove');
+    Route::post('/order', [ShoppingCartController::class, 'createOrder'])->name('order.create');
+});
 
 // Admin routes with 'is_admin' middleware
 Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
