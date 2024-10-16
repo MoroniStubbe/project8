@@ -90,7 +90,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.index');
     })->name('admin.index.view');
 
-    Route::get('/add_product', [ProductController::class, 'show'])->name('admin.add.product.view');
+    Route::get('/add_product', [ProductController::class, 'show_admin'])->name('admin.add.product.view');
 
     Route::post('/add_product/create', [ProductController::class, 'create'])->name('product.create');
 
