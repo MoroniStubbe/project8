@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function show($id)
+    {
+        $product = Product::findOrFail($id); // Find product by ID
+        return view('webshop.product', compact('product')); // Pass the product to the view
+    }
+
     public function show_admin()
     {
         // Retrieve all products and convert them to an array
