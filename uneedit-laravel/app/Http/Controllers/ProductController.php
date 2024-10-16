@@ -7,18 +7,27 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function show_admin()
+    // Toon alle producten in de webshop
+    public function index()
     {
-        // Retrieve all products and convert them to an array
-        $table_data = Product::all()->toArray();
+        // Haal alle producten op uit de database
+        $products = Product::all();
 
-        // Return the view with the products table_data
-        return view('admin.add_product', compact('table_data'));
+        // Geef de producten door aan de webshop view
+        return view('webshop.webshop', compact('products'));
     }
 
+    // Toon het formulier om producten toe te voegen in de admin sectie
+    public function show($id)
+    {
+        $product = Product::findOrFail($id); // Find product by ID
+        return view('webshop.product', compact('product')); // Pass the product to the view
+    }
+
+    // Product aanmaken
     public function create(Request $request)
     {
-        // Validate the input data with default values
+        // Valideer de input data
         $validatedData = $request->validate([
             'name' => 'string|max:255',
             'price' => 'numeric|min:0',
@@ -28,24 +37,25 @@ class ProductController extends Controller
             'picture' => 'string|max:255',
         ]);
 
-        // Create a new product instance
+        // Maak een nieuw product aan
         $product = new Product();
-        $product->name = $validatedData['name'] ?? ''; // Default to empty string if null
-        $product->price = $validatedData['price'] ?? 0; // Default to 0 if null
-        $product->description = $validatedData['description'] ?? ''; // Default to empty string if null
-        $product->stock = $validatedData['stock'] ?? 0; // Default to 0 if null
-        $product->type = $validatedData['type'] ?? ''; // Default to 0 if null
-        $product->picture = $validatedData['picture'] ?? ''; // Default to 0 if null
+        $product->name = $validatedData['name'] ?? '';
+        $product->price = $validatedData['price'] ?? 0;
+        $product->description = $validatedData['description'] ?? '';
+        $product->stock = $validatedData['stock'] ?? 0;
+        $product->type = $validatedData['type'] ?? '';
+        $product->picture = $validatedData['picture'] ?? '';
 
-        // Save the new product to the database
+        // Sla het product op in de database
         $product->save();
 
         return response()->json(['message' => 'Product created successfully.', 'product' => $product], 201);
     }
 
+    // Verwijder een product
     public function destroy($id)
     {
-        // Find the row by ID and delete it
+        // Vind het product op basis van ID en verwijder het
         $row = Product::find($id);
 
         if ($row) {
@@ -58,7 +68,7 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        // Validate the input data
+        // Valideer de input data
         $validatedData = $request->validate([
             'type' => 'string|max:255',
             'name' => 'string|max:255',
@@ -82,13 +92,13 @@ class ProductController extends Controller
             $product->description = $validatedData['description'];
             $product->order_product_id = $validatedData['order_product_id'];
 
-            // Save the changes
+            // Sla de wijzigingen op
             $product->save();
 
             return response()->json(['message' => 'Product updated successfully.'], 200);
         }
 
-        // If product is not found, return a 404 response
+        // Product niet gevonden
         return response()->json(['message' => 'Product not found.'], 404);
     }
 }
