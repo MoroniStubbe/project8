@@ -8,9 +8,10 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\WebshopController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\IsAdmin;
-use App\Models\product;
+use App\Models\Product;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -20,12 +21,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Middleware group for authenticated users
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Public routes
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -68,11 +71,10 @@ Route::get('/webshop/product/{id}', function ($id) {
     $product = Product::find($id);
     return view('webshop.product', ['product' => $product]);
 });
+Route::get('/webshop', [WebshopController::class, 'index'])->name('webshop.index'); // Use WebshopController
+Route::get('/webshop/product/{id}', [ProductController::class, 'show'])->name('webshop.product.show');
 
-Route::get('/webshop', function () {
-    return view('webshop.webshop');
-})->name('webshop');
-
+// Shopping Cart Page
 Route::get('/webshop/shopping_cart', function () {
     return view('webshop.shopping_cart');
 })->name('shopping_cart');
@@ -93,15 +95,16 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/add_product', [ProductController::class, 'show_admin'])->name('admin.add.product.view');
 
     Route::post('/add_product/create', [ProductController::class, 'create'])->name('product.create');
-
     Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
     Route::post('/add_product/update', [ProductController::class, 'update'])->name('product.update');
+    Route::put('/add_product/save/{id}', [ProductController::class, 'update'])->name('product.update');
 
+    // User Management Routes
     Route::get('/add_user', function () {
         return view('admin.add_user');
     })->name('admin.add.user.view');
-
+    
     Route::post('/add_user', function () {
         return view('admin.add_user');
     });
@@ -115,21 +118,22 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     })->name('admin.add.admin');
 
     Route::post('/make/{id}', [UserController::class, 'make_admin'])->name('admin.make');
-
     Route::post('/remove/{id}', [UserController::class, 'remove_admin'])->name('admin.remove');
 
+    // Request Management Routes
     Route::get('/requests', function () {
         return view('admin.requests');
     })->name('admin.requests.view');
 
+    // News Management Routes
     Route::post('/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
-
     Route::post('/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
 
+    // FAQ Management Routes
     Route::post('/faq_panel/create', [FaqController::class, 'create'])->name('admin.faq.create');
-
     Route::post('/faq_panel/delete', [FaqController::class, 'delete'])->name('admin.faq.delete');
 
+    // Admin Views for News and FAQ
     Route::get('/news_panel', function () {
         return view('admin.news_panel');
     })->name('admin.news.panel.view');
@@ -137,12 +141,9 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/faq_panel', function () {
         return view('admin.faq_panel');
     })->name('admin.faq.panel.view');
-
-    Route::post('/faq_panel', function () {
-        return view('admin.faq_panel');
-    });
 });
 
+// User Routes
 Route::prefix('user')->group(function () {
     Route::group(['middleware' => RedirectIfAuthenticated::class], function () {
         Route::get('/login_or_signup', function () {
@@ -150,13 +151,11 @@ Route::prefix('user')->group(function () {
         })->name('login_or_signup');
 
         Route::post('/create', [UserController::class, 'create'])->name('user.create');
-
         Route::get('/create', function () {
             return view('user/create');
         })->name('user.create.view');
 
         Route::post('/login', [UserController::class, 'login'])->name('user.login');
-
         Route::get('/login', function () {
             return view('user/login');
         })->name('user.login.view');
@@ -164,7 +163,6 @@ Route::prefix('user')->group(function () {
 
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/save', [UserController::class, 'save'])->name('user.save');
-
         Route::get('/save', function () {
             return view('user/save');
         })->name('user.save.view');
