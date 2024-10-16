@@ -6,7 +6,7 @@
             <li><a href="{{ route('admin.news.panel.view') }}">nieuws</a></li>
             <li><a href="{{ route('admin.requests.view') }}">aanvragen inzien</a></li>
             <li><a href="{{ route('admin.faq.panel.view') }}">FAQ</a></li>
-            <li><a href="{{ route('admin.add.product.view') }}">product toevoegen</a></li>
+            <li><a href="{{ route('admin.products.view') }}">product toevoegen</a></li>
         </ul>
     </nav>
 </header>
