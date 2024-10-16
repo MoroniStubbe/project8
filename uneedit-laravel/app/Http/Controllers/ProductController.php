@@ -19,7 +19,7 @@ class ProductController extends Controller
         $table_data = Product::all()->toArray();
 
         // Return the view with the products table_data
-        return view('admin.add_product', compact('table_data'));
+        return view('admin.products', compact('table_data'));
     }
 
     public function create(Request $request)
