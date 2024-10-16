@@ -118,6 +118,10 @@ input[type="submit"] {
     color: #333;
 }
 
+.cart-empty-text {
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .shopping-cart-container {
         flex-direction: column;
