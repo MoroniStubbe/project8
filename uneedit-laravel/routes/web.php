@@ -98,13 +98,12 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::delete('/add_product/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
     Route::post('/add_product/update', [ProductController::class, 'update'])->name('product.update');
-    Route::put('/add_product/save/{id}', [ProductController::class, 'update'])->name('product.update');
 
     // User Management Routes
     Route::get('/add_user', function () {
         return view('admin.add_user');
     })->name('admin.add.user.view');
-    
+
     Route::post('/add_user', function () {
         return view('admin.add_user');
     });
