@@ -1,4 +1,13 @@
+body {
+  position: relative;
+  min-height: 100vh; /* Zorgt ervoor dat het lichaam ten minste de schermhoogte inneemt */
+  margin: 0;
+}
+
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Zorg dat de footer de hele breedte van de pagina in beslag neemt */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,6 +15,3 @@ footer {
   background-color: #2c3e50;
   color: #fff;
 }
-footer p {
-  margin: 0 auto;
-}/*# sourceMappingURL=footer.css.map */
