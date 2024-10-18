@@ -12,7 +12,7 @@
                 <li><a href="{{route('contact')}}">Contact</a></li>
                 <li><a href="{{route('request.view')}}">Aanvraag</a></li>
                 <li><a href="{{route('faq')}}">FAQ</a></li>
-                <li><a href="{{route('delivery_services')}}">Bezorgdiensten</a></li>
+                <li><a href="{{route('webshop.index')}}">Webshop</a></li>
                 <li><a href="{{ route('login_or_signup') }}"><img src="{{ asset('img/account_white.png') }}" alt="account"></a></li>
             </ul>
         </nav>
