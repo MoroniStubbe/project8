@@ -71,8 +71,8 @@ Route::get('/webshop/product/{id}', function ($id) {
     $product = Product::find($id);
     return view('webshop.product', ['product' => $product]);
 });
-Route::get('/webshop', [WebshopController::class, 'index'])->name('webshop.index'); // Use WebshopController
-Route::get('/webshop/product/{id}', [ProductController::class, 'show'])->name('webshop.product.show');
+
+Route::get('/webshop', [WebshopController::class, 'index'])->name('webshop.index');
 
 // Shopping Cart Page
 Route::get('/webshop/shopping_cart', function () {
@@ -103,7 +103,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/add_user', function () {
         return view('admin.add_user');
     })->name('admin.add.user.view');
-
+    
     Route::post('/add_user', function () {
         return view('admin.add_user');
     });
