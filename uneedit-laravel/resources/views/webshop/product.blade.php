@@ -26,10 +26,12 @@
                     <span>Voorraad:</span> <div id="stock">{{ $product->stock }}</div>
                  </div>
                 </div>
-             <button class="btn">Voeg toe aan winkelwagen</button>
+                <form action="{{ route('add', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn">Voeg toe aan winkelwagen</button>
+                </form>
             </div>
         </div>
     </main>
 </body>
-
 </html>
