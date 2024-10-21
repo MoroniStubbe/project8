@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <x-header></x-header>
+<x-webshop-header></x-webshop-header>
   <main>
     <div class="container">
       <div id="delivery_box-container">
