@@ -45,10 +45,6 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/delivery_services', function () {
-    return view('delivery_services');
-})->name('delivery_services');
-
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
@@ -73,6 +69,10 @@ Route::get('/webshop/product/{id}', function ($id) {
 });
 
 Route::get('/webshop', [WebshopController::class, 'index'])->name('webshop.index');
+
+Route::get('/webshop/delivery_services', function () {
+    return view('webshop.delivery_services');
+})->name('delivery_services');
 
 // Shopping Cart Page
 Route::get('/webshop/shopping_cart', function () {
