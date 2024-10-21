@@ -1,17 +1,18 @@
 .center-container {
     display: flex;
-    flex-direction: column; /* Zorgt ervoor dat de inhoud in kolommen wordt uitgelijnd */
-    align-items: center; /* Centraal in het midden */
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Vier gelijke kolommen */
-    gap: 20px; /* Ruimte tussen de producten */
-    justify-items: center;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    width: 80%;
     margin: 0 auto;
-    width: 80%; 
+    overflow: hidden; 
+    min-height: 310px;
 }
 
 .product {
@@ -22,26 +23,71 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Zorgt ervoor dat alle productblokken dezelfde breedte hebben */
-    box-sizing: border-box; /* Houdt rekening met padding bij het instellen van de breedte */
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease; 
+}
+
+
+.product.exiting {
+    transform: translateX(-100%);
+    opacity: 0; 
+}
+
+.product.entering-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.product.entering-right-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.product.entering-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.product.entering-left-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .product img {
-    width: 100%; /* Zorgt ervoor dat de afbeelding de volledige breedte van het product inneemt */
+    width: 100%;
     height: auto;
-    object-fit: cover; /* Past de afbeelding aan binnen de container zonder de verhoudingen te verliezen */
+    object-fit: cover;
 }
 
 .product-info {
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    width: 100%; /* Zorgt ervoor dat de productinfo ook 100% van de breedte beslaat */
+    width: 100%;
     text-align: left;
 }
 
-.webshop {
-    margin-top: 0; /* Zet de marge bovenaan op nul */
-    margin-bottom: 20px; /* Voeg wat ruimte onder de h1 toe */
-    text-align: center; /* Zorg dat de tekst gecentreerd is */
-    font-size: 2.5em; /* Grotere tekstgrootte voor betere zichtbaarheid */
+.load-more-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
 }
+
+#previous {
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: auto;
+}
+
+#load-more {
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
