@@ -9,12 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'order_product_junction_id',
-    ];
+    // Allow mass assignment for relevant fields
+    protected $fillable = ['order_product_junction_id'];
 
-    public function products()
+    // Define relationship between orders and the junction table
+    public function junction()
     {
-        return $this->belongsToMany(Product::class, 'order_product_junction', 'order_id', 'product_id');
+        return $this->hasMany(OrderProductJunction::class, 'order_id');
     }
 }

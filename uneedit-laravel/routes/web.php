@@ -79,11 +79,11 @@ Route::get('/webshop/shopping_cart', function () {
     return view('webshop.shopping_cart');
 })->name('shopping_cart');
 
-Route::prefix('shopping_cart')->name('shopping_cart.')->group(function () {
-    Route::get('/', [ShoppingCartController::class, 'index'])->name('index');
-    Route::post('/add/{id}', [ShoppingCartController::class, 'add'])->name('add');
-    Route::post('/remove/{id}', [ShoppingCartController::class, 'remove'])->name('remove');
-    Route::post('/order', [ShoppingCartController::class, 'createOrder'])->name('order.create');
+Route::prefix('shopping_cart')->group(function () {
+    Route::post('/add/{id}', [ShoppingCartController::class, 'addToCart'])->name('add');
+    Route::get('/', [ShoppingCartController::class, 'viewCart'])->name('view');
+    Route::post('/checkout', [ShoppingCartController::class, 'checkout'])->name('checkout');
+    Route::post('/remove/{id}', [ShoppingCartController::class, 'removeFromCart'])->name('remove');
 });
 
 // Admin routes with 'is_admin' middleware

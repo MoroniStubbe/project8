@@ -15,59 +15,52 @@
                 <h2>Shopping Cart</h2>
             </div>
 
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
-            @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
-            @if(empty($cart))
-                <p class="cart-empty-text">Your cart is empty.</p>
-            @else
-                @foreach($cart as $id => $product)
+            <!-- Display the products in the cart -->
+            @if($productsInCart->isNotEmpty())
+                @foreach($productsInCart as $junction)
                     <div class="product">
                         <div>
-                            <img src="{{ asset($product['picture']) }}" alt="{{ $product['name'] }}">
-                            <p>${{ $product['price'] }}</p>
+                            <!-- Use the product relationship to access details -->
+                            <img src="{{ asset($junction->product->picture) }}" alt="Product image">
+                            <p>{{ $junction->product->name }}</p>
+                            <p>Price: ${{ number_format($junction->product->price, 2) }}</p>
+                            <p>Quantity: {{ $junction->quantity }}</p>
                         </div>
                         <div>
-                            <form action="{{ route('shopping_cart.remove', $id) }}" method="POST" class="quantity-form">
+                            <!-- Remove Button -->
+                            <form action="{{ route('remove', $junction->id) }}" method="POST">
                                 @csrf
-                                <label for="quantity">
-                                    <p>Quantity:</p>
-                                    <input type="number" name="quantity" min="1" max="{{ $product['quantity'] }}" value="{{ $product['quantity'] }}">
-                                    <input class="button" type="submit" value="Update">
-                                </label>
-                                <input class="button" type="submit" value="Remove" formaction="{{ route('shopping_cart.remove', $id) }}">
+                                <button type="submit" class="button">Remove</button>
                             </form>
                         </div>
                     </div>
                 @endforeach
-            @endif
-        </div>
+                @else
+                    <p class="cart-empty-text">Your cart is empty!</p>
+                @endif
+            </div>
 
         <div class="checkout">
             <div class="title">
                 <h2>Overview</h2>
             </div>
+
             <div class="summary">
+                <!-- Display total price and product count -->
                 <div class="product-summary">
-                    <p>Items:</p>
-                    <p>{{ !empty($cart) ? count($cart) : 0 }}</p> <!-- Count of unique items -->
+                    <p>Items: {{ $productsInCart->count() }}</p>
                 </div>
+
                 <div class="price-summary">
-                    <p>Total Price:</p>
-                    <p>
-                        ${{ number_format(!empty($cart) ? array_reduce($cart, function ($carry, $item) {
-                            return $carry + ($item['price'] * $item['quantity']);
-                        }, 0) : 0, 2) }}
+                <p>Total Price: 
+                        ${{ number_format($productsInCart->sum(fn($junction) => $junction->product->price * $junction->quantity), 2) }}
                     </p>
                 </div>
-                <form action="{{ route('shopping_cart.order.create') }}" method="POST">
+
+                <!-- Checkout button -->
+                <form action="{{ route('checkout') }}" method="POST">
                     @csrf
-                    <input class="button" type="submit" value="Checkout">
+                    <button type="submit" class="button">Checkout</button>
                 </form>
             </div>
         </div>

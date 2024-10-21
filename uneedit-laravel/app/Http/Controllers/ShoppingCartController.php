@@ -2,89 +2,112 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderProductJunction;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
 {
-    // Show the shopping cart
-    public function index()
+    // Add product to cart
+    public function addToCart(Request $request, $id)
     {
-        $cart = session()->get('cart', []);
-        return view('shopping_cart', compact('cart'));
-    }
-
-    // Add a product to the shopping cart
-    public function add(Request $request, $id)
-    {
+        // Find the product by ID
         $product = Product::findOrFail($id);
+
+        // Get current cart from session
         $cart = session()->get('cart', []);
 
-        // Check if the product is in stock
-        if ($product->stock < 1) {
-            return redirect()->back()->with('error', 'Product is out of stock!');
+        // Check if the product is already in the cart
+        $junctionId = null;
+
+        // Search for the existing junction
+        foreach ($cart as $existingJunctionId) {
+            $junction = OrderProductJunction::find($existingJunctionId);
+            if ($junction && $junction->product_id == $product->id) {
+                $junctionId = $existingJunctionId;
+                break;
+            }
         }
 
-        // Check if the product already exists in the cart
-        if (isset($cart[$id])) {
-            if ($cart[$id]['quantity'] < $product->stock) {
-                $cart[$id]['quantity']++;
-            } else {
-                return redirect()->back()->with('error', 'Cannot add more of this product. Not enough stock!');
-            }
+        if ($junctionId) {
+            // If the junction exists, increment the quantity
+            $junction = OrderProductJunction::find($junctionId);
+            $junction->quantity++; // Assuming you have a quantity column
+            $junction->save();
+            return redirect()->route('view');
         } else {
-            $cart[$id] = [
-                'name' => $product->name,
-                'quantity' => 1,
-                'price' => $product->price,
-                'picture' => $product->picture,
-            ];
+        // If the junction does not exist, create a new junction record
+        $junction = OrderProductJunction::create([
+            'product_id' => $product->id,
+            'quantity' => 1,
+        ]);
+
+        // Store the junction in the session for the active cart
+        session()->push('cart', $junction->id);
+
+        return redirect()->route('view');
+    }
+}
+
+    // View shopping cart
+    public function viewCart()
+    {
+        // Retrieve cart session or an empty array if it doesn't exist
+        $cart = session()->get('cart', []);
+
+        // If cart is not empty, retrieve the products in the cart using the junction model
+        $productsInCart = $cart ? OrderProductJunction::whereIn('id', $cart)->with('product')->get() : collect();
+
+        // Pass the $productsInCart to the shopping_cart view
+        return view('webshop.shopping_cart', compact('productsInCart'));
+    }
+
+    public function removeFromCart($id)
+    {
+        // Retrieve the current cart from the session
+        $cart = session()->get('cart', []);
+
+        // Remove the product's junction ID from the session cart array
+        if (($key = array_search($id, $cart)) !== false) {
+            unset($cart[$key]);
         }
 
+        // Update the session with the new cart array
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        // Optionally, delete the junction record from the database
+        OrderProductJunction::destroy($id);
+
+        return redirect()->route('view');
     }
 
-    // Remove a product from the shopping cart
-    public function remove($id)
+    // Checkout logic
+    public function checkout()
     {
         $cart = session()->get('cart', []);
 
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-        }
-
-        return redirect()->back()->with('success', 'Product removed from cart successfully!');
-    }
-
-    // Create an order from the shopping cart
-    public function createOrder(Request $request)
-    {
-        $cart = session()->get('cart', []);
         if (empty($cart)) {
-            return redirect()->route('shopping_cart.index')->with('error', 'Your cart is empty.');
+            return redirect()->back()->with('error', 'Cart is empty!');
         }
 
-        DB::transaction(function () use ($cart) {
-            // Create a new order
-            $order = Order::create();
+        // Create a new order
+        $order = Order::create([
+            'order_product_junction_id' => auth()->id(),
+        ]);
 
-            // Create the junction records
-            foreach ($cart as $id => $product) {
-                OrderProductJunction::create([
-                    'order_id' => $order->id,
-                    'product_id' => $id,
-                ]);
+        // Loop through cart and save each product with quantity (if relevant) to junction table
+        foreach ($cart as $junctionId) {
+            $junction = OrderProductJunction::find($junctionId);
+            if ($junction) {
+                // Store product details for the order
+                $order->products()->attach($junction->product_id, ['quantity' => $junction->quantity]);
             }
-        });
+        }
 
-        // Clear the cart
+        // Clear the cart session
         session()->forget('cart');
 
-        return redirect()->route('shopping_cart.index')->with('success', 'Your order has been placed successfully!');
+        return redirect()->route('index');
     }
 }
