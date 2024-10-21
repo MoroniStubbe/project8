@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('order_product_junction', function (Blueprint $table) {
             $table->id();
             $table->foreignId("product_id")->constrained('products');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
