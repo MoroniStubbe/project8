@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/auth.php';
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
@@ -45,9 +47,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
+Route::prefix('faq')->group(function () {
+    Route::get('/', function () {
+        return view('faq');
+    })->name('faq');
+});
 
 Route::get('/news', function () {
     return view('news');
@@ -103,7 +107,7 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::get('/add_user', function () {
         return view('admin.add_user');
     })->name('admin.add.user.view');
-    
+
     Route::post('/add_user', function () {
         return view('admin.add_user');
     });
@@ -169,5 +173,3 @@ Route::prefix('user')->group(function () {
         Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
 });
-
-require __DIR__ . '/auth.php';
