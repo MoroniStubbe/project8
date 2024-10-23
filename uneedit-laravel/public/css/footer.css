@@ -1,13 +1,11 @@
 body {
   position: relative;
-  min-height: 100vh; /* Zorgt ervoor dat het lichaam ten minste de schermhoogte inneemt */
+  min-height: 100vh;
   margin: 0;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%; /* Zorg dat de footer de hele breedte van de pagina in beslag neemt */
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
