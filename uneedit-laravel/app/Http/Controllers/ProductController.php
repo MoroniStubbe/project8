@@ -48,19 +48,6 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product created successfully.', 'product' => $product], 201);
     }
 
-    public function destroy($id)
-    {
-        // Find the row by ID and delete it
-        $row = Product::find($id);
-
-        if ($row) {
-            $row->delete();
-            return response()->json(['message' => 'Row deleted successfully.'], 200);
-        }
-
-        return response()->json(['message' => 'Row not found.'], 404);
-    }
-
     public function update(Request $request)
     {
         // Validate the input data
@@ -93,5 +80,11 @@ class ProductController extends Controller
 
         // If product is not found, return a 404 response
         return response()->json(['message' => 'Product not found.'], 404);
+    }
+
+    public function destroy($id)
+    {
+        Product::destroy($id);
+        return response()->json(['message' => 'Faq deleted successfully.'], 200);
     }
 }
