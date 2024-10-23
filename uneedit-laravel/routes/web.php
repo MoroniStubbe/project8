@@ -47,11 +47,9 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::prefix('faq')->group(function () {
-    Route::get('/', function () {
-        return view('faq');
-    })->name('faq');
-});
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
 
 Route::get('/news', function () {
     return view('news');
@@ -67,21 +65,23 @@ Route::get('/service', function () {
     return view('service');
 })->name('service');
 
-Route::get('/webshop/product/{id}', function ($id) {
-    $product = Product::find($id);
-    return view('webshop.product', ['product' => $product]);
+Route::prefix('webshop')->group(function () {
+    Route::get('/', [WebshopController::class, 'index'])->name('webshop.index');
+
+    Route::get('/product/{id}', function ($id) {
+        $product = Product::find($id);
+        return view('webshop.product', ['product' => $product]);
+    });
+
+    Route::get('/delivery_services', function () {
+        return view('webshop.delivery_services');
+    })->name('delivery_services');
+
+    // Shopping Cart Page
+    Route::get('/shopping_cart', function () {
+        return view('webshop.shopping_cart');
+    })->name('shopping_cart');
 });
-
-Route::get('/webshop', [WebshopController::class, 'index'])->name('webshop.index');
-
-Route::get('/webshop/delivery_services', function () {
-    return view('webshop.delivery_services');
-})->name('delivery_services');
-
-// Shopping Cart Page
-Route::get('/webshop/shopping_cart', function () {
-    return view('webshop.shopping_cart');
-})->name('shopping_cart');
 
 Route::prefix('cart')->group(function () {
     Route::get('/', [ShoppingCartController::class, 'showCart'])->name('cart.show');
@@ -128,22 +128,24 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         return view('admin.requests');
     })->name('admin.requests.view');
 
-    // News Management Routes
-    Route::post('/news_panel/create', [NewsController::class, 'create'])->name('admin.news.create');
-    Route::post('/news_panel/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+    Route::prefix('faq_panel')->group(function () {
+        // FAQ Management Routes
+        Route::post('/create', [FaqController::class, 'create'])->name('admin.faq.create');
+        Route::post('/delete',)->name('admin.faq.delete');
 
-    // FAQ Management Routes
-    Route::post('/faq_panel/create', [FaqController::class, 'create'])->name('admin.faq.create');
-    Route::post('/faq_panel/delete', [FaqController::class, 'delete'])->name('admin.faq.delete');
+        Route::get('/', [FaqController::class, 'show_admin'])->name('admin.faq.panel.view');
+    });
 
-    // Admin Views for News and FAQ
-    Route::get('/news_panel', function () {
-        return view('admin.news_panel');
-    })->name('admin.news.panel.view');
+    Route::prefix('news_panel')->group(function () {
+        // News Management Routes
+        Route::post('/create', [NewsController::class, 'create'])->name('admin.news.create');
+        Route::post('/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
 
-    Route::get('/faq_panel', function () {
-        return view('admin.faq_panel');
-    })->name('admin.faq.panel.view');
+        // Admin Views for News and FAQ
+        Route::get('/', function () {
+            return view('admin.news_panel');
+        })->name('admin.news.panel.view');
+    });
 });
 
 // User Routes
