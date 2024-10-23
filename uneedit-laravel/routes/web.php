@@ -86,7 +86,7 @@ Route::get('/webshop/shopping_cart', function () {
 Route::prefix('cart')->group(function () {
     Route::get('/', [ShoppingCartController::class, 'showCart'])->name('cart.show');
     Route::post('/add/{id}', [ShoppingCartController::class, 'addToCart'])->name('cart.add');
-    Route::get('/remove/{id}', [ShoppingCartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::delete('/remove/{id}', [ShoppingCartController::class, 'removeFromCart'])->name('cart.remove');
     Route::post('/checkout', [ShoppingCartController::class, 'checkout'])->name('cart.checkout');
 });
 
