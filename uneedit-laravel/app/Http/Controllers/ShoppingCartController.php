@@ -42,6 +42,23 @@ class ShoppingCartController extends Controller
         return view('shopping_cart', compact('cart'));
     }
 
+    // Remove product from cart (session)
+    public function removeFromCart($id)
+    {
+        // Fetch the cart from session
+        $cart = session()->get('cart', []);
+
+        // Check if the product exists in the cart
+        if (isset($cart[$id])) {
+            // Remove the product from the cart
+            unset($cart[$id]);
+            // Save the updated cart back to the session
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->back()->with('success', 'Product removed from cart successfully.');
+    }
+
     // Proceed to checkout
     public function checkout()
     {
