@@ -19,17 +19,19 @@
     <div class="center-container">
     <h1 class="webshop">Webshop</h1>
     <div id="product-grid" class="product-grid">
-        @foreach ($products as $product) 
-            <div class="product">
-                <img src="{{ asset('img/products/' . $product->picture) }}" alt="{{ $product->name }}">
-                <div class="product-info">
-                    <h3>{{ $product->name }}</h3>
-                    <p>€{{ number_format($product->price, 2) }}</p>
-                </div>
+    @foreach ($products as $product)
+    <div class="product">
+        <a href="{{ url('/webshop/product/' . $product->id) }}" class="product-link">
+            <img src="{{ asset('img/products/' . $product->picture) }}" alt="{{ $product->name }}">
+            <div class="product-info">
+                <h3>{{ $product->name }}</h3>
+                <p>€{{ number_format($product->price, 2) }}</p>
             </div>
-        @endforeach
+        </a>
     </div>
-
+    @endforeach
+    </div>
+    
     <div class="load-more-container">
     <button id="previous" data-page="1" style="display:none;"><</button>
     <button id="load-more" data-page="2">></button>
