@@ -26,7 +26,7 @@
                     <span>Voorraad:</span> <div id="stock">{{ $product->stock }}</div>
                  </div>
                 </div>
-                <form action="{{ route('add', $product->id) }}" method="POST">
+                <form action="{{ route('cart.add', $product->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="btn">Voeg toe aan winkelwagen</button>
                 </form>
