@@ -131,7 +131,8 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::prefix('faq_panel')->group(function () {
         // FAQ Management Routes
         Route::post('/create', [FaqController::class, 'create'])->name('admin.faq.create');
-        Route::post('/delete',)->name('admin.faq.delete');
+        Route::post('/update', [FaqController::class, 'update'])->name('admin.faq.update');
+        Route::delete('/destroy/{id}', [FaqController::class, 'destroy'])->name('admin.faq.destroy');
 
         Route::get('/', [FaqController::class, 'show_admin'])->name('admin.faq.panel.view');
     });
