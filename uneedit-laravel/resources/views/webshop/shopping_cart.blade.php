@@ -19,18 +19,24 @@
                 <!-- Loop through the cart session to display items -->
                 @if (session('cart'))
                     @foreach (session('cart') as $id => $details)
-                        <div class="product">
-                            <div>
-                                <img src="/img/logo.png" alt="{{ $details['name'] }}">
-                                <p>{{ $details['name'] }}</p>
-                                <p>€{{ $details['price'] }}</p>
-                            </div>
-                            <div>
-                                <label for="quantity">
-                                    <p>Quantity: {{ $details['quantity'] }}</p>
-                                </label>
-                            </div>
+                    <div class="product">
+                        <div>
+                            <img src="/img/logo.png" alt="{{ $details['name'] }}">
+                            <p>{{ $details['name'] }}</p>
+                            <p>€{{ $details['price'] }}</p>
                         </div>
+                        <div>
+                            <label for="quantity">
+                                <p>Quantity: {{ $details['quantity'] }}</p>
+                            </label>
+                            <!-- Add a form to remove the product -->
+                            <form action="{{ route('cart.remove', $id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE') <!-- Use DELETE method for removal -->
+                                <button class="button" type="submit" class="remove-button">Remove</button>
+                            </form>
+                        </div>
+                    </div>
                     @endforeach
                 @else
                     <p class="cart-empty-text">Your cart is empty.</p>
