@@ -36,11 +36,11 @@ class ProductController extends Controller
 
         // Create a new product instance
         $product = new Product();
-        $product->name = $validatedData['name'] ?? ''; // Default to empty string if null
+        $product->name = $validatedData['name'] ?? 'name'; // Default to empty string if null
         $product->price = $validatedData['price'] ?? 0; // Default to 0 if null
-        $product->description = $validatedData['description'] ?? ''; // Default to empty string if null
+        $product->description = $validatedData['description'] ?? 'description'; // Default to empty string if null
         $product->stock = $validatedData['stock'] ?? 0; // Default to 0 if null
-        $product->type = $validatedData['type'] ?? ''; // Default to 0 if null
+        $product->type = $validatedData['type'] ?? 'type'; // Default to 0 if null
 
         // Save the new product to the database
         $product->save();
