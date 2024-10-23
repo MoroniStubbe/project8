@@ -41,7 +41,6 @@ class ProductController extends Controller
         $product->description = $validatedData['description'] ?? ''; // Default to empty string if null
         $product->stock = $validatedData['stock'] ?? 0; // Default to 0 if null
         $product->type = $validatedData['type'] ?? ''; // Default to 0 if null
-        $product->picture = $validatedData['picture'] ?? ''; // Default to 0 if null
 
         // Save the new product to the database
         $product->save();
