@@ -41,7 +41,6 @@ class ProductController extends Controller
         $product->description = $validatedData['description'] ?? ''; // Default to empty string if null
         $product->stock = $validatedData['stock'] ?? 0; // Default to 0 if null
         $product->type = $validatedData['type'] ?? ''; // Default to 0 if null
-        $product->picture = $validatedData['picture'] ?? ''; // Default to 0 if null
 
         // Save the new product to the database
         $product->save();
@@ -71,8 +70,7 @@ class ProductController extends Controller
             'price' => 'numeric|min:0',
             'picture' => 'string|max:255',
             'stock' => 'integer|min:0',
-            'description' => 'nullable|string|max:255',
-            'order_product_id' => 'integer|min:0',
+            'description' => 'nullable|string|max:255'
         ]);
         // Find the product by its ID
         $product = Product::find($request->id);
@@ -86,7 +84,6 @@ class ProductController extends Controller
             $product->picture = $validatedData['picture'];
             $product->stock = $validatedData['stock'];
             $product->description = $validatedData['description'];
-            $product->order_product_id = $validatedData['order_product_id'];
 
             // Save the changes
             $product->save();

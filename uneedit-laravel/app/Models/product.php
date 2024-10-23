@@ -11,9 +11,8 @@ class Product extends Model
 
     protected $fillable = ['type', 'name', 'price', 'picture', 'stock', 'description'];
 
-    // Relationship to the product-order junction
-    public function junction()
+    public function orders()
     {
-        return $this->hasMany(OrderProductJunction::class);
+        return $this->belongsToMany(Order::class, 'order_product_junction')->withTimestamps();
     }
 }
