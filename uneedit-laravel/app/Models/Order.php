@@ -9,12 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Allow mass assignment for relevant fields
-    protected $fillable = ['order_product_junction_id'];
+    protected $fillable = ['status'];
 
-    // Define relationship between orders and the junction table
-    public function junction()
+    // An order can have many products
+    public function products()
     {
-        return $this->hasMany(OrderProductJunction::class, 'order_id');
+        return $this->belongsToMany(Product::class, 'order_product_junction')->withTimestamps();
     }
 }
