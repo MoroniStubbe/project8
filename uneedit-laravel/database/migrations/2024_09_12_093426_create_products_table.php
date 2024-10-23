@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("type");
             $table->string("name");
             $table->decimal("price");
-            $table->string("picture");
+            $table->string("picture")->default("gj.jpg");
             $table->integer("stock");
             $table->string("description");
         });
