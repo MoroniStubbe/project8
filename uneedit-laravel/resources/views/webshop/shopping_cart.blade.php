@@ -1,70 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shopping_cart.css') }}">
 </head>
 <body>
-<x-webshop-header></x-webshop-header>
+    <x-webshop-header></x-webshop-header>
+    <main>
+        <div class="shopping-cart-container">
+            <div class="shopping-cart">
+                <div class="title">
+                    <h2>Shopping Cart</h2>
+                </div>
 
-<main>
-    <div class="shopping-cart-container">
-        <div class="shopping-cart">
-            <div class="title">
-                <h2>Shopping Cart</h2>
-            </div>
-
-            <!-- Display the products in the cart -->
-            @if($productsInCart->isNotEmpty())
-                @foreach($productsInCart as $junction)
-                    <div class="product">
-                        <div>
-                            <!-- Use the product relationship to access details -->
-                            <img src="{{ asset($junction->product->picture) }}" alt="Product image">
-                            <p>{{ $junction->product->name }}</p>
-                            <p>Price: ${{ number_format($junction->product->price, 2) }}</p>
-                            <p>Quantity: {{ $junction->quantity }}</p>
+                <!-- Loop through the cart session to display items -->
+                @if (session('cart'))
+                    @foreach (session('cart') as $id => $details)
+                        <div class="product">
+                            <div>
+                                <img src="/img/logo.png" alt="{{ $details['name'] }}">
+                                <p>{{ $details['name'] }}</p>
+                                <p>€{{ $details['price'] }}</p>
+                            </div>
+                            <div>
+                                <label for="quantity">
+                                    <p>Quantity: {{ $details['quantity'] }}</p>
+                                </label>
+                            </div>
                         </div>
-                        <div>
-                            <!-- Remove Button -->
-                            <form action="{{ route('remove', $junction->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="button">Remove</button>
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 @else
-                    <p class="cart-empty-text">Your cart is empty!</p>
+                    <p class="cart-empty-text">Your cart is empty.</p>
                 @endif
             </div>
 
-        <div class="checkout">
-            <div class="title">
-                <h2>Overview</h2>
-            </div>
-
-            <div class="summary">
-                <!-- Display total price and product count -->
-                <div class="product-summary">
-                    <p>Items: {{ $productsInCart->count() }}</p>
+            <div class="checkout">
+                <div class="title">
+                    <h2>Overview</h2>
                 </div>
 
-                <div class="price-summary">
-                <p>Total Price: 
-                        ${{ number_format($productsInCart->sum(fn($junction) => $junction->product->price * $junction->quantity), 2) }}
-                    </p>
-                </div>
-
-                <!-- Checkout button -->
-                <form action="{{ route('checkout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="button">Checkout</button>
-                </form>
+                @if (session('cart'))
+                    <div class="summary">
+                        <div class="product-summary">
+                            <p>Items: {{ count(session('cart')) }}</p>
+                        </div>
+                        <div class="price-summary">
+                            @php $total = 0 @endphp
+                            @foreach (session('cart') as $id => $details)
+                                @php $total += $details['price'] * $details['quantity'] @endphp
+                            @endforeach
+                            <p>Total Price: €{{ $total }}</p>
+                        </div>
+                        <form action="{{ route('cart.checkout') }}" method="POST">
+                            @csrf
+                            <input class="button" type="submit" value="Checkout">
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
-    </div>
-</main>
+    </main>
 </body>
 </html>
