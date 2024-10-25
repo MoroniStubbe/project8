@@ -18,19 +18,39 @@
 
                 <!-- Loop through the cart session to display items -->
                 @if (session('cart'))
-                    @foreach (session('cart') as $id => $details)
-                    <div class="product">
-                        <div>
-                            <img src="/img/logo.png" alt="{{ $details['name'] }}">
-                            <p>{{ $details['name'] }}</p>
-                            <p>€{{ $details['price'] }}</p>
-                        </div>
-                        <div>
-                            <label for="quantity">
-                                <p>Quantity: {{ $details['quantity'] }}</p>
-                            </label>
+                @foreach (session('cart') as $id => $details)
+                <div class="product">
+                    <div>
+                        <img src="/img/logo.png" alt="{{ $details['name'] }}">
+                        <p>{{ $details['name'] }}</p>
+                        <p>€{{ $details['price'] }}</p>
+                    </div>
+                    <div>
+                        @if (session('editMode') && isset(session('editMode')[$id]))
+                            <!-- Quantity update form if in edit mode -->
+                            <form action="{{ route('cart.update', $id) }}" method="POST">
+                                @csrf
+                                <input type="number" name="quantity" value="{{ $details['quantity'] }}" min="1">
+                                <button type="submit" class="button">Save</button>
+                            </form>
+                            
+                            <!-- Cancel button to turn off edit mode -->
+                            <form action="{{ route('cart.toggleUpdate', $id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="button">Cancel</button>
+                            </form>
+                        @else
+                            <!-- Display quantity and Update button if not in edit mode -->
+                            <p>Quantity: {{ $details['quantity'] }}</p>
+                            
+                            <form action="{{ route('cart.toggleUpdate', $id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="button">Update</button>
+                            </form>
+                        @endif
+                            
                             <!-- Add a form to remove the product -->
-                            <form action="{{ route('cart.remove', $id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('cart.remove', $id) }}" method="POST">
                                 @csrf
                                 @method('DELETE') <!-- Use DELETE method for removal -->
                                 <button class="button" type="submit" class="remove-button">Remove</button>
