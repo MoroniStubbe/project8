@@ -86,6 +86,8 @@ Route::prefix('webshop')->group(function () {
 Route::prefix('cart')->group(function () {
     Route::get('/', [ShoppingCartController::class, 'showCart'])->name('cart.show');
     Route::post('/add/{id}', [ShoppingCartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/toggle-update/{id}', [ShoppingCartController::class, 'toggleUpdateMode'])->name('cart.toggleUpdate');
+    Route::post('/update/{id}', [ShoppingCartController::class, 'updateCart'])->name('cart.update');
     Route::delete('/remove/{id}', [ShoppingCartController::class, 'removeFromCart'])->name('cart.remove');
     Route::post('/checkout', [ShoppingCartController::class, 'checkout'])->name('cart.checkout');
 });
