@@ -12,7 +12,7 @@
     <h1>{{ $product->name }}</h1>
         <div id="container-1">
             <div id="container-2" class="container">
-                <img src="{{ asset('img/logo.png') }}" alt="{{ $product->name }}">
+                <img src="{{ asset('img/products/' . $product->picture) }}" alt="{{ $product->name }}">
                 <p>
                     {{ $product->description }}
                 </p>
