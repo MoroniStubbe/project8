@@ -96,6 +96,7 @@ input[type="submit"] {
 .checkout {
     padding: 20px;
     border-radius: 10px;
+    height: 200px;
     flex-basis: 30%;
 }
 
