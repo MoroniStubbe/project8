@@ -18,10 +18,9 @@ use App\Http\Controllers\NewsController; ?>
     <main>
         <h2>Recent News</h2>
         <section id="news">
-            <?php $newsItems = NewsController::show(); ?>
             <ul>
-                @foreach ($newsItems as $news)
-                <li>{{ $news->id }}: {{ $news->message }}</li>
+                @foreach ($news_items as $news)
+                <li>{{ $news->message }}</li>
                 @endforeach
             </ul>
         </section>

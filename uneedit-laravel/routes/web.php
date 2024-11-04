@@ -51,9 +51,7 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
-Route::get('/news', function () {
-    return view('news');
-})->name('news');
+Route::get('/news', [NewsController::class, 'show'])->name('news');
 
 Route::get('/request', function () {
     return view('request');
@@ -143,15 +141,14 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
         Route::get('/', [FaqController::class, 'show_admin'])->name('admin.faq.panel.view');
     });
 
-    Route::prefix('news_panel')->group(function () {
+    Route::prefix('news')->group(function () {
         // News Management Routes
         Route::post('/create', [NewsController::class, 'create'])->name('admin.news.create');
-        Route::post('/delete', [NewsController::class, 'delete'])->name('admin.news.delete');
+        Route::post('/update', [NewsController::class, 'update'])->name('admin.news.update');
+        Route::delete('/destroy/{id}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
-        // Admin Views for News and FAQ
-        Route::get('/', function () {
-            return view('admin.news_panel');
-        })->name('admin.news.panel.view');
+        // Admin Views for News
+        Route::get('/', [NewsController::class, 'show_admin'])->name('admin.news.view');
     });
 });
 

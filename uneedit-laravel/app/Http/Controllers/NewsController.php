@@ -2,38 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NewsModel;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    
+    public function show_admin()
+    {
+        // Retrieve all requests and convert them to an array
+        $table_data = News::all()->toArray();
+
+        // Return the view with the requests table_data
+        return view('admin.news', compact('table_data'));
+    }
+
+    public static function show()
+    {
+        $news_items = News::all();
+        return view('news', compact('news_items'));
+    }
+
     public function create(Request $request)
     {
         $request->validate([
-            'addnew' => 'required|string|max:255',
+            'message' => 'string|max:255'
         ]);
 
-        NewsModel::create([
-            'message' => $request->input('addnew'),
+        News::create([
+            'message' => $request->input('message') ?? "message"
         ]);
 
-        return redirect()->back()->with('success', 'News added successfully!');
+        return response()->json(['message' => 'News created successfully.'], 200);
     }
 
-    public function delete(Request $request)
+    public function update(Request $request)
     {
-        $request->validate([
-            'rmnew' => 'required|integer|exists:news,id',
+        // Validate the input data
+        $validatedData = $request->validate([
+            'message' => 'string|max:255'
         ]);
+        // Find the news by its ID
+        $news = News::find($request->id);
 
-        $news = NewsModel::findOrFail($request->input('rmnew'));
-        $news->delete();
+        // If the news exists, update its attributes
+        if ($news) {
+            $news->message = $validatedData['message'] ?? "message";
 
-        return redirect()->back()->with('success', 'News deleted successfully!');
+            // Save the changes
+            $news->save();
+
+            return response()->json(['message' => 'News updated successfully.'], 200);
+        }
+
+        // If news is not found, return a 404 response
+        return response()->json(['message' => 'News not found.'], 404);
     }
-    public static function show(){
-        return NewsModel::all();
+
+    public function destroy($id)
+    {
+        News::destroy($id);
+        return response()->json(['message' => 'News deleted successfully.'], 200);
     }
-   
 }
