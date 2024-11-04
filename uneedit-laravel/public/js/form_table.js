@@ -119,19 +119,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 cells.forEach((cell, index) => {
                     if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
-                        // Get the computed width of the current cell
+                        // Get the computed width and height of the current cell
                         const cellWidth = window.getComputedStyle(cell).width;
+                        const cellHeight = window.getComputedStyle(cell).height;
 
-                        // Create an input element
-                        const input = document.createElement('input');
-                        input.type = 'text';
-                        input.value = cell.innerText; // Set input value to current cell value
+                        // Create a textarea element
+                        const textarea = document.createElement('textarea');
+                        textarea.value = cell.innerText; // Set textarea value to current cell value
 
-                        // Set the input width to match the cell width
-                        input.style.width = cellWidth;
+                        // Set the textarea dimensions to match the cell dimensions
+                        textarea.style.width = parseFloat(cellWidth) + 10;
+                        textarea.style.height = parseFloat(cellHeight);
 
                         cell.innerHTML = ''; // Clear cell
-                        cell.appendChild(input); // Append input to the cell
+                        cell.appendChild(textarea); // Append textarea to the cell
                     }
                 });
             } else if (button.innerText === 'Save') {
@@ -140,9 +141,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 cells.forEach((cell, index) => {
                     if (index < cells.length - 2) { // Ignore last two cells (Edit and Delete)
-                        const input = cell.querySelector('input');
-                        if (input) {
-                            cell.innerText = input.value; // Set the cell text to the input value
+                        const textarea = cell.querySelector('textarea');
+                        if (textarea) {
+                            cell.innerText = textarea.value; // Set the cell text to the textarea value
                         }
                     }
                 });
