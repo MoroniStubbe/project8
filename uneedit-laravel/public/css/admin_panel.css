@@ -74,7 +74,6 @@ main {
 .table1 td {
   white-space: wrap;
   overflow-wrap: break-word;
-  word-break: break-word;
   max-width: 700px;
 }
 
