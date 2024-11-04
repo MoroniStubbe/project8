@@ -10,9 +10,8 @@ class WebshopController extends Controller
     
     public function index(Request $request)
     {
-        $products = Product::paginate(8); 
-    
-        $hasMore = $products->hasMorePages(); // Controleer of er meer pagina's zijn
+        $products = Product::paginate(10); 
+        $hasMore = $products->hasMorePages(); 
     
         if ($request->ajax()) {
             return response()->json([
@@ -23,14 +22,4 @@ class WebshopController extends Controller
     
         return view('webshop.webshop', ['products' => $products]);
     }
-    
-    
-
-    
-    public function show($id)
-    {
-        $product = Product::findOrFail($id); 
-        return view('webshop.show', compact('product')); 
-    }
-
 }
