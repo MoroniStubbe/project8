@@ -125,10 +125,14 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
     Route::post('/make/{id}', [UserController::class, 'make_admin'])->name('admin.make');
     Route::post('/remove/{id}', [UserController::class, 'remove_admin'])->name('admin.remove');
 
-    // Request Management Routes
-    Route::get('/requests', function () {
-        return view('admin.requests');
-    })->name('admin.requests.view');
+    Route::prefix('requests')->group(function () {
+        // Request Management Routes
+        Route::post('/create', [RequestController::class, 'create'])->name('admin.requests.create');
+        Route::post('/update', [RequestController::class, 'update'])->name('admin.requests.update');
+        Route::delete('/destroy/{id}', [RequestController::class, 'destroy'])->name('admin.requests.destroy');
+
+        Route::get('/', [RequestController::class, 'show_admin'])->name('admin.requests.view');
+    });
 
     Route::prefix('faq_panel')->group(function () {
         // FAQ Management Routes
