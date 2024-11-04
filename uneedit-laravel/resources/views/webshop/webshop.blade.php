@@ -14,30 +14,22 @@
 </head>
 
 <body>
-<x-webshop-header></x-webshop-header>
+    <x-webshop-header></x-webshop-header>
 
     <div class="center-container">
-    <h1 class="webshop">Webshop</h1>
-    <div id="product-grid" class="product-grid">
-    @foreach ($products as $product)
-    <div class="product">
-        <a href="{{ url('/webshop/product/' . $product->id) }}" class="product-link">
-            <img src="{{ asset('img/products/' . $product->picture) }}" alt="{{ $product->name }}">
-            <div class="product-info">
-                <h3>{{ $product->name }}</h3>
-                <p>€{{ number_format($product->price, 2) }}</p>
-            </div>
-        </a>
-    </div>
-    @endforeach
+        <h1 class="webshop">Webshop</h1>
+        
+        <div id="product-grid" class="product-grid">
+        @include('webshop._products', ['products' => $products])
+        </div>
+        
+        <div class="load-more-container">
+            <button id="previous" data-page="1" style="display:none;"><</button>
+            <button id="load-more" data-page="2">></button>
+        </div>
     </div>
     
-    <div class="load-more-container">
-    <button id="previous" data-page="1" style="display:none;"><</button>
-    <button id="load-more" data-page="2">></button>
-</div>
-</div>
-    <x-footer></x-footer>
+    <x-footer></x-footer>  
 </body>
 </html>
 
