@@ -7,7 +7,7 @@
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(5, 1fr); 
     gap: 20px; 
     width: 80%;
     margin: 0 auto;
@@ -17,7 +17,7 @@
 
 .product {
     background-color: #f5f5f5;
-    padding: 10px;
+    padding-top: 0;
     padding-bottom: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -61,13 +61,15 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+    display: block;
 }
 
 .product-info {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 0;
     background-color: rgba(255, 255, 255, 0.8);
-    width: 100%;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .load-more-container {
