@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Order;
-use App\Models\OrderProductJunction;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
@@ -19,12 +18,13 @@ class ShoppingCartController extends Controller
 
         // Check if the product already exists in the cart
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;  // Increment quantity if it exists
+            $cart[$id]['quantity']++;
         } else {
             // Add product to the cart
             $cart[$id] = [
                 'name' => $product->name,
                 'price' => $product->price,
+                'picture' => $product->picture,
                 'quantity' => 1
             ];
         }
