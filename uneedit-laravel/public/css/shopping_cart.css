@@ -56,6 +56,9 @@ main {
 .product div:last-child {
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 400px;
 }
 
 label {
