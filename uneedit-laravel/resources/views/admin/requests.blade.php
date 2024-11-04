@@ -13,7 +13,12 @@ use App\Http\Controllers\RequestController;
 <body>
   <x-admin_nav></x-admin_nav>
   <main>
-    <?php RequestController::showAll(); ?>
+    <x-form-table
+      id="form-1"
+      :tableData="$table_data"
+      create_URL="{{ url('/admin/requests/create/') }}"
+      update_URL="{{ url('/admin/requests/update/') }}"
+      destroy_URL="{{ url('/admin/requests/destroy/') }}" />
   </main>
 </body>
 
