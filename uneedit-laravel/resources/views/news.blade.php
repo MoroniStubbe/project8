@@ -20,7 +20,7 @@ use App\Http\Controllers\NewsController; ?>
         <section id="news">
             <ul>
                 @foreach ($news_items as $news)
-                <li>{{ $news->id }}: {{ $news->message }}</li>
+                <li>{{ $news->message }}</li>
                 @endforeach
             </ul>
         </section>
