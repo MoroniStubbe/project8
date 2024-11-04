@@ -21,7 +21,7 @@
                 @foreach (session('cart') as $id => $details)
                 <div class="product">
                     <div>
-                        <img src="/img/logo.png" alt="{{ $details['name'] }}">
+                        <img src="{{ asset('img/products/' . $details['picture']) }}" alt="{{ $details['name'] }}">
                         <p>{{ $details['name'] }}</p>
                         <p>€{{ $details['price'] }}</p>
                     </div>
