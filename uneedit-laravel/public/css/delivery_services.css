@@ -16,7 +16,7 @@ body main .container #delivery_box-container .delivery_box {
 body main .container #delivery_box-container .delivery_box .text_delivery {
   display: flex;
   justify-content: center;
-  width: 400px;
+  width: 450px;
   margin: 2vh 3vw;
 }
 body main .container #delivery_box-container .delivery_box .text_delivery .delivery_service {
@@ -34,4 +34,18 @@ body main .container #delivery_box-container .delivery_box ul li {
 }
 body main .container #delivery_box-container .delivery_box ul li button {
   min-width: 10vw;
-}/*# sourceMappingURL=delivery_services.css.map */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+  width: 90px;
+}
+
+body main .container #delivery_box-container .delivery_box .input {
+  margin: 0;
+}
+/*# sourceMappingURL=delivery_services.css.map */
