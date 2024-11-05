@@ -76,7 +76,7 @@ class ShoppingCartController extends Controller
         if (isset($cart[$id])) {
             // Update the product quantity
             $cart[$id]['quantity'] = $request->input('quantity');
-            
+
             // Save the updated cart back to the session
             session()->put('cart', $cart);
         }
@@ -118,9 +118,22 @@ class ShoppingCartController extends Controller
             $order->products()->attach($productId, ['quantity' => $details['quantity']]);
         }
 
+        $order->total_price = $this->calculateTotalPrice($order);
+
         // Clear the cart session
         session()->forget('cart');
 
-        return redirect()->route('webshop.index');
+        return view('webshop.paypal', compact('order'));
+    }
+
+    public function calculateTotalPrice(Order $order): float
+    {
+        $totalPrice = 0;
+        foreach ($order->products as $product) {
+            $quantity = $product->pivot->quantity;
+            $totalPrice += $product->price * $quantity;
+        }
+
+        return $totalPrice;
     }
 }
