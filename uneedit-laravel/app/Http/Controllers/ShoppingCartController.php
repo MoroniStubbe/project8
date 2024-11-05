@@ -76,12 +76,12 @@ class ShoppingCartController extends Controller
         if (isset($cart[$id])) {
             // Update the product quantity
             $cart[$id]['quantity'] = $request->input('quantity');
-
+            
             // Save the updated cart back to the session
             session()->put('cart', $cart);
         }
 
-        return redirect()->back()->with('success', 'Cart updated successfully.');
+        return redirect()->back();
     }
 
     // Remove product from cart (session)
@@ -101,7 +101,6 @@ class ShoppingCartController extends Controller
         return redirect()->back()->with('success', 'Product removed from cart successfully.');
     }
 
-    // Proceed to checkout
     public function checkout()
     {
         $cart = session()->get('cart', []);
@@ -112,28 +111,43 @@ class ShoppingCartController extends Controller
 
         // Create a new order
         $order = Order::create();
-
+        
         // Add products to the order
         foreach ($cart as $productId => $details) {
             $order->products()->attach($productId, ['quantity' => $details['quantity']]);
         }
 
-        $order->total_price = $this->calculateTotalPrice($order);
-
         // Clear the cart session
         session()->forget('cart');
 
-        return view('webshop.paypal', compact('order'));
+        session()->put('orderId', $order->id);
+
+        // Redirect to delivery service page with the order ID
+        return redirect()->route('delivery_services', ['order' => $order->id]);
     }
 
-    public function calculateTotalPrice(Order $order): float
+    // Save delivery information
+    public function saveDeliveryInfo($orderId, Request $request)
     {
-        $totalPrice = 0;
-        foreach ($order->products as $product) {
-            $quantity = $product->pivot->quantity;
-            $totalPrice += $product->price * $quantity;
-        }
+        $orderId = session()->get('orderId', []);
 
-        return $totalPrice;
+        // Validate the request data
+        $request->validate([
+            'delivery_service' => 'required|string',
+            'delivery_date' => 'required|date',
+            'delivery_time' => 'required|date_format:H:i'
+        ]);
+
+        // Find the order
+        $order = Order::findOrFail($orderId);
+
+        // Save the delivery information
+        $order->update([
+            'delivery_service' => $request->input('delivery_service'),
+            'delivery_date' => $request->input('delivery_date'),
+            'delivery_time' => $request->input('delivery_time'),
+        ]);
+
+        return view('delivery_services', compact('orderId'));
     }
 }
