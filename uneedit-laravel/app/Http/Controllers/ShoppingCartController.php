@@ -76,7 +76,7 @@ class ShoppingCartController extends Controller
         if (isset($cart[$id])) {
             // Update the product quantity
             $cart[$id]['quantity'] = $request->input('quantity');
-            
+
             // Save the updated cart back to the session
             session()->put('cart', $cart);
         }
@@ -111,7 +111,7 @@ class ShoppingCartController extends Controller
 
         // Create a new order
         $order = Order::create();
-        
+
         // Add products to the order
         foreach ($cart as $productId => $details) {
             $order->products()->attach($productId, ['quantity' => $details['quantity']]);
@@ -119,17 +119,16 @@ class ShoppingCartController extends Controller
 
         // Clear the cart session
         session()->forget('cart');
-
         session()->put('orderId', $order->id);
 
         // Redirect to delivery service page with the order ID
-        return redirect()->route('delivery_services', ['order' => $order->id]);
+        return view('webshop.delivery_services');
     }
 
     // Save delivery information
-    public function saveDeliveryInfo($orderId, Request $request)
+    public function saveDeliveryInfo(Request $request)
     {
-        $orderId = session()->get('orderId', []);
+        $orderId = session()->get('orderId');
 
         // Validate the request data
         $request->validate([
@@ -142,12 +141,23 @@ class ShoppingCartController extends Controller
         $order = Order::findOrFail($orderId);
 
         // Save the delivery information
-        $order->update([
-            'delivery_service' => $request->input('delivery_service'),
-            'delivery_date' => $request->input('delivery_date'),
-            'delivery_time' => $request->input('delivery_time'),
-        ]);
+        $order->delivery_service = $request->input('delivery_service');
+        $order->delivery_date = $request->input('delivery_date');
+        $order->delivery_time = $request->input('delivery_time');
+        $order->save();
+        $order->total_price = $this->calculateTotalPrice($order);
 
-        return view('delivery_services', compact('orderId'));
+        return view('webshop.paypal', compact('order'));
+    }
+
+    public function calculateTotalPrice(Order $order): float
+    {
+        $totalPrice = 0;
+        foreach ($order->products as $product) {
+            $quantity = $product->pivot->quantity;
+            $totalPrice += $product->price * $quantity;
+        }
+
+        return $totalPrice;
     }
 }
