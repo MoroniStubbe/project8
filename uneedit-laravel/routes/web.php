@@ -79,6 +79,10 @@ Route::prefix('webshop')->group(function () {
     Route::get('/shopping_cart', function () {
         return view('webshop.shopping_cart');
     })->name('shopping_cart');
+
+    Route::get('/paypal', function () {
+        return view('webshop.paypal');
+    })->name('paypal');
 });
 
 Route::prefix('cart')->group(function () {
