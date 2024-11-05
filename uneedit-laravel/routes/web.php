@@ -85,6 +85,8 @@ Route::prefix('webshop')->group(function () {
     })->name('paypal');
 });
 
+Route::get('/delivery-service/{order}', [ShoppingCartController::class, 'showDeliveryService'])->name('delivery.service');
+
 Route::prefix('cart')->group(function () {
     Route::get('/', [ShoppingCartController::class, 'showCart'])->name('cart.show');
     Route::post('/add/{id}', [ShoppingCartController::class, 'addToCart'])->name('cart.add');
