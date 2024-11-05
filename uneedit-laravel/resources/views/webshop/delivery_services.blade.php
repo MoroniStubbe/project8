@@ -15,16 +15,14 @@
 
     <div class="container">
       <div id="delivery_box-container">
-        <h1>Bezorgdiensten voor Order #{{ $order->id }}</h1>
+        <h1>Bezorgdiensten voor Order #{{ $orderId = session('orderId'); }}</h1>
         <div class="delivery_box">
           <h1 class="text_delivery">Bezorgdiensten</h1>
           <p class="text_delivery">Kies een bezorgdienst:</p>
 
-          <form action="{{ route('delivery.info', ['orderId' => $order->id]) }}" method="POST">
+          <form action="{{ route('delivery.services.update') }}" method="POST">
             @csrf
             <input type="hidden" name="delivery_service" id="delivery_service" value="">
-            <input type="hidden" name="delivery_date" id="delivery_date" value="">
-            <input type="hidden" name="delivery_time" id="delivery_time" value="">
             <ul>
               <li><button type="button" class="delivery_service" onclick="selectService('UPS')">UPS</button></li>
               <li><button type="button" class="delivery_service" onclick="selectService('DHL')">DHL</button></li>
@@ -45,6 +43,7 @@
         </div>
         <script>
           function selectService(deliveryService) {
+            document.getElementById('delivery_service').value = deliveryService;
             const selectedDate = document.getElementById('delivery_date').value;
             const selectedTime = document.getElementById('delivery_time').value;
 
