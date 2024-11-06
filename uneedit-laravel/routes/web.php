@@ -7,6 +7,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShoppingCartController;
@@ -156,6 +157,13 @@ Route::prefix('admin')->middleware(IsAdmin::class)->group(function () {
 
         // Admin Views for News
         Route::get('/', [NewsController::class, 'show_admin'])->name('admin.news.view');
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'show_admin'])->name('admin.orders.view');
+        Route::post('/create', [OrderController::class, 'create'])->name('admin.orders.create');
+        Route::post('/update', [OrderController::class, 'update'])->name('admin.orders.update');
+        Route::delete('/destroy/{id}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
     });
 });
 
