@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('delivery_service')->nullable();
+            $table->date('delivery_date')->nullable();
+            $table->time('delivery_time')->nullable();
             $table->timestamps();
         });
     }

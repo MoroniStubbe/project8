@@ -71,14 +71,16 @@ Route::prefix('webshop')->group(function () {
         return view('webshop.product', ['product' => $product]);
     });
 
-    Route::get('/delivery_services', function () {
-        return view('webshop.delivery_services');
-    })->name('delivery_services');
-
     // Shopping Cart Page
     Route::get('/shopping_cart', function () {
         return view('webshop.shopping_cart');
     })->name('shopping_cart');
+
+    Route::get('/delivery_services', function () {
+        return view('webshop.delivery_services');
+    })->name('delivery_services');
+
+    Route::post('/delivery_services/update', [ShoppingCartController::class, 'saveDeliveryInfo'])->name('delivery.services.update');
 
     Route::get('/paypal', function () {
         return view('webshop.paypal');

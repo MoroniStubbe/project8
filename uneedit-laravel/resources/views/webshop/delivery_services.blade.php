@@ -10,35 +10,40 @@
 </head>
 
 <body>
-<x-webshop-header></x-webshop-header>
+  <x-webshop-header></x-webshop-header>
   <main>
-    
+
     <div class="container">
       <div id="delivery_box-container">
+        <h1>Bezorgdiensten voor Order #{{ $orderId = session('orderId'); }}</h1>
         <div class="delivery_box">
           <h1 class="text_delivery">Bezorgdiensten</h1>
-          <p class="text_delivery"> Als gebruiker wil ik informatie zien over bezorgdiensten zoals UPS, DHL, Homerr, zodat ik kan
-            kiezen voor ophalen en verzenden.</p>
           <p class="text_delivery">Kies een bezorgdienst:</p>
-          
-          <ul>
-            <li><button class="delivery_service" onclick="selectService('UPS')">UPS</button></li>
-            <li><button class="delivery_service" onclick="selectService('DHL')">DHL</button></li>
-            <li><button class="delivery_service" onclick="selectService('Homerr')">Homerr</button></li>
-          </ul>
 
-          <div class="input-container">
-            <label for="delivery_date" class="input text_delivery">Bezorgdag:</label>
-            <input type="date" id="delivery_date" class="input text_delivery">
+          <form action="{{ route('delivery.services.update') }}" method="POST">
+            @csrf
+            <input type="hidden" name="delivery_service" id="delivery_service" value="">
+            <ul>
+              <li><button type="button" class="delivery_service" onclick="selectService('UPS')">UPS</button></li>
+              <li><button type="button" class="delivery_service" onclick="selectService('DHL')">DHL</button></li>
+              <li><button type="button" class="delivery_service" onclick="selectService('Homerr')">Homerr</button></li>
+            </ul>
 
-            <label for="delivery_time" class="input text_delivery">Levertijd:</label>
-            <input type="time" id="delivery_time" class="input text_delivery">
-          </div>
+            <div class="input-container">
+              <label for="delivery_date" class="input text_delivery">Bezorgdag:</label>
+              <input type="date" id="delivery_date" class="input text_delivery" name="delivery_date">
+
+              <label for="delivery_time" class="input text_delivery">Levertijd:</label>
+              <input type="time" id="delivery_time" class="input text_delivery" name="delivery_time">
+            </div>
+            <button type="submit">Bevestigen</button>
+          </form>
 
           <div id="result" class="text_delivery"></div>
         </div>
         <script>
           function selectService(deliveryService) {
+            document.getElementById('delivery_service').value = deliveryService;
             const selectedDate = document.getElementById('delivery_date').value;
             const selectedTime = document.getElementById('delivery_time').value;
 

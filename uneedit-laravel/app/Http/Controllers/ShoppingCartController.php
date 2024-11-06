@@ -81,7 +81,7 @@ class ShoppingCartController extends Controller
             session()->put('cart', $cart);
         }
 
-        return redirect()->back()->with('success', 'Cart updated successfully.');
+        return redirect()->back();
     }
 
     // Remove product from cart (session)
@@ -101,7 +101,6 @@ class ShoppingCartController extends Controller
         return redirect()->back()->with('success', 'Product removed from cart successfully.');
     }
 
-    // Proceed to checkout
     public function checkout()
     {
         $cart = session()->get('cart', []);
@@ -118,10 +117,35 @@ class ShoppingCartController extends Controller
             $order->products()->attach($productId, ['quantity' => $details['quantity']]);
         }
 
-        $order->total_price = $this->calculateTotalPrice($order);
-
         // Clear the cart session
         session()->forget('cart');
+        session()->put('orderId', $order->id);
+
+        // Redirect to delivery service page with the order ID
+        return view('webshop.delivery_services');
+    }
+
+    // Save delivery information
+    public function saveDeliveryInfo(Request $request)
+    {
+        $orderId = session()->get('orderId');
+
+        // Validate the request data
+        $request->validate([
+            'delivery_service' => 'required|string',
+            'delivery_date' => 'required|date',
+            'delivery_time' => 'required|date_format:H:i'
+        ]);
+
+        // Find the order
+        $order = Order::findOrFail($orderId);
+
+        // Save the delivery information
+        $order->delivery_service = $request->input('delivery_service');
+        $order->delivery_date = $request->input('delivery_date');
+        $order->delivery_time = $request->input('delivery_time');
+        $order->save();
+        $order->total_price = $this->calculateTotalPrice($order);
 
         return view('webshop.paypal', compact('order'));
     }
