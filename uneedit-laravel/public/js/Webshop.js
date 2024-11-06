@@ -1,7 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function() { 
     let loading = false; 
 
-    // Debounce function to limit the rate at which a function can fire
     function debounce(func, delay) {
         let timeoutId;
         return function(...args) {
@@ -22,43 +21,26 @@ $(document).ready(function() {
         var nextPage = $(this).data('page') || 2; 
         var url = 'webshop?page=' + nextPage; 
 
-        var oldProducts = $('.product'); 
-        oldProducts.addClass('exiting'); 
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                $('.product').remove();
+                $('.product-grid').append(data.products); 
+                $('#load-more').data('page', nextPage + 1); 
+                $('#previous').show(); 
 
-        setTimeout(function() {
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function(data) {
-                    
-                    oldProducts.remove();
-                    $('.product-grid').append(data.products); 
-                    $('#load-more').data('page', nextPage + 1); 
-                    $('#previous').show(); 
-
-                    if (!data.hasMore) {
-                        $('#load-more').hide(); 
-                    }
-
-                    // Reset animation classes for new products
-                    var newProducts = $('.product-grid').find('.product');
-                    newProducts.removeClass('entering-right entering-right-active'); 
-                    
-                    // Wait a moment before adding animations to ensure they start correctly
-                    setTimeout(function() {
-                        newProducts.addClass('entering-right'); // Add animation class
-                        setTimeout(function() {
-                            newProducts.addClass('entering-right-active'); 
-                            loading = false; 
-                        }, 50); 
-                    }, 50);
-                },
-                error: function() {
-                    console.log('Error loading more products.'); 
-                    loading = false;
+                if (!data.hasMore) {
+                    $('#load-more').hide(); 
                 }
-            });
-        }, 50);
+
+                loading = false;
+            },
+            error: function() {
+                console.log('Error loading more products.'); 
+                loading = false;
+            }
+        });
     });
 
     // Event listener for load more button click
@@ -71,49 +53,30 @@ $(document).ready(function() {
         var url = 'webshop?page=' + previousPage; 
 
         if (previousPage > 0) {
-            var oldProducts = $('.product'); 
-            oldProducts.addClass('exiting'); 
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(data) {
+                    $('.product').remove();
+                    $('.product-grid').html(data.products); 
+                    $('#load-more').data('page', previousPage + 1); 
 
-            setTimeout(function() {
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    success: function(data) {
-                        
-                        oldProducts.remove();
-                        $('.product-grid').html(data.products); 
-                        $('#load-more').data('page', previousPage + 1); 
-
-                        if (data.hasMore) {
-                            $('#load-more').show(); 
-                        } else {
-                            $('#load-more').hide();
-                        }
-
-                        
-                        if (previousPage === 1) {
-                            $('#previous').hide(); 
-                        } else {
-                            $('#previous').show(); 
-                        }
-
-                        // Reset animation classes for new products
-                        var newProducts = $('.product-grid').find('.product');
-                        newProducts.removeClass('entering-left entering-left-active'); 
-                        
-                        
-                        setTimeout(function() {
-                            newProducts.addClass('entering-left'); 
-                            setTimeout(function() {
-                                newProducts.addClass('entering-left-active'); 
-                            }, 50);
-                        }, 50); 
-                    },
-                    error: function() {
-                        console.log('Error loading previous products.'); 
+                    if (data.hasMore) {
+                        $('#load-more').show(); 
+                    } else {
+                        $('#load-more').hide();
                     }
-                });
-            }, 50);
+
+                    if (previousPage === 1) {
+                        $('#previous').hide(); 
+                    } else {
+                        $('#previous').show(); 
+                    }
+                },
+                error: function() {
+                    console.log('Error loading previous products.'); 
+                }
+            });
         }
     }); 
 
