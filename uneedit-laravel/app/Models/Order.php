@@ -14,6 +14,6 @@ class Order extends Model
     // An order can have many products
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'order_product_junction')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'order_product_junction')->withPivot('quantity')->withTimestamps();
     }
 }
