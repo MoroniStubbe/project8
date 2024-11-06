@@ -7,6 +7,24 @@ Github:	https://github.com/MoroniStubbe/project8 \
 Trello:	https://trello.com/b/Qd0KNNHJ/project-8
 
 # Installation
-1. Clone repo to htdocs in XAMPP or MAMP
-2. Edit database_config_example.php so the username and password matches your database credentials. (Use a safe username and password)
-3. Rename the edited database_config_example.php to database.php
+Clone the Repository to XAMPP's htdocs Folder: Open your terminal and navigate to the htdocs folder inside your XAMPP directory (typically C:/xampp/htdocs on Windows). Clone the repository directly into this folder:
+
+cd /path/to/xampp/htdocs\
+git clone <repository-url>
+
+Install Dependencies: Inside your project folder, use Composer to install the required PHP dependencies:\
+composer install
+
+Copy Environment File: Copy the .env.example file to .env to set up environment variables.\
+cp .env.example .env
+
+Generate Application Key: Generate a unique application key, which Laravel uses for encryption.\
+php artisan key:generate
+
+Open .env and set the database connection details to match your XAMPP setup.
+
+Run Migrations: Initialize the database tables:\
+php artisan migrate
+
+If the project has seeded data, you can also run:\
+php artisan db:seed
