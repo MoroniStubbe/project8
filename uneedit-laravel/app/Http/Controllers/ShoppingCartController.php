@@ -118,7 +118,6 @@ class ShoppingCartController extends Controller
         }
 
         // Clear the cart session
-        session()->forget('cart');
         session()->put('orderId', $order->id);
 
         // Redirect to delivery service page with the order ID
@@ -159,5 +158,10 @@ class ShoppingCartController extends Controller
         }
 
         return $totalPrice;
+    }
+
+    public function forget(Request $request)
+    {
+        session()->forget('cart');
     }
 }
