@@ -93,6 +93,7 @@ Route::prefix('cart')->group(function () {
     Route::post('/toggle-update/{id}', [ShoppingCartController::class, 'toggleUpdateMode'])->name('cart.toggleUpdate');
     Route::post('/update/{id}', [ShoppingCartController::class, 'updateCart'])->name('cart.update');
     Route::delete('/remove/{id}', [ShoppingCartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::delete('/forget', [ShoppingCartController::class, 'forget'])->name('cart.forget');
     Route::post('/checkout', [ShoppingCartController::class, 'checkout'])->name('cart.checkout');
 });
 
