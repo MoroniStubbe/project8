@@ -10,8 +10,8 @@ class OrderController extends Controller
     public function show_admin()
     {
         $table_data = Order::with('products')->get()->map(function ($order) {
-            $order->formatted_products = $order->products->map(function ($product) {
-                return "ID: {$product->id}, Name: {$product->name}, Quantity: {$product->pivot->quantity}";
+            $order->product_list = $order->products->map(function ($product) {
+                return "ID: {$product->id} | Name: {$product->name} | Quantity: {$product->pivot->quantity}";
             })->implode("\n");
 
             unset($order->products);
