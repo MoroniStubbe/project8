@@ -72,7 +72,7 @@ main {
 }
 
 .table1 td {
-  white-space: wrap;
+  white-space: pre-wrap;
   overflow-wrap: break-word;
   max-width: 700px;
 }
