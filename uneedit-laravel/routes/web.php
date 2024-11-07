@@ -77,6 +77,10 @@ Route::prefix('webshop')->group(function () {
         return view('webshop.shopping_cart');
     })->name('shopping_cart');
 
+    Route::get('/THNX', function () {
+        return view('webshop.THNX');
+    })->name('THNX');
+
     Route::get('/delivery_services', function () {
         return view('webshop.delivery_services');
     })->name('delivery_services');
