@@ -32,7 +32,7 @@
 
                     xhr.onload = function() {
                         if (xhr.status >= 200 && xhr.status < 300) {
-                            window.location.href = "http://localhost/project8/uneedit-laravel/public/webshop/";
+                            window.location.href = "{{route('webshop.THNX')}}";
                         }
                     };
 
