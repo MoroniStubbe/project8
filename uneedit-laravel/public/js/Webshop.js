@@ -18,8 +18,8 @@ $(document).ready(function() {
         if (loading) return; 
         loading = true; 
 
-        var nextPage = $(this).data('page') || 2; 
-        var url = 'webshop?page=' + nextPage; 
+        let nextPage = $(this).data('page') || 2; 
+        let url = 'webshop?page=' + nextPage; 
 
         $.ajax({
             url: url,
@@ -48,9 +48,9 @@ $(document).ready(function() {
 
     // Function to load previous products via AJAX
     const loadPreviousProducts = debounce(function() {
-        var currentPage = $('#load-more').data('page') - 1;
-        var previousPage = currentPage - 1; 
-        var url = 'webshop?page=' + previousPage; 
+        let currentPage = $('#load-more').data('page') - 1;
+        let previousPage = currentPage - 1; 
+        let url = 'webshop?page=' + previousPage; 
 
         if (previousPage > 0) {
             $.ajax({
