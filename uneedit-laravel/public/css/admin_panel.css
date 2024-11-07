@@ -98,3 +98,8 @@ main {
   border-radius: 3px;
   cursor: pointer;
 }
+
+
+#logo a:hover {
+    border: none; /* Verwijdert alle randen die mogelijk verschijnen */
+}
