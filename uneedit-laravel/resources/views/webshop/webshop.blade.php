@@ -15,7 +15,8 @@
 
 <body>
     <x-webshop-header></x-webshop-header>
-
+    <main>
+        
     <div class="center-container">
         <h1 class="webshop">Webshop</h1>
         
@@ -24,15 +25,18 @@
         </div>
         
         <div class="load-more-container">
-            <button id="previous" data-page="1" style="display:none;">
-                <img src="{{ asset('img/previous.png') }}" alt="Previous" >
-            </button>
-            <button id="load-more" data-page="2">
-                <img src="{{ asset('img/next.png') }}" alt="Load More">
-            </button>
+            @if($hasMore)
+                <button id="previous" data-page="1" style="display:none;">
+                    <img src="{{ asset('img/previous.png') }}" alt="Previous">
+                </button>
+                <button id="load-more" data-page="2">
+                    <img src="{{ asset('img/next.png') }}" alt="Load More">
+                </button>
+            @endif
         </div>
     </div>
-    
+
+    </main>
     <x-footer></x-footer>  
 </body>
 </html>
